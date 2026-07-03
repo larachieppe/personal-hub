@@ -1,36 +1,52 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Polymath Hub
 
-## Getting Started
+A personal dashboard for self-directed, cross-disciplinary study — a place to keep the mission
+statement in front of you, track a curriculum across multiple domains, and collect the
+books/courses/articles that go with each topic.
 
-First, run the development server:
+Live site (once Pages is enabled): `https://<your-username>.github.io/personal-hub/`
+
+## What's here
+
+- **Dashboard** (`/`) — mission statement, a rotating quote, and overall progress across every domain.
+- **Curriculum** (`/curriculum`, `/curriculum/[domain]`) — domains (Mathematics, CS, Philosophy, ...)
+  broken into topics with a status (`not-started` / `in-progress` / `done`).
+- **Resources** (`/resources`) — every resource attached to a topic, searchable and filterable by
+  domain/type.
+
+## Editing your curriculum
+
+All content lives in plain data files — no database, no login, just edit and commit:
+
+- [`data/curriculum.json`](data/curriculum.json) — domains, topics, statuses, and resources.
+  - Add a domain by adding an object to the `domains` array.
+  - Add a topic by adding an object to a domain's `topics` array. Valid `status` values:
+    `"not-started"`, `"in-progress"`, `"done"`.
+  - Add a resource to a topic's `resources` array: `{ "title": "...", "url": "...", "type": "book" }`
+    (`type` is one of `book`, `course`, `video`, `article`, `paper`, `other`; `url` can be `""` if
+    you don't have a link yet).
+- [`data/motivation.json`](data/motivation.json) — your mission statement and the pool of quotes
+  shown on the dashboard (one is picked per day).
+
+Commit and push changes to `main` and the site redeploys automatically.
+
+## Running locally
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Deployment
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+This repo is configured for static export (`output: "export"` in `next.config.ts`) and deploys to
+GitHub Pages automatically via [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml) on
+every push to `main`.
 
-## Learn More
+One-time setup after pushing this repo: in the GitHub repo, go to **Settings → Pages** and set
+**Source** to **GitHub Actions** (only needed once; the workflow handles every deploy after that).
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+If you rename the repo, update `repoName` in `next.config.ts` to match — it's used to compute the
+`basePath` so assets resolve correctly under `https://<username>.github.io/<repo>/`.

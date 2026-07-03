@@ -1,0 +1,169 @@
+{
+  "domains": [
+    {
+      "id": "mathematics",
+      "name": "Mathematics",
+      "description": "The language underlying every other discipline on this list.",
+      "topics": [
+        {
+          "id": "linear-algebra",
+          "title": "Linear Algebra",
+          "status": "in-progress",
+          "notes": "Focus on intuition (3Blue1Brown) before grinding proofs.",
+          "resources": [
+            { "title": "3Blue1Brown: Essence of Linear Algebra", "url": "https://www.3blue1brown.com/topics/linear-algebra", "type": "video" },
+            { "title": "Linear Algebra Done Right - Sheldon Axler", "url": "", "type": "book" }
+          ]
+        },
+        {
+          "id": "calculus",
+          "title": "Calculus & Analysis",
+          "status": "not-started",
+          "resources": [
+            { "title": "MIT 18.01 Single Variable Calculus", "url": "https://ocw.mit.edu/courses/18-01sc-single-variable-calculus-fall-2010/", "type": "course" }
+          ]
+        },
+        {
+          "id": "probability-statistics",
+          "title": "Probability & Statistics",
+          "status": "not-started",
+          "resources": [
+            { "title": "Introduction to Probability - Blitzstein & Hwang", "url": "", "type": "book" }
+          ]
+        },
+        {
+          "id": "discrete-math",
+          "title": "Discrete Mathematics & Logic",
+          "status": "not-started",
+          "resources": []
+        }
+      ]
+    },
+    {
+      "id": "computer-science",
+      "name": "Computer Science",
+      "description": "How computers work, from silicon to software systems.",
+      "topics": [
+        {
+          "id": "data-structures-algorithms",
+          "title": "Data Structures & Algorithms",
+          "status": "in-progress",
+          "resources": [
+            { "title": "Data Structures Cheat Sheet", "url": "", "type": "article" }
+          ]
+        },
+        {
+          "id": "systems",
+          "title": "Computer Systems (OS, networking, distributed systems)",
+          "status": "not-started",
+          "resources": [
+            { "title": "Designing Data-Intensive Applications - Martin Kleppmann", "url": "", "type": "book" }
+          ]
+        },
+        {
+          "id": "machine-learning",
+          "title": "Machine Learning & AI",
+          "status": "not-started",
+          "resources": [
+            { "title": "Cheatsheet: Transformers & LLMs", "url": "", "type": "article" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "natural-sciences",
+      "name": "Natural Sciences",
+      "description": "Physics, chemistry, and biology as models of reality.",
+      "topics": [
+        {
+          "id": "physics-fundamentals",
+          "title": "Classical & Modern Physics",
+          "status": "not-started",
+          "resources": []
+        },
+        {
+          "id": "biology-fundamentals",
+          "title": "Biology & Molecular Life Sciences",
+          "status": "not-started",
+          "resources": []
+        }
+      ]
+    },
+    {
+      "id": "philosophy",
+      "name": "Philosophy",
+      "description": "Rigorous thinking about knowledge, ethics, and existence.",
+      "topics": [
+        {
+          "id": "history-of-philosophy",
+          "title": "History of Western & Eastern Philosophy",
+          "status": "not-started",
+          "resources": []
+        },
+        {
+          "id": "logic-epistemology",
+          "title": "Logic & Epistemology",
+          "status": "not-started",
+          "resources": []
+        }
+      ]
+    },
+    {
+      "id": "history",
+      "name": "History",
+      "description": "Understanding how the present came to be.",
+      "topics": [
+        {
+          "id": "world-history-survey",
+          "title": "World History Survey",
+          "status": "not-started",
+          "resources": []
+        },
+        {
+          "id": "history-of-science",
+          "title": "History of Science & Ideas",
+          "status": "not-started",
+          "resources": []
+        }
+      ]
+    },
+    {
+      "id": "writing-communication",
+      "name": "Writing & Communication",
+      "description": "Thinking clearly and expressing it clearly.",
+      "topics": [
+        {
+          "id": "expository-writing",
+          "title": "Expository & Technical Writing",
+          "status": "not-started",
+          "resources": []
+        },
+        {
+          "id": "rhetoric",
+          "title": "Rhetoric & Persuasion",
+          "status": "not-started",
+          "resources": []
+        }
+      ]
+    },
+    {
+      "id": "art-music",
+      "name": "Art & Music",
+      "description": "Creative and aesthetic literacy.",
+      "topics": [
+        {
+          "id": "music-theory",
+          "title": "Music Theory & an Instrument",
+          "status": "not-started",
+          "resources": []
+        },
+        {
+          "id": "art-history",
+          "title": "Art History & Visual Literacy",
+          "status": "not-started",
+          "resources": []
+        }
+      ]
+    }
+  ]
+}
