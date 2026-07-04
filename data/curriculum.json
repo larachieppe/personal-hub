@@ -403,6 +403,51 @@
           ]
         }
       ]
+    },
+    {
+      "id": "mcat",
+      "name": "MCAT",
+      "description": "Preparing for the MCAT — the standardized exam for medical school admission.",
+      "topics": [
+        {
+          "id": "bio-biochem-foundations",
+          "title": "Biological & Biochemical Foundations of Living Systems",
+          "resources": [
+            { "title": "Khan Academy: MCAT Collection", "url": "https://www.khanacademy.org/test-prep/mcat", "type": "course" },
+            { "title": "Crash Course Biology", "url": "https://thecrashcourse.com/topic/biology/", "type": "video" }
+          ]
+        },
+        {
+          "id": "chem-physics-foundations",
+          "title": "Chemical & Physical Foundations of Biological Systems",
+          "resources": [
+            { "title": "Crash Course Chemistry", "url": "https://thecrashcourse.com/topic/chemistry/", "type": "video" },
+            { "title": "Crash Course Physics", "url": "https://thecrashcourse.com/topic/physics/", "type": "video" }
+          ]
+        },
+        {
+          "id": "psych-soc-foundations",
+          "title": "Psychological, Social & Biological Foundations of Behavior",
+          "resources": [
+            { "title": "Crash Course Psychology", "url": "https://thecrashcourse.com/topic/psychology/", "type": "video" }
+          ]
+        },
+        {
+          "id": "cars",
+          "title": "Critical Analysis & Reasoning Skills (CARS)",
+          "notes": "CARS rewards consistency over cramming — one passage a day, reviewed carefully, beats occasional large blocks.",
+          "resources": [
+            { "title": "Jack Westin: Daily CARS Practice Passages", "url": "https://jackwestin.com/daily/mcat-practice-passages/cars-practice-passages/", "type": "course" }
+          ]
+        },
+        {
+          "id": "test-strategy-practice",
+          "title": "Test Strategy & Full-Length Practice",
+          "resources": [
+            { "title": "AAMC: Free Planning and Study Resources", "url": "https://students-residents.aamc.org/prepare-mcat-exam/free-planning-and-study-resources", "type": "article" }
+          ]
+        }
+      ]
     }
   ]
 }
