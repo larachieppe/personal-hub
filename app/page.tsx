@@ -33,7 +33,7 @@ export default function Home() {
             {overall.done} / {overall.total} topics mastered
           </span>
         </div>
-        <ProgressBar percent={overall.percentDone} />
+        <ProgressBar percent={overall.percentProgress} />
         <div className="flex gap-4 text-xs uppercase tracking-wide text-muted">
           <span>{overall.done} mastered</span>
           <span className="text-gold-dim">·</span>
@@ -67,7 +67,7 @@ export default function Home() {
                 <span className="font-display text-base text-foreground">
                   {domain.name}
                 </span>
-                <ProgressBar percent={progress.percentDone} />
+                <ProgressBar percent={progress.percentProgress} />
                 <span className="text-xs uppercase tracking-wide text-muted">
                   {progress.done} / {progress.total} mastered
                 </span>

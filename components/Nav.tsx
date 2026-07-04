@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Crest from "./Crest";
+import MobileNav from "./MobileNav";
 
 const LINKS = [
   { href: "/", label: "Dashboard" },
@@ -9,15 +10,15 @@ const LINKS = [
 
 export default function Nav() {
   return (
-    <header className="border-b border-border">
+    <header className="relative border-b border-border">
       <nav className="mx-auto flex max-w-4xl items-center justify-between px-6 py-5">
         <Link href="/" className="flex items-center gap-2.5 text-gold">
-          <Crest className="h-6 w-6" />
-          <span className="font-display text-lg italic tracking-wide text-foreground">
+          <Crest className="h-6 w-6 shrink-0" />
+          <span className="font-display text-lg italic tracking-wide text-foreground whitespace-nowrap">
             Polymath Hub
           </span>
         </Link>
-        <div className="flex gap-6 text-xs font-medium uppercase tracking-[0.15em] text-muted">
+        <div className="hidden md:flex gap-6 text-xs font-medium uppercase tracking-[0.15em] text-muted">
           {LINKS.map((link) => (
             <Link
               key={link.href}
@@ -28,6 +29,7 @@ export default function Nav() {
             </Link>
           ))}
         </div>
+        <MobileNav links={LINKS} />
       </nav>
     </header>
   );

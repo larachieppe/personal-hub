@@ -31,6 +31,7 @@ export interface DomainProgress {
   inProgress: number;
   notStarted: number;
   percentDone: number;
+  percentProgress: number;
 }
 
 export interface ResourceWithContext extends Resource {
@@ -48,23 +49,23 @@ export function getDomain(domainId: string): Domain | undefined {
   return getDomains().find((domain) => domain.id === domainId);
 }
 
-export function computeDomainProgress(domain: Domain): DomainProgress {
-  const total = domain.topics.length;
-  const done = domain.topics.filter((t) => t.status === "done").length;
-  const inProgress = domain.topics.filter((t) => t.status === "in-progress").length;
+function summarizeTopics(topics: Topic[]): DomainProgress {
+  const total = topics.length;
+  const done = topics.filter((t) => t.status === "done").length;
+  const inProgress = topics.filter((t) => t.status === "in-progress").length;
   const notStarted = total - done - inProgress;
   const percentDone = total === 0 ? 0 : Math.round((done / total) * 100);
-  return { total, done, inProgress, notStarted, percentDone };
+  const percentProgress =
+    total === 0 ? 0 : Math.round(((done + inProgress * 0.5) / total) * 100);
+  return { total, done, inProgress, notStarted, percentDone, percentProgress };
+}
+
+export function computeDomainProgress(domain: Domain): DomainProgress {
+  return summarizeTopics(domain.topics);
 }
 
 export function computeOverallProgress(domains: Domain[]): DomainProgress {
-  const allTopics = domains.flatMap((d) => d.topics);
-  const total = allTopics.length;
-  const done = allTopics.filter((t) => t.status === "done").length;
-  const inProgress = allTopics.filter((t) => t.status === "in-progress").length;
-  const notStarted = total - done - inProgress;
-  const percentDone = total === 0 ? 0 : Math.round((done / total) * 100);
-  return { total, done, inProgress, notStarted, percentDone };
+  return summarizeTopics(domains.flatMap((d) => d.topics));
 }
 
 export function getAllResources(domains: Domain[]): ResourceWithContext[] {

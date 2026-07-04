@@ -11,7 +11,7 @@
           "status": "in-progress",
           "notes": "Learn to read a balance sheet, income statement, and cash flow statement before anything else.",
           "resources": [
-            { "title": "Financial Intelligence for Entrepreneurs - Berman & Knight", "url": "", "type": "book" }
+            { "title": "Visible.vc: How to Calculate Runway & Burn Rate", "url": "https://visible.vc/blog/how-to-calculate-runway/", "type": "article" }
           ]
         },
         {
@@ -19,7 +19,8 @@
           "title": "Marketing & Positioning",
           "status": "not-started",
           "resources": [
-            { "title": "Obviously Awesome - April Dunford", "url": "", "type": "book" }
+            { "title": "April Dunford: An Introduction to Positioning", "url": "https://www.aprildunford.com/post/an-introduction-to-positioning", "type": "article" },
+            { "title": "Positioning with April Dunford (playlist)", "url": "https://www.youtube.com/playlist?list=PLmO9xFBjnc9erRlqDZiltzRC4YkDpF2-p", "type": "video" }
           ]
         },
         {
@@ -39,7 +40,8 @@
           "title": "Strategy & Competitive Analysis",
           "status": "not-started",
           "resources": [
-            { "title": "Good Strategy Bad Strategy - Richard Rumelt", "url": "", "type": "book" }
+            { "title": "Lenny's Newsletter: Good Strategy, Bad Strategy (Richard Rumelt)", "url": "https://www.lennysnewsletter.com/p/good-strategy-bad-strategy-richard", "type": "article" },
+            { "title": "Manager Tools: The Kernel of Strategy", "url": "https://www.manager-tools.com/2022/05/kernel-strategy-part-1", "type": "article" }
           ]
         }
       ]
@@ -62,7 +64,7 @@
           "title": "Computer Systems & Databases",
           "status": "not-started",
           "resources": [
-            { "title": "Designing Data-Intensive Applications - Martin Kleppmann", "url": "", "type": "book" }
+            { "title": "CMU Database Group (YouTube)", "url": "https://www.youtube.com/c/CMUDatabaseGroup", "type": "course" }
           ]
         },
         {
@@ -91,26 +93,36 @@
           "title": "Software Engineering Practices",
           "status": "not-started",
           "resources": [
-            { "title": "freeCodeCamp", "url": "https://www.freecodecamp.org/", "type": "course" }
+            { "title": "freeCodeCamp", "url": "https://www.freecodecamp.org/", "type": "course" },
+            { "title": "Google Engineering Practices Documentation", "url": "https://google.github.io/eng-practices/", "type": "article" }
           ]
         },
         {
           "id": "cloud-infrastructure",
           "title": "Cloud & Infrastructure",
           "status": "not-started",
-          "resources": []
+          "resources": [
+            { "title": "AWS Cloud Practitioner Essentials", "url": "https://aws.amazon.com/training/classroom/aws-cloud-practitioner-essentials/", "type": "course" },
+            { "title": "The Twelve-Factor App", "url": "https://12factor.net/", "type": "article" }
+          ]
         },
         {
           "id": "product-ux",
           "title": "Product & UX Design",
           "status": "not-started",
-          "resources": []
+          "resources": [
+            { "title": "Product Talk - Teresa Torres", "url": "https://www.producttalk.org/", "type": "article" },
+            { "title": "Nielsen Norman Group: UX Articles", "url": "https://www.nngroup.com/articles/", "type": "article" }
+          ]
         },
         {
           "id": "emerging-tech",
           "title": "Emerging Tech (AI, hardware, protocols)",
           "status": "not-started",
-          "resources": []
+          "resources": [
+            { "title": "Simon Willison's Weblog", "url": "https://simonwillison.net/", "type": "article" },
+            { "title": "Latent Space: The AI Engineer Podcast (YouTube)", "url": "https://www.youtube.com/channel/UCxBcwypKK-W3GHd_RZ9FZrQ", "type": "video" }
+          ]
         }
       ]
     },
@@ -123,9 +135,8 @@
           "id": "idea-validation",
           "title": "Idea Validation & Customer Discovery",
           "status": "not-started",
-          "notes": "Talk to users before writing code. The Mom Test is short (~140 pages) — read it in one sitting.",
+          "notes": "Talk to users before writing code — the single highest-leverage habit for a first-time founder.",
           "resources": [
-            { "title": "The Mom Test - Rob Fitzpatrick", "url": "", "type": "book" },
             { "title": "Y Combinator: How to Get Your First Customers | Startup School", "url": "https://www.youtube.com/watch?v=hyYCn_kAngI", "type": "video" },
             { "title": "Y Combinator Startup School (free course)", "url": "https://www.startupschool.org/", "type": "course" }
           ]

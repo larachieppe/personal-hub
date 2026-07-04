@@ -46,7 +46,7 @@ export default async function DomainPage({
         </h1>
         <p className="mt-1 text-sm text-muted">{domain.description}</p>
         <div className="mt-4 flex flex-col gap-2">
-          <ProgressBar percent={progress.percentDone} />
+          <ProgressBar percent={progress.percentProgress} />
           <span className="text-xs uppercase tracking-wide text-muted">
             {progress.done} mastered · {progress.inProgress} in progress ·{" "}
             {progress.notStarted} uncharted

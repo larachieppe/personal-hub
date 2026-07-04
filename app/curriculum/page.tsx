@@ -44,7 +44,7 @@ export default function CurriculumPage() {
                 </span>
               </div>
               <p className="text-sm text-muted">{domain.description}</p>
-              <ProgressBar percent={progress.percentDone} />
+              <ProgressBar percent={progress.percentProgress} />
             </Link>
           );
         })}
