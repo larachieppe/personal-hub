@@ -1,26 +1,49 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #14100d;
+  --surface: #1c1712;
+  --surface-hover: #241d16;
+  --foreground: #ece3d3;
+  --muted: #a08b72;
+  --gold: #c6a15b;
+  --gold-dim: #8a713c;
+  --wine: #a34640;
+  --green: #6f8f6a;
+  --border: #33291f;
 }
 
 @theme inline {
   --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-surface-hover: var(--surface-hover);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-muted: var(--muted);
+  --color-gold: var(--gold);
+  --color-gold-dim: var(--gold-dim);
+  --color-wine: var(--wine);
+  --color-green: var(--green);
+  --color-border: var(--border);
+  --font-display: var(--font-playfair);
+  --font-body: var(--font-crimson);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+  font-family: var(--font-body), Georgia, "Times New Roman", serif;
+  background-image: radial-gradient(
+    ellipse 80% 60% at 50% -10%,
+    rgba(198, 161, 91, 0.08),
+    transparent
+  );
+}
+
+::selection {
+  background: var(--gold-dim);
+  color: var(--background);
+}
+
+.font-display {
+  font-family: var(--font-display), Georgia, serif;
 }

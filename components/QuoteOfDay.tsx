@@ -27,8 +27,11 @@ export default function QuoteOfDay() {
   const quote = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
 
   return (
-    <blockquote className="border-l-2 border-emerald-500 pl-4 text-sm italic text-zinc-600 dark:text-zinc-400">
-      {quote}
+    <blockquote className="relative border-l-2 border-gold pl-6">
+      <span className="font-display absolute -left-2 -top-4 text-5xl text-gold-dim opacity-40">
+        &ldquo;
+      </span>
+      <p className="text-base italic text-muted">{quote}</p>
     </blockquote>
   );
 }

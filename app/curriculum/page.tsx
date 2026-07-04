@@ -12,33 +12,38 @@ export default function CurriculumPage() {
   return (
     <div className="flex flex-col gap-6">
       <div>
-        <h1 className="text-2xl font-semibold">Curriculum</h1>
-        <p className="mt-1 text-sm text-zinc-500 dark:text-zinc-400">
+        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-gold">
+          Domains of Study
+        </p>
+        <h1 className="font-display mt-2 text-3xl italic text-foreground">
+          The Curriculum
+        </h1>
+        <p className="mt-2 text-sm text-muted">
           Every domain you&apos;re building competence in. Edit{" "}
-          <code className="rounded bg-zinc-100 px-1 py-0.5 dark:bg-zinc-800">
+          <code className="border border-border bg-surface px-1 py-0.5 text-foreground">
             data/curriculum.json
           </code>{" "}
           to add topics or update status.
         </p>
       </div>
-      <div className="flex flex-col divide-y divide-zinc-200 dark:divide-zinc-800">
+      <div className="flex flex-col divide-y divide-border">
         {domains.map((domain) => {
           const progress = computeDomainProgress(domain);
           return (
             <Link
               key={domain.id}
               href={`/curriculum/${domain.id}`}
-              className="flex flex-col gap-2 py-5 transition-opacity hover:opacity-70"
+              className="group flex flex-col gap-2 py-5 transition-colors"
             >
               <div className="flex items-baseline justify-between">
-                <h2 className="text-base font-medium">{domain.name}</h2>
-                <span className="text-xs text-zinc-500 dark:text-zinc-400">
-                  {progress.done} / {progress.total} done
+                <h2 className="font-display text-lg text-foreground group-hover:text-gold">
+                  {domain.name}
+                </h2>
+                <span className="text-xs uppercase tracking-wide text-muted">
+                  {progress.done} / {progress.total} mastered
                 </span>
               </div>
-              <p className="text-sm text-zinc-500 dark:text-zinc-400">
-                {domain.description}
-              </p>
+              <p className="text-sm text-muted">{domain.description}</p>
               <ProgressBar percent={progress.percentDone} />
             </Link>
           );

@@ -36,15 +36,15 @@ export default function ResourceLibrary({
       <div className="flex flex-col gap-3 sm:flex-row">
         <input
           type="text"
-          placeholder="Search resources..."
+          placeholder="Search the catalog..."
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          className="flex-1 rounded-lg border border-zinc-300 bg-transparent px-3 py-2 text-sm outline-none focus:border-emerald-500 dark:border-zinc-700"
+          className="flex-1 border border-border bg-surface px-3 py-2 text-sm text-foreground outline-none placeholder:text-muted focus:border-gold"
         />
         <select
           value={domainFilter}
           onChange={(e) => setDomainFilter(e.target.value)}
-          className="rounded-lg border border-zinc-300 bg-transparent px-3 py-2 text-sm outline-none focus:border-emerald-500 dark:border-zinc-700"
+          className="border border-border bg-surface px-3 py-2 text-sm text-foreground outline-none focus:border-gold"
         >
           <option value="all">All domains</option>
           {domains.map((domain) => (
@@ -56,7 +56,7 @@ export default function ResourceLibrary({
         <select
           value={typeFilter}
           onChange={(e) => setTypeFilter(e.target.value)}
-          className="rounded-lg border border-zinc-300 bg-transparent px-3 py-2 text-sm outline-none focus:border-emerald-500 dark:border-zinc-700"
+          className="border border-border bg-surface px-3 py-2 text-sm text-foreground outline-none focus:border-gold"
         >
           <option value="all">All types</option>
           {types.map((type) => (
@@ -68,11 +68,11 @@ export default function ResourceLibrary({
       </div>
 
       {filtered.length === 0 ? (
-        <p className="text-sm text-zinc-500 dark:text-zinc-400">
+        <p className="text-sm italic text-muted">
           No resources match your filters yet.
         </p>
       ) : (
-        <ul className="flex flex-col divide-y divide-zinc-200 dark:divide-zinc-800">
+        <ul className="flex flex-col divide-y divide-border">
           {filtered.map((resource, i) => (
             <li key={`${resource.topicId}-${resource.title}-${i}`} className="flex flex-col gap-1 py-4">
               <div className="flex items-center justify-between gap-4">
@@ -81,18 +81,20 @@ export default function ResourceLibrary({
                     href={resource.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-sm font-medium text-emerald-600 hover:underline dark:text-emerald-400"
+                    className="font-display text-base italic text-gold hover:text-foreground hover:underline"
                   >
                     {resource.title}
                   </a>
                 ) : (
-                  <span className="text-sm font-medium">{resource.title}</span>
+                  <span className="font-display text-base italic text-foreground">
+                    {resource.title}
+                  </span>
                 )}
-                <span className="text-xs uppercase tracking-wide text-zinc-400 dark:text-zinc-500">
+                <span className="text-xs uppercase tracking-wide text-muted">
                   {resource.type}
                 </span>
               </div>
-              <span className="text-xs text-zinc-500 dark:text-zinc-400">
+              <span className="text-xs uppercase tracking-wide text-muted">
                 {resource.domainName} · {resource.topicTitle}
               </span>
             </li>
