@@ -13,7 +13,6 @@ export interface Resource {
 export interface Topic {
   id: string;
   title: string;
-  status: TopicStatus;
   resources: Resource[];
   notes?: string;
 }
@@ -25,13 +24,20 @@ export interface Domain {
   topics: Topic[];
 }
 
-export interface DomainProgress {
+export interface TopicProgress {
+  status: TopicStatus;
   total: number;
-  done: number;
-  inProgress: number;
-  notStarted: number;
-  percentDone: number;
-  percentProgress: number;
+  checked: number;
+}
+
+export interface DomainProgress {
+  totalTopics: number;
+  masteredTopics: number;
+  inProgressTopics: number;
+  notStartedTopics: number;
+  totalResources: number;
+  checkedResources: number;
+  percent: number;
 }
 
 export interface ResourceWithContext extends Resource {
@@ -49,23 +55,97 @@ export function getDomain(domainId: string): Domain | undefined {
   return getDomains().find((domain) => domain.id === domainId);
 }
 
-function summarizeTopics(topics: Topic[]): DomainProgress {
-  const total = topics.length;
-  const done = topics.filter((t) => t.status === "done").length;
-  const inProgress = topics.filter((t) => t.status === "in-progress").length;
-  const notStarted = total - done - inProgress;
-  const percentDone = total === 0 ? 0 : Math.round((done / total) * 100);
-  const percentProgress =
-    total === 0 ? 0 : Math.round(((done + inProgress * 0.5) / total) * 100);
-  return { total, done, inProgress, notStarted, percentDone, percentProgress };
+function slugify(text: string): string {
+  return text
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/(^-+|-+$)/g, "");
 }
 
-export function computeDomainProgress(domain: Domain): DomainProgress {
-  return summarizeTopics(domain.topics);
+export function resourceKey(domainId: string, topicId: string, resource: Resource): string {
+  return `${domainId}/${topicId}/${slugify(resource.title)}`;
 }
 
-export function computeOverallProgress(domains: Domain[]): DomainProgress {
-  return summarizeTopics(domains.flatMap((d) => d.topics));
+export function computeTopicProgress(
+  domainId: string,
+  topic: Topic,
+  completed: ReadonlySet<string>
+): TopicProgress {
+  const total = topic.resources.length;
+  const checked = topic.resources.filter((resource) =>
+    completed.has(resourceKey(domainId, topic.id, resource))
+  ).length;
+  const status: TopicStatus =
+    total === 0 || checked === 0 ? "not-started" : checked === total ? "done" : "in-progress";
+  return { status, total, checked };
+}
+
+export function computeDomainProgress(
+  domain: Domain,
+  completed: ReadonlySet<string>
+): DomainProgress {
+  let masteredTopics = 0;
+  let inProgressTopics = 0;
+  let notStartedTopics = 0;
+  let totalResources = 0;
+  let checkedResources = 0;
+
+  for (const topic of domain.topics) {
+    const progress = computeTopicProgress(domain.id, topic, completed);
+    totalResources += progress.total;
+    checkedResources += progress.checked;
+    if (progress.status === "done") masteredTopics += 1;
+    else if (progress.status === "in-progress") inProgressTopics += 1;
+    else notStartedTopics += 1;
+  }
+
+  const percent =
+    totalResources === 0 ? 0 : Math.round((checkedResources / totalResources) * 100);
+
+  return {
+    totalTopics: domain.topics.length,
+    masteredTopics,
+    inProgressTopics,
+    notStartedTopics,
+    totalResources,
+    checkedResources,
+    percent,
+  };
+}
+
+export function computeOverallProgress(
+  domains: Domain[],
+  completed: ReadonlySet<string>
+): DomainProgress {
+  let totalTopics = 0;
+  let masteredTopics = 0;
+  let inProgressTopics = 0;
+  let notStartedTopics = 0;
+  let totalResources = 0;
+  let checkedResources = 0;
+
+  for (const domain of domains) {
+    const progress = computeDomainProgress(domain, completed);
+    totalTopics += progress.totalTopics;
+    masteredTopics += progress.masteredTopics;
+    inProgressTopics += progress.inProgressTopics;
+    notStartedTopics += progress.notStartedTopics;
+    totalResources += progress.totalResources;
+    checkedResources += progress.checkedResources;
+  }
+
+  const percent =
+    totalResources === 0 ? 0 : Math.round((checkedResources / totalResources) * 100);
+
+  return {
+    totalTopics,
+    masteredTopics,
+    inProgressTopics,
+    notStartedTopics,
+    totalResources,
+    checkedResources,
+    percent,
+  };
 }
 
 export function getAllResources(domains: Domain[]): ResourceWithContext[] {

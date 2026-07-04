@@ -8,40 +8,72 @@
         {
           "id": "finance-accounting",
           "title": "Finance & Accounting Fundamentals",
-          "status": "in-progress",
           "notes": "Learn to read a balance sheet, income statement, and cash flow statement before anything else.",
           "resources": [
-            { "title": "Visible.vc: How to Calculate Runway & Burn Rate", "url": "https://visible.vc/blog/how-to-calculate-runway/", "type": "article" }
+            {
+              "title": "Visible.vc: How to Calculate Runway & Burn Rate",
+              "url": "https://visible.vc/blog/how-to-calculate-runway/",
+              "type": "article"
+            }
           ]
         },
         {
           "id": "marketing-positioning",
           "title": "Marketing & Positioning",
-          "status": "not-started",
           "resources": [
-            { "title": "April Dunford: An Introduction to Positioning", "url": "https://www.aprildunford.com/post/an-introduction-to-positioning", "type": "article" },
-            { "title": "Positioning with April Dunford (playlist)", "url": "https://www.youtube.com/playlist?list=PLmO9xFBjnc9erRlqDZiltzRC4YkDpF2-p", "type": "video" }
+            {
+              "title": "April Dunford: An Introduction to Positioning",
+              "url": "https://www.aprildunford.com/post/an-introduction-to-positioning",
+              "type": "article"
+            },
+            {
+              "title": "Positioning with April Dunford (playlist)",
+              "url": "https://www.youtube.com/playlist?list=PLmO9xFBjnc9erRlqDZiltzRC4YkDpF2-p",
+              "type": "video"
+            }
           ]
         },
         {
           "id": "sales-negotiation",
           "title": "Sales & Negotiation",
-          "status": "not-started",
           "notes": "As a technical founder you'll be doing sales yourself before you can hire for it. Start with founder-led sales.",
           "resources": [
-            { "title": "Never Split the Difference - Chris Voss | Talks at Google", "url": "https://www.youtube.com/watch?v=guZa7mQV1l0", "type": "video" },
-            { "title": "Josh Braun - cold outreach & buyer-based selling", "url": "https://www.youtube.com/channel/UCK9rfCmYHBIaC9o-qOsNtLg", "type": "video" },
-            { "title": "First Round Review: Founder-Led Sales", "url": "https://review.firstround.com/articles/founder-led-sales/", "type": "article" },
-            { "title": "SaaStr: 7 Things All Founders Should Know About Sales (w/ Dave Kellogg)", "url": "https://www.youtube.com/watch?v=BEP2a_dCExg", "type": "video" }
+            {
+              "title": "Never Split the Difference - Chris Voss | Talks at Google",
+              "url": "https://www.youtube.com/watch?v=guZa7mQV1l0",
+              "type": "video"
+            },
+            {
+              "title": "Josh Braun - cold outreach & buyer-based selling",
+              "url": "https://www.youtube.com/channel/UCK9rfCmYHBIaC9o-qOsNtLg",
+              "type": "video"
+            },
+            {
+              "title": "First Round Review: Founder-Led Sales",
+              "url": "https://review.firstround.com/articles/founder-led-sales/",
+              "type": "article"
+            },
+            {
+              "title": "SaaStr: 7 Things All Founders Should Know About Sales (w/ Dave Kellogg)",
+              "url": "https://www.youtube.com/watch?v=BEP2a_dCExg",
+              "type": "video"
+            }
           ]
         },
         {
           "id": "strategy",
           "title": "Strategy & Competitive Analysis",
-          "status": "not-started",
           "resources": [
-            { "title": "Lenny's Newsletter: Good Strategy, Bad Strategy (Richard Rumelt)", "url": "https://www.lennysnewsletter.com/p/good-strategy-bad-strategy-richard", "type": "article" },
-            { "title": "Manager Tools: The Kernel of Strategy", "url": "https://www.manager-tools.com/2022/05/kernel-strategy-part-1", "type": "article" }
+            {
+              "title": "Lenny's Newsletter: Good Strategy, Bad Strategy (Richard Rumelt)",
+              "url": "https://www.lennysnewsletter.com/p/good-strategy-bad-strategy-richard",
+              "type": "article"
+            },
+            {
+              "title": "Manager Tools: The Kernel of Strategy",
+              "url": "https://www.manager-tools.com/2022/05/kernel-strategy-part-1",
+              "type": "article"
+            }
           ]
         }
       ]
@@ -54,31 +86,60 @@
         {
           "id": "data-structures-algorithms",
           "title": "Data Structures & Algorithms",
-          "status": "in-progress",
           "resources": [
-            { "title": "Data Structures Cheat Sheet", "url": "", "type": "article" }
+            {
+              "title": "Data Structures Cheat Sheet",
+              "url": "",
+              "type": "article"
+            }
           ]
         },
         {
           "id": "systems-databases",
           "title": "Computer Systems & Databases",
-          "status": "not-started",
           "resources": [
-            { "title": "CMU Database Group (YouTube)", "url": "https://www.youtube.com/c/CMUDatabaseGroup", "type": "course" }
+            {
+              "title": "CMU Database Group (YouTube)",
+              "url": "https://www.youtube.com/c/CMUDatabaseGroup",
+              "type": "course"
+            }
           ]
         },
         {
           "id": "machine-learning",
           "title": "Machine Learning & AI",
-          "status": "not-started",
           "notes": "Go conceptual first (Google's course), then intuitive (3Blue1Brown), then hands-on (fast.ai, Karpathy).",
           "resources": [
-            { "title": "Google Machine Learning Crash Course", "url": "https://developers.google.com/machine-learning/crash-course", "type": "course" },
-            { "title": "3Blue1Brown: Neural Networks (playlist)", "url": "https://www.youtube.com/playlist?list=PLZZWrBYkx7Otcjr3eCLZDCgfpqnxMY29s", "type": "course" },
-            { "title": "StatQuest with Josh Starmer", "url": "https://www.youtube.com/c/joshstarmer", "type": "video" },
-            { "title": "fast.ai: Practical Deep Learning for Coders", "url": "https://course.fast.ai/", "type": "course" },
-            { "title": "Andrej Karpathy: Neural Networks - Zero to Hero (playlist)", "url": "https://www.youtube.com/playlist?list=PLXYLzZ3XzIbi4lL43O6fIU_ojuZwBO6vi", "type": "course" },
-            { "title": "Cheatsheet: Transformers & LLMs", "url": "", "type": "article" }
+            {
+              "title": "Google Machine Learning Crash Course",
+              "url": "https://developers.google.com/machine-learning/crash-course",
+              "type": "course"
+            },
+            {
+              "title": "3Blue1Brown: Neural Networks (playlist)",
+              "url": "https://www.youtube.com/playlist?list=PLZZWrBYkx7Otcjr3eCLZDCgfpqnxMY29s",
+              "type": "course"
+            },
+            {
+              "title": "StatQuest with Josh Starmer",
+              "url": "https://www.youtube.com/c/joshstarmer",
+              "type": "video"
+            },
+            {
+              "title": "fast.ai: Practical Deep Learning for Coders",
+              "url": "https://course.fast.ai/",
+              "type": "course"
+            },
+            {
+              "title": "Andrej Karpathy: Neural Networks - Zero to Hero (playlist)",
+              "url": "https://www.youtube.com/playlist?list=PLXYLzZ3XzIbi4lL43O6fIU_ojuZwBO6vi",
+              "type": "course"
+            },
+            {
+              "title": "Cheatsheet: Transformers & LLMs",
+              "url": "",
+              "type": "article"
+            }
           ]
         }
       ]
@@ -91,37 +152,65 @@
         {
           "id": "software-engineering",
           "title": "Software Engineering Practices",
-          "status": "not-started",
           "resources": [
-            { "title": "freeCodeCamp", "url": "https://www.freecodecamp.org/", "type": "course" },
-            { "title": "Google Engineering Practices Documentation", "url": "https://google.github.io/eng-practices/", "type": "article" }
+            {
+              "title": "freeCodeCamp",
+              "url": "https://www.freecodecamp.org/",
+              "type": "course"
+            },
+            {
+              "title": "Google Engineering Practices Documentation",
+              "url": "https://google.github.io/eng-practices/",
+              "type": "article"
+            }
           ]
         },
         {
           "id": "cloud-infrastructure",
           "title": "Cloud & Infrastructure",
-          "status": "not-started",
           "resources": [
-            { "title": "AWS Cloud Practitioner Essentials", "url": "https://aws.amazon.com/training/classroom/aws-cloud-practitioner-essentials/", "type": "course" },
-            { "title": "The Twelve-Factor App", "url": "https://12factor.net/", "type": "article" }
+            {
+              "title": "AWS Cloud Practitioner Essentials",
+              "url": "https://aws.amazon.com/training/classroom/aws-cloud-practitioner-essentials/",
+              "type": "course"
+            },
+            {
+              "title": "The Twelve-Factor App",
+              "url": "https://12factor.net/",
+              "type": "article"
+            }
           ]
         },
         {
           "id": "product-ux",
           "title": "Product & UX Design",
-          "status": "not-started",
           "resources": [
-            { "title": "Product Talk - Teresa Torres", "url": "https://www.producttalk.org/", "type": "article" },
-            { "title": "Nielsen Norman Group: UX Articles", "url": "https://www.nngroup.com/articles/", "type": "article" }
+            {
+              "title": "Product Talk - Teresa Torres",
+              "url": "https://www.producttalk.org/",
+              "type": "article"
+            },
+            {
+              "title": "Nielsen Norman Group: UX Articles",
+              "url": "https://www.nngroup.com/articles/",
+              "type": "article"
+            }
           ]
         },
         {
           "id": "emerging-tech",
           "title": "Emerging Tech (AI, hardware, protocols)",
-          "status": "not-started",
           "resources": [
-            { "title": "Simon Willison's Weblog", "url": "https://simonwillison.net/", "type": "article" },
-            { "title": "Latent Space: The AI Engineer Podcast (YouTube)", "url": "https://www.youtube.com/channel/UCxBcwypKK-W3GHd_RZ9FZrQ", "type": "video" }
+            {
+              "title": "Simon Willison's Weblog",
+              "url": "https://simonwillison.net/",
+              "type": "article"
+            },
+            {
+              "title": "Latent Space: The AI Engineer Podcast (YouTube)",
+              "url": "https://www.youtube.com/channel/UCxBcwypKK-W3GHd_RZ9FZrQ",
+              "type": "video"
+            }
           ]
         }
       ]
@@ -134,54 +223,113 @@
         {
           "id": "idea-validation",
           "title": "Idea Validation & Customer Discovery",
-          "status": "not-started",
           "notes": "Talk to users before writing code — the single highest-leverage habit for a first-time founder.",
           "resources": [
-            { "title": "Y Combinator: How to Get Your First Customers | Startup School", "url": "https://www.youtube.com/watch?v=hyYCn_kAngI", "type": "video" },
-            { "title": "Y Combinator Startup School (free course)", "url": "https://www.startupschool.org/", "type": "course" }
+            {
+              "title": "Y Combinator: How to Get Your First Customers | Startup School",
+              "url": "https://www.youtube.com/watch?v=hyYCn_kAngI",
+              "type": "video"
+            },
+            {
+              "title": "Y Combinator Startup School (free course)",
+              "url": "https://www.startupschool.org/",
+              "type": "course"
+            }
           ]
         },
         {
           "id": "fundraising-vc",
           "title": "Fundraising & Venture Capital",
-          "status": "not-started",
           "resources": [
-            { "title": "Y Combinator Startup Library", "url": "https://www.ycombinator.com/library", "type": "article" },
-            { "title": "Sequoia Capital: Writing a Business Plan", "url": "https://sequoiacap.com/article/writing-a-business-plan/", "type": "article" },
-            { "title": "Guy Kawasaki: The Only 10 Slides You Need in Your Pitch", "url": "https://guykawasaki.com/the-only-10-slides-you-need-in-your-pitch/", "type": "article" },
-            { "title": "Kevin Hale (YC): How to Pitch Your Startup", "url": "https://www.youtube.com/watch?v=17XZGUX_9iM", "type": "video" },
-            { "title": "First Round Review: Fundraising", "url": "https://review.firstround.com/articles/fundraising/", "type": "article" }
+            {
+              "title": "Y Combinator Startup Library",
+              "url": "https://www.ycombinator.com/library",
+              "type": "article"
+            },
+            {
+              "title": "Sequoia Capital: Writing a Business Plan",
+              "url": "https://sequoiacap.com/article/writing-a-business-plan/",
+              "type": "article"
+            },
+            {
+              "title": "Guy Kawasaki: The Only 10 Slides You Need in Your Pitch",
+              "url": "https://guykawasaki.com/the-only-10-slides-you-need-in-your-pitch/",
+              "type": "article"
+            },
+            {
+              "title": "Kevin Hale (YC): How to Pitch Your Startup",
+              "url": "https://www.youtube.com/watch?v=17XZGUX_9iM",
+              "type": "video"
+            },
+            {
+              "title": "First Round Review: Fundraising",
+              "url": "https://review.firstround.com/articles/fundraising/",
+              "type": "article"
+            }
           ]
         },
         {
           "id": "growth-gtm",
           "title": "Growth & Go-To-Market",
-          "status": "not-started",
           "resources": [
-            { "title": "Lenny's Newsletter", "url": "https://www.lennysnewsletter.com/", "type": "article" },
-            { "title": "Lenny's Podcast", "url": "https://www.youtube.com/@LennysPodcast", "type": "video" },
-            { "title": "First Round Review: Founder-Led Growth Playbook", "url": "https://review.firstround.com/founder-led-growth-playbook/", "type": "article" }
+            {
+              "title": "Lenny's Newsletter",
+              "url": "https://www.lennysnewsletter.com/",
+              "type": "article"
+            },
+            {
+              "title": "Lenny's Podcast",
+              "url": "https://www.youtube.com/@LennysPodcast",
+              "type": "video"
+            },
+            {
+              "title": "First Round Review: Founder-Led Growth Playbook",
+              "url": "https://review.firstround.com/founder-led-growth-playbook/",
+              "type": "article"
+            }
           ]
         },
         {
           "id": "building-a-team",
           "title": "Building & Leading a Team",
-          "status": "not-started",
           "resources": [
-            { "title": "Paul Graham's Essays", "url": "http://www.paulgraham.com/articles.html", "type": "article" },
-            { "title": "First Round Review: Hiring Engineers", "url": "https://review.firstround.com/articles/hiring-engineers/", "type": "article" },
-            { "title": "First Round Review: Read This Before Joining as Employee 1 to 20", "url": "https://review.firstround.com/read-this-before-joining-as-employee-1-to-20-at-a-startup/", "type": "article" }
+            {
+              "title": "Paul Graham's Essays",
+              "url": "http://www.paulgraham.com/articles.html",
+              "type": "article"
+            },
+            {
+              "title": "First Round Review: Hiring Engineers",
+              "url": "https://review.firstround.com/articles/hiring-engineers/",
+              "type": "article"
+            },
+            {
+              "title": "First Round Review: Read This Before Joining as Employee 1 to 20",
+              "url": "https://review.firstround.com/read-this-before-joining-as-employee-1-to-20-at-a-startup/",
+              "type": "article"
+            }
           ]
         },
         {
           "id": "networking-bay-area",
           "title": "Networking & the Bay Area Ecosystem",
-          "status": "not-started",
           "notes": "Added this one deliberately: as a technical founder here, who you know shapes your fundraising, hiring, and early customers as much as what you build.",
           "resources": [
-            { "title": "Hacker News", "url": "https://news.ycombinator.com/", "type": "other" },
-            { "title": "Silicon Valley Entrepreneurs (SVE) Meetup", "url": "https://www.meetup.com/sventrepreneurs/", "type": "other" },
-            { "title": "Hackers/Founders Meetup", "url": "https://www.meetup.com/hackers-and-founders/", "type": "other" }
+            {
+              "title": "Hacker News",
+              "url": "https://news.ycombinator.com/",
+              "type": "other"
+            },
+            {
+              "title": "Silicon Valley Entrepreneurs (SVE) Meetup",
+              "url": "https://www.meetup.com/sventrepreneurs/",
+              "type": "other"
+            },
+            {
+              "title": "Hackers/Founders Meetup",
+              "url": "https://www.meetup.com/hackers-and-founders/",
+              "type": "other"
+            }
           ]
         }
       ]

@@ -1,13 +1,16 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { resourceKey } from "@/lib/curriculum";
 import type { ResourceWithContext } from "@/lib/curriculum";
+import { toggleResourceCompleted, useCompletedResources } from "@/lib/progress-store";
 
 export default function ResourceLibrary({
   resources,
 }: {
   resources: ResourceWithContext[];
 }) {
+  const completed = useCompletedResources();
   const [query, setQuery] = useState("");
   const [domainFilter, setDomainFilter] = useState("all");
   const [typeFilter, setTypeFilter] = useState("all");
@@ -73,32 +76,58 @@ export default function ResourceLibrary({
         </p>
       ) : (
         <ul className="flex flex-col divide-y divide-border">
-          {filtered.map((resource, i) => (
-            <li key={`${resource.topicId}-${resource.title}-${i}`} className="flex flex-col gap-1 py-4">
-              <div className="flex items-center justify-between gap-4">
-                {resource.url ? (
-                  <a
-                    href={resource.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="font-display text-base italic text-gold hover:text-foreground hover:underline"
-                  >
-                    {resource.title}
-                  </a>
-                ) : (
-                  <span className="font-display text-base italic text-foreground">
-                    {resource.title}
+          {filtered.map((resource, i) => {
+            const key = resourceKey(resource.domainId, resource.topicId, resource);
+            const isChecked = completed.has(key);
+            return (
+              <li
+                key={`${resource.topicId}-${resource.title}-${i}`}
+                className="flex items-start gap-2.5 py-4"
+              >
+                <input
+                  type="checkbox"
+                  checked={isChecked}
+                  onChange={() => toggleResourceCompleted(key)}
+                  className="mt-1.5 h-4 w-4 shrink-0 cursor-pointer accent-gold"
+                  aria-label={`Mark "${resource.title}" as done`}
+                />
+                <div className="flex flex-1 flex-col gap-1">
+                  <div className="flex items-center justify-between gap-4">
+                    {resource.url ? (
+                      <a
+                        href={resource.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={
+                          isChecked
+                            ? "font-display text-base italic text-muted line-through hover:underline"
+                            : "font-display text-base italic text-gold hover:text-foreground hover:underline"
+                        }
+                      >
+                        {resource.title}
+                      </a>
+                    ) : (
+                      <span
+                        className={
+                          isChecked
+                            ? "font-display text-base italic text-muted line-through"
+                            : "font-display text-base italic text-foreground"
+                        }
+                      >
+                        {resource.title}
+                      </span>
+                    )}
+                    <span className="text-xs uppercase tracking-wide text-muted">
+                      {resource.type}
+                    </span>
+                  </div>
+                  <span className="text-xs uppercase tracking-wide text-muted">
+                    {resource.domainName} · {resource.topicTitle}
                   </span>
-                )}
-                <span className="text-xs uppercase tracking-wide text-muted">
-                  {resource.type}
-                </span>
-              </div>
-              <span className="text-xs uppercase tracking-wide text-muted">
-                {resource.domainName} · {resource.topicTitle}
-              </span>
-            </li>
-          ))}
+                </div>
+              </li>
+            );
+          })}
         </ul>
       )}
     </div>
