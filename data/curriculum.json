@@ -216,6 +216,76 @@
       ]
     },
     {
+      "id": "biotech",
+      "name": "Biotech",
+      "description": "Enough biology, drug development, and biotech business literacy to walk into a biotech startup and be useful fast.",
+      "topics": [
+        {
+          "id": "biology-fundamentals",
+          "title": "Biology & Life Sciences Fundamentals",
+          "notes": "Start here if it's been a while since biology class — everything else in this domain assumes this vocabulary.",
+          "resources": [
+            {
+              "title": "MIT 7.01SC Fundamentals of Biology (playlist)",
+              "url": "https://www.youtube.com/playlist?list=PLF83B8D8C87426E44",
+              "type": "course"
+            },
+            {
+              "title": "MIT OpenCourseWare: Fundamentals of Biology",
+              "url": "https://ocw.mit.edu/courses/7-01sc-fundamentals-of-biology-fall-2011/",
+              "type": "course"
+            }
+          ]
+        },
+        {
+          "id": "drug-development-pipeline",
+          "title": "Drug Discovery & Development Pipeline",
+          "notes": "Know the shape of the pipeline (discovery → preclinical → Phase I/II/III → FDA review) before your first week at a biotech startup.",
+          "resources": [
+            {
+              "title": "FDA: The Drug Development Process",
+              "url": "https://www.fda.gov/patients/learn-about-drug-and-device-approvals/drug-development-process",
+              "type": "article"
+            }
+          ]
+        },
+        {
+          "id": "computational-biology",
+          "title": "Computational Biology & Bioinformatics",
+          "notes": "Directly useful given the protein-function-classifier work — this is where ML and biotech actually meet.",
+          "resources": [
+            {
+              "title": "DeepMind: AlphaFold Reveals the Structure of the Protein Universe",
+              "url": "https://deepmind.google/blog/alphafold-reveals-the-structure-of-the-protein-universe/",
+              "type": "article"
+            },
+            {
+              "title": "Fundamentals of Bioinformatics (Caporaso, playlist)",
+              "url": "https://www.youtube.com/playlist?list=PLbVDKwGpb3XnwBACQ5w8L8NzjZ-6D0M8u",
+              "type": "course"
+            }
+          ]
+        },
+        {
+          "id": "biotech-business-vc",
+          "title": "Biotech Business, VC & Deals",
+          "notes": "Biotech financing, licensing, and M&A run on different logic than software startups — don't assume SaaS playbooks transfer.",
+          "resources": [
+            {
+              "title": "LifeSciVC (Bruce Booth)",
+              "url": "https://lifescivc.com/",
+              "type": "article"
+            },
+            {
+              "title": "a16z Bio + Health",
+              "url": "https://a16z.com/bio-health/",
+              "type": "article"
+            }
+          ]
+        }
+      ]
+    },
+    {
       "id": "startups",
       "name": "Startups",
       "description": "Going from idea to company.",
