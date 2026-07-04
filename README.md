@@ -13,6 +13,8 @@ Live site (once Pages is enabled): `https://<your-username>.github.io/personal-h
   Technology, Startups) broken into topics, each with a checklist of resources.
 - **Resources** (`/resources`) — every resource across the whole curriculum, searchable and
   filterable by domain/type, with the same checkboxes as the domain pages.
+- **Habits** (`/habits`) — daily check-off for a fixed set of habits (weight lifting, cardio,
+  studying 8+ hours, reading before sleep), each with a streak counter and all-time total.
 
 ## How progress works
 
@@ -27,6 +29,11 @@ Every resource in a topic is a checkbox. Check one off and:
   site data resets it.
 - Renaming a resource's `title` in `curriculum.json` changes its identity, so a previously
   checked item under the old title will show as unchecked again.
+
+The Habits page works the same way (`localStorage`, per-browser): each habit can be marked done
+once per calendar day. A streak stays alive if you've checked in today or yesterday, and breaks
+if you miss a full day; the all-time total never resets. To add, remove, or rename habits, edit
+[`data/habits.json`](data/habits.json).
 
 ## Editing your curriculum
 

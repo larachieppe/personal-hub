@@ -5,6 +5,7 @@ import MobileNav from "./MobileNav";
 const LINKS = [
   { href: "/", label: "Dashboard" },
   { href: "/curriculum", label: "Curriculum" },
+  { href: "/habits", label: "Habits" },
   { href: "/resources", label: "Athenaeum" },
 ];
 

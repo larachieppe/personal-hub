@@ -1,0 +1,24 @@
+{
+  "habits": [
+    {
+      "id": "weight-lifting",
+      "name": "Weight Lifting",
+      "description": "Any strength training session."
+    },
+    {
+      "id": "cardio",
+      "name": "Cardio",
+      "description": "Run, bike, swim, or any sustained cardio session."
+    },
+    {
+      "id": "study-8-hours",
+      "name": "Study 8+ Hours",
+      "description": "At least 8 hours of focused study or deep work."
+    },
+    {
+      "id": "reading-before-sleep",
+      "name": "Reading Before Sleep",
+      "description": "Read before bed instead of a screen."
+    }
+  ]
+}
