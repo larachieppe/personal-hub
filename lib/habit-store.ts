@@ -1,4 +1,5 @@
 import { useSyncExternalStore } from "react";
+import { addDays, toDateString } from "@/lib/date-utils";
 
 const STORAGE_KEY = "polymath-hub:habit-log";
 const EMPTY_LOG: Readonly<Record<string, string[]>> = {};
@@ -43,19 +44,6 @@ function persist(next: HabitLog) {
   listeners.forEach((listener) => listener());
 }
 
-function toDateString(date: Date): string {
-  const y = date.getFullYear();
-  const m = String(date.getMonth() + 1).padStart(2, "0");
-  const d = String(date.getDate()).padStart(2, "0");
-  return `${y}-${m}-${d}`;
-}
-
-function addDays(date: Date, delta: number): Date {
-  const next = new Date(date);
-  next.setDate(next.getDate() + delta);
-  return next;
-}
-
 export function toggleHabitToday(habitId: string) {
   const today = toDateString(new Date());
   const current = getSnapshot();
@@ -70,6 +58,14 @@ export function toggleHabitToday(habitId: string) {
 
 export function useHabitLog(): HabitLog {
   return useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
+}
+
+export function exportHabitLog(): HabitLog {
+  return getSnapshot();
+}
+
+export function replaceHabitLog(next: HabitLog) {
+  persist(next ?? {});
 }
 
 export interface HabitStats {
@@ -105,4 +101,39 @@ export function computeHabitStats(dates: string[]): HabitStats {
     isDoneToday: set.has(todayStr),
     last7Days,
   };
+}
+
+export interface HeatmapDay {
+  date: string;
+  done: boolean;
+}
+
+export function computeHeatmap(dates: string[], weeks = 52): HeatmapDay[][] {
+  const set = new Set(dates);
+  const today = new Date();
+  const totalDays = weeks * 7;
+  const days: HeatmapDay[] = [];
+  for (let i = totalDays - 1; i >= 0; i -= 1) {
+    const date = addDays(today, -i);
+    const dateStr = toDateString(date);
+    days.push({ date: dateStr, done: set.has(dateStr) });
+  }
+
+  const weekColumns: HeatmapDay[][] = [];
+  for (let i = 0; i < days.length; i += 7) {
+    weekColumns.push(days.slice(i, i + 7));
+  }
+  return weekColumns;
+}
+
+const STREAK_MILESTONES: { threshold: number; label: string }[] = [
+  { threshold: 365, label: "Year Streak" },
+  { threshold: 100, label: "Century Streak" },
+  { threshold: 30, label: "Month Streak" },
+  { threshold: 7, label: "Week Streak" },
+];
+
+export function getStreakMilestone(streak: number): string | null {
+  const hit = STREAK_MILESTONES.find((m) => streak >= m.threshold);
+  return hit ? hit.label : null;
 }

@@ -14,7 +14,17 @@ Live site (once Pages is enabled): `https://<your-username>.github.io/personal-h
 - **Resources** (`/resources`) — every resource across the whole curriculum, searchable and
   filterable by domain/type, with the same checkboxes as the domain pages.
 - **Habits** (`/habits`) — daily check-off for a fixed set of habits (weight lifting, cardio,
-  studying 8+ hours, reading before sleep), each with a streak counter and all-time total.
+  studying 8+ hours, reading before sleep), each with a streak counter, a milestone label
+  (Week/Month/Century/Year Streak), a full-year heatmap, and an all-time total.
+- **Review** (`/review`) — a weekly retrospective: how consistent you were with each habit over
+  the last 7 days, and which resources you checked off in that window.
+- **Backup** (`/backup`) — export all progress (curriculum + habits) to a JSON file, or import one
+  to restore it. Linked from the footer on every page.
+
+The homepage also surfaces a **What's Next** pick — one random unchecked resource from the whole
+curriculum, with a checkbox and a "Shuffle" button — for days you want to make progress without
+deciding where. Domains and the homepage Ledger show milestone callouts once you cross 25/50/75/100%
+overall, or fully master a domain (a "Mastered" badge appears next to its name everywhere).
 
 ## How progress works
 
@@ -34,6 +44,10 @@ The Habits page works the same way (`localStorage`, per-browser): each habit can
 once per calendar day. A streak stays alive if you've checked in today or yesterday, and breaks
 if you miss a full day; the all-time total never resets. To add, remove, or rename habits, edit
 [`data/habits.json`](data/habits.json).
+
+Because everything lives in `localStorage` and nowhere else, use the **Backup** page periodically
+(or before switching browsers/devices) to export a JSON snapshot of both your curriculum progress
+and habit log, and import it back in on the other side.
 
 ## Editing your curriculum
 

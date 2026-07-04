@@ -5,10 +5,21 @@ import type { Domain } from "@/lib/curriculum";
 import { computeDomainProgress, computeOverallProgress } from "@/lib/curriculum";
 import { useCompletedResources } from "@/lib/progress-store";
 import ProgressBar from "@/components/ProgressBar";
+import StatusBadge from "@/components/StatusBadge";
+import WhatsNext from "@/components/WhatsNext";
+
+function overallMilestoneMessage(percent: number): string | null {
+  if (percent >= 100) return "Every resource in the curriculum is checked off.";
+  if (percent >= 75) return "Three-quarters of the way through the curriculum.";
+  if (percent >= 50) return "Halfway through the curriculum.";
+  if (percent >= 25) return "A quarter of the way through the curriculum.";
+  return null;
+}
 
 export default function HomeDashboard({ domains }: { domains: Domain[] }) {
   const completed = useCompletedResources();
   const overall = computeOverallProgress(domains, completed);
+  const milestone = overallMilestoneMessage(overall.percent);
 
   return (
     <>
@@ -22,14 +33,19 @@ export default function HomeDashboard({ domains }: { domains: Domain[] }) {
           </span>
         </div>
         <ProgressBar percent={overall.percent} />
-        <div className="flex gap-4 text-xs uppercase tracking-wide text-muted">
+        <div className="flex flex-wrap items-center gap-4 text-xs uppercase tracking-wide text-muted">
           <span>{overall.masteredTopics} mastered</span>
           <span className="text-gold-dim">·</span>
           <span>{overall.inProgressTopics} in progress</span>
           <span className="text-gold-dim">·</span>
           <span>{overall.notStartedTopics} uncharted</span>
         </div>
+        {milestone && (
+          <p className="text-xs italic text-gold">{milestone}</p>
+        )}
       </section>
+
+      <WhatsNext domains={domains} />
 
       <section className="flex flex-col gap-4">
         <div className="flex items-baseline justify-between">
@@ -52,9 +68,12 @@ export default function HomeDashboard({ domains }: { domains: Domain[] }) {
                 href={`/curriculum/${domain.id}`}
                 className="flex flex-col gap-3 border border-border border-t-2 border-t-gold-dim bg-surface p-4 transition-colors hover:border-t-gold hover:bg-surface-hover"
               >
-                <span className="font-display text-base text-foreground">
-                  {domain.name}
-                </span>
+                <div className="flex items-center justify-between gap-2">
+                  <span className="font-display text-base text-foreground">
+                    {domain.name}
+                  </span>
+                  {progress.percent === 100 && <StatusBadge status="done" />}
+                </div>
                 <ProgressBar percent={progress.percent} />
                 <span className="text-xs uppercase tracking-wide text-muted">
                   {progress.masteredTopics} / {progress.totalTopics} mastered

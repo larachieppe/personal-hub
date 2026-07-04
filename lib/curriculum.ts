@@ -161,3 +161,22 @@ export function getAllResources(domains: Domain[]): ResourceWithContext[] {
     )
   );
 }
+
+export interface CompletedResource extends ResourceWithContext {
+  completedAt: string;
+}
+
+export function getResourcesCompletedSince(
+  domains: Domain[],
+  timestamps: Readonly<Record<string, string>>,
+  sinceDateStr: string
+): CompletedResource[] {
+  return getAllResources(domains)
+    .map((resource) => {
+      const key = resourceKey(resource.domainId, resource.topicId, resource);
+      const completedAt = timestamps[key];
+      return completedAt ? { ...resource, completedAt } : null;
+    })
+    .filter((resource): resource is CompletedResource => resource !== null && resource.completedAt >= sinceDateStr)
+    .sort((a, b) => (a.completedAt < b.completedAt ? 1 : -1));
+}

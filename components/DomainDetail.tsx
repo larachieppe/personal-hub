@@ -20,9 +20,12 @@ export default function DomainDetail({ domain }: { domain: Domain }) {
         >
           &larr; All domains
         </Link>
-        <h1 className="font-display mt-3 text-3xl italic text-foreground">
-          {domain.name}
-        </h1>
+        <div className="mt-3 flex items-center gap-3">
+          <h1 className="font-display text-3xl italic text-foreground">
+            {domain.name}
+          </h1>
+          {progress.percent === 100 && <StatusBadge status="done" />}
+        </div>
         <p className="mt-1 text-sm text-muted">{domain.description}</p>
         <div className="mt-4 flex flex-col gap-2">
           <ProgressBar percent={progress.percent} />
