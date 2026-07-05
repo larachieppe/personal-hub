@@ -88,8 +88,8 @@
           "title": "Data Structures & Algorithms",
           "resources": [
             {
-              "title": "Data Structures Cheat Sheet",
-              "url": "",
+              "title": "Big-O Cheat Sheet",
+              "url": "https://www.bigocheatsheet.com/",
               "type": "article"
             }
           ]
@@ -124,7 +124,7 @@
             { "title": "ML Crash Course: AutoML", "url": "https://developers.google.com/machine-learning/crash-course/automl", "type": "course" },
             { "title": "ML Crash Course: ML Fairness", "url": "https://developers.google.com/machine-learning/crash-course/fairness", "type": "course" },
             { "title": "StatQuest with Josh Starmer", "url": "https://www.youtube.com/c/joshstarmer", "type": "video" },
-            { "title": "Cheatsheet: Transformers & LLMs", "url": "", "type": "article" }
+            { "title": "Jay Alammar: The Illustrated Transformer", "url": "https://jalammar.github.io/illustrated-transformer/", "type": "article" }
           ]
         },
         {
