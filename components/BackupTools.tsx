@@ -11,6 +11,8 @@ import {
   replaceMealLog,
   replaceMealOverrides,
 } from "@/lib/meal-store";
+import type { PantryCategoryState } from "@/lib/pantry-store";
+import { exportPantry, replacePantry } from "@/lib/pantry-store";
 import { exportProgressData, replaceProgressData } from "@/lib/progress-store";
 
 interface BackupFile {
@@ -22,6 +24,7 @@ interface BackupFile {
   mealLog: string[];
   mealOverrides: Record<string, MealOverride>;
   dailyCalorieGoalOverride: number | null;
+  pantry: PantryCategoryState[];
 }
 
 export default function BackupTools() {
@@ -38,6 +41,7 @@ export default function BackupTools() {
       mealLog: exportMealLog(),
       mealOverrides: exportMealOverrides(),
       dailyCalorieGoalOverride: exportDailyGoalOverride(),
+      pantry: exportPantry(),
     };
     const blob = new Blob([JSON.stringify(payload, null, 2)], {
       type: "application/json",
@@ -61,6 +65,7 @@ export default function BackupTools() {
         replaceMealLog(parsed.mealLog ?? []);
         replaceMealOverrides(parsed.mealOverrides ?? {});
         replaceDailyGoalOverride(parsed.dailyCalorieGoalOverride ?? null);
+        replacePantry(parsed.pantry ?? []);
         setMessage("Backup restored. Reload any open pages to see the change everywhere.");
       } catch {
         setMessage("That file couldn't be read as a valid backup.");

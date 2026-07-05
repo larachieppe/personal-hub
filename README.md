@@ -24,10 +24,14 @@ Live site (once Pages is enabled): `https://<your-username>.github.io/personal-h
   meals are checked, which drives a streak and an all-time total, the same as the Habits page.
   Click **Edit plan** to rewrite any meal's name or calorie count directly on the page — no file
   editing required.
+- **Pantry** (`/pantry`) — a checklist of what you keep stocked, organized into categories (Grains,
+  Proteins, Produce, etc). Check an item off once you have it; unchecked items are what's missing.
+  Click **Edit pantry** to rename items/categories or add and remove them — this list is fully
+  yours to shape, unlike the fixed weekly structure of Habits/Meals.
 - **Review** (`/review`) — a weekly retrospective: how consistent you were with each habit over
   the last 7 days, and which resources you checked off in that window.
-- **Backup** (`/backup`) — export all progress (curriculum + habits) to a JSON file, or import one
-  to restore it. Linked from the footer on every page.
+- **Backup** (`/backup`) — export all progress (curriculum + habits + meals + pantry) to a JSON
+  file, or import one to restore it. Linked from the footer on every page.
 
 The homepage also surfaces a **What's Next** pick — one random unchecked resource from the whole
 curriculum, with a checkbox and a "Shuffle" button — for days you want to make progress without
@@ -66,9 +70,16 @@ box. Each day shows "calories eaten / goal" based on the checked meals for that 
 over goal), and a day's streak/total is based on all of that day's meals being checked, using the
 same today-or-yesterday grace period as habit streaks.
 
+The Pantry page works differently from Habits/Meals: instead of overriding a fixed JSON template,
+the *entire* list lives in `localStorage` from the moment you first visit (seeded once from
+[`data/pantry.json`](data/pantry.json)). That's because a pantry naturally needs items and whole
+categories added and removed, not just text edits to fixed slots — there's no JSON file to keep
+editing afterwards. "Reset to default" wipes your customized list and reseeds it from the file.
+
 Because everything lives in `localStorage` and nowhere else, use the **Backup** page periodically
 (or before switching browsers/devices) to export a JSON snapshot of your curriculum progress, habit
-log, meal log, meal plan edits, and calorie goal — and import it back in on the other side.
+log, meal log, meal plan edits, calorie goal, and pantry list — and import it back in on the other
+side.
 
 ### How the Weekly Plan "auto-updates"
 
