@@ -1,0 +1,60 @@
+{
+  "days": [
+    {
+      "day": "monday",
+      "meals": [
+        { "id": "breakfast", "label": "Breakfast", "name": "Greek yogurt, berries, and granola" },
+        { "id": "lunch", "label": "Lunch", "name": "Grilled chicken salad with olive oil dressing" },
+        { "id": "dinner", "label": "Dinner", "name": "Salmon, roasted vegetables, and quinoa" }
+      ]
+    },
+    {
+      "day": "tuesday",
+      "meals": [
+        { "id": "breakfast", "label": "Breakfast", "name": "Oatmeal with banana and peanut butter" },
+        { "id": "lunch", "label": "Lunch", "name": "Turkey and avocado wrap" },
+        { "id": "dinner", "label": "Dinner", "name": "Stir-fried tofu and vegetables over rice" }
+      ]
+    },
+    {
+      "day": "wednesday",
+      "meals": [
+        { "id": "breakfast", "label": "Breakfast", "name": "Scrambled eggs with spinach and toast" },
+        { "id": "lunch", "label": "Lunch", "name": "Lentil soup with a side salad" },
+        { "id": "dinner", "label": "Dinner", "name": "Grilled steak with sweet potato" }
+      ]
+    },
+    {
+      "day": "thursday",
+      "meals": [
+        { "id": "breakfast", "label": "Breakfast", "name": "Smoothie: spinach, banana, protein, almond milk" },
+        { "id": "lunch", "label": "Lunch", "name": "Chicken burrito bowl" },
+        { "id": "dinner", "label": "Dinner", "name": "Baked cod with asparagus and brown rice" }
+      ]
+    },
+    {
+      "day": "friday",
+      "meals": [
+        { "id": "breakfast", "label": "Breakfast", "name": "Greek yogurt with honey and walnuts" },
+        { "id": "lunch", "label": "Lunch", "name": "Leftovers or meal-prep bowl" },
+        { "id": "dinner", "label": "Dinner", "name": "Homemade pizza night" }
+      ]
+    },
+    {
+      "day": "saturday",
+      "meals": [
+        { "id": "breakfast", "label": "Breakfast", "name": "Pancakes with fruit" },
+        { "id": "lunch", "label": "Lunch", "name": "Poke bowl or sushi" },
+        { "id": "dinner", "label": "Dinner", "name": "Whatever sounds good — rest day for the plan too" }
+      ]
+    },
+    {
+      "day": "sunday",
+      "meals": [
+        { "id": "breakfast", "label": "Breakfast", "name": "Omelet with peppers and cheese" },
+        { "id": "lunch", "label": "Lunch", "name": "Big salad with grilled shrimp" },
+        { "id": "dinner", "label": "Dinner", "name": "Roast chicken and vegetables — meal prep for the week" }
+      ]
+    }
+  ]
+}

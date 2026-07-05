@@ -1,6 +1,6 @@
 import type { Domain, ResourceWithContext } from "@/lib/curriculum";
 import { getAllResources, resourceKey } from "@/lib/curriculum";
-import { addDays, toDateString } from "@/lib/date-utils";
+import { addDays, getWeekStart, toDateString } from "@/lib/date-utils";
 
 export interface DayPlan {
   date: string;
@@ -42,12 +42,6 @@ function shuffle<T>(items: T[], random: () => number): T[] {
     [result[i], result[j]] = [result[j], result[i]];
   }
   return result;
-}
-
-export function getWeekStart(date: Date): Date {
-  const day = date.getDay();
-  const diff = day === 0 ? -6 : 1 - day;
-  return addDays(date, diff);
 }
 
 export function buildWeeklyPlan(

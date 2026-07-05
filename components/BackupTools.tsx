@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { exportHabitLog, replaceHabitLog } from "@/lib/habit-store";
+import { exportMealLog, replaceMealLog } from "@/lib/meal-store";
 import { exportProgressData, replaceProgressData } from "@/lib/progress-store";
 
 interface BackupFile {
@@ -10,6 +11,7 @@ interface BackupFile {
   completedResources: string[];
   completedTimestamps: Record<string, string>;
   habitLog: Record<string, string[]>;
+  mealLog: string[];
 }
 
 export default function BackupTools() {
@@ -23,6 +25,7 @@ export default function BackupTools() {
       completedResources: progress.completedResources,
       completedTimestamps: progress.completedTimestamps,
       habitLog: exportHabitLog(),
+      mealLog: exportMealLog(),
     };
     const blob = new Blob([JSON.stringify(payload, null, 2)], {
       type: "application/json",
@@ -43,6 +46,7 @@ export default function BackupTools() {
         const parsed = JSON.parse(String(reader.result)) as Partial<BackupFile>;
         replaceProgressData(parsed.completedResources ?? [], parsed.completedTimestamps ?? {});
         replaceHabitLog(parsed.habitLog ?? {});
+        replaceMealLog(parsed.mealLog ?? []);
         setMessage("Backup restored. Reload any open pages to see the change everywhere.");
       } catch {
         setMessage("That file couldn't be read as a valid backup.");

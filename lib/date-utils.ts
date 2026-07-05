@@ -18,6 +18,12 @@ export function parseDateString(value: string): Date {
   return new Date(y, m - 1, d);
 }
 
+export function getWeekStart(date: Date): Date {
+  const day = date.getDay();
+  const diff = day === 0 ? -6 : 1 - day;
+  return addDays(date, diff);
+}
+
 const SERVER_TODAY = toDateString(new Date());
 
 function subscribe(): () => void {

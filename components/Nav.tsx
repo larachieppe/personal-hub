@@ -7,6 +7,7 @@ const LINKS = [
   { href: "/plan", label: "Plan" },
   { href: "/curriculum", label: "Curriculum" },
   { href: "/habits", label: "Habits" },
+  { href: "/meals", label: "Meals" },
   { href: "/review", label: "Review" },
   { href: "/resources", label: "Athenaeum" },
 ];
@@ -21,7 +22,7 @@ export default function Nav() {
             Polymath Hub
           </span>
         </Link>
-        <div className="hidden md:flex gap-6 text-xs font-medium uppercase tracking-[0.15em] text-muted">
+        <div className="hidden lg:flex gap-5 text-xs font-medium uppercase tracking-[0.12em] text-muted">
           {LINKS.map((link) => (
             <Link
               key={link.href}

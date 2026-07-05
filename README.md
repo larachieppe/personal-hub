@@ -18,6 +18,9 @@ Live site (once Pages is enabled): `https://<your-username>.github.io/personal-h
   (Week/Month/Century/Year Streak), a full-year heatmap, and an all-time total.
 - **Plan** (`/plan`) — a day-by-day plan for the current week: one unchecked resource assigned to
   each weekday, weekends left as rest/review days.
+- **Meals** (`/meals`) — your weekly menu (breakfast/lunch/dinner for each day), with a checkbox per
+  meal. A day counts as fully followed once all its meals are checked, which drives a streak and an
+  all-time total, the same as the Habits page.
 - **Review** (`/review`) — a weekly retrospective: how consistent you were with each habit over
   the last 7 days, and which resources you checked off in that window.
 - **Backup** (`/backup`) — export all progress (curriculum + habits) to a JSON file, or import one
@@ -47,9 +50,15 @@ once per calendar day. A streak stays alive if you've checked in today or yester
 if you miss a full day; the all-time total never resets. To add, remove, or rename habits, edit
 [`data/habits.json`](data/habits.json).
 
+The Meals page is a fixed weekly menu template — edit [`data/meals.json`](data/meals.json) to
+change what's planned for each day of the week (it repeats every week until you edit it again).
+Checking off a meal logs it against that specific calendar date, so it doesn't carry over week to
+week. A day's streak/total is based on all of that day's meals being checked, using the same
+today-or-yesterday grace period as habit streaks.
+
 Because everything lives in `localStorage` and nowhere else, use the **Backup** page periodically
-(or before switching browsers/devices) to export a JSON snapshot of both your curriculum progress
-and habit log, and import it back in on the other side.
+(or before switching browsers/devices) to export a JSON snapshot of your curriculum progress,
+habit log, and meal log, and import it back in on the other side.
 
 ### How the Weekly Plan "auto-updates"
 
