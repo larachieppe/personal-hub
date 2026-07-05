@@ -1,5 +1,6 @@
 import { getHabits } from "@/lib/habits";
 import HabitTracker from "@/components/HabitTracker";
+import Ornament from "@/components/Ornament";
 
 export const metadata = {
   title: "Habits — Polymath Hub",
@@ -22,6 +23,7 @@ export default function HabitsPage() {
           all-time total keeps counting.
         </p>
       </div>
+      <Ornament />
       <HabitTracker habits={habits} />
     </div>
   );

@@ -1,5 +1,6 @@
 import { getDomains, getAllResources } from "@/lib/curriculum";
 import ResourceLibrary from "@/components/ResourceLibrary";
+import Ornament from "@/components/Ornament";
 
 export const metadata = {
   title: "Athenaeum — Polymath Hub",
@@ -31,6 +32,7 @@ export default function ResourcesPage() {
           .
         </p>
       </div>
+      <Ornament />
       <ResourceLibrary resources={resources} />
     </div>
   );

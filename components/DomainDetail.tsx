@@ -6,6 +6,8 @@ import { computeDomainProgress, computeTopicProgress, resourceKey } from "@/lib/
 import { toggleResourceCompleted, useCompletedResources } from "@/lib/progress-store";
 import ProgressBar from "@/components/ProgressBar";
 import StatusBadge from "@/components/StatusBadge";
+import DomainIcon from "@/components/DomainIcon";
+import Ornament from "@/components/Ornament";
 
 export default function DomainDetail({ domain }: { domain: Domain }) {
   const completed = useCompletedResources();
@@ -21,12 +23,15 @@ export default function DomainDetail({ domain }: { domain: Domain }) {
           &larr; All domains
         </Link>
         <div className="mt-3 flex items-center gap-3">
+          <div className="flex h-12 w-12 shrink-0 items-center justify-center border border-gold-dim bg-surface">
+            <DomainIcon domainId={domain.id} className="h-6 w-6 text-gold" />
+          </div>
           <h1 className="font-display text-3xl italic text-foreground">
             {domain.name}
           </h1>
           {progress.percent === 100 && <StatusBadge status="done" />}
         </div>
-        <p className="mt-1 text-sm text-muted">{domain.description}</p>
+        <p className="mt-3 text-sm text-muted">{domain.description}</p>
         <div className="mt-4 flex flex-col gap-2">
           <ProgressBar percent={progress.percent} />
           <span className="text-xs uppercase tracking-wide text-muted">
@@ -35,6 +40,8 @@ export default function DomainDetail({ domain }: { domain: Domain }) {
           </span>
         </div>
       </div>
+
+      <Ornament />
 
       <div className="flex flex-col divide-y divide-border">
         {domain.topics.map((topic) => {

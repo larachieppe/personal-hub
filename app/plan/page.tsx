@@ -1,5 +1,6 @@
 import { getDomains } from "@/lib/curriculum";
 import WeeklyPlan from "@/components/WeeklyPlan";
+import Ornament from "@/components/Ornament";
 
 export const metadata = {
   title: "Weekly Plan — Polymath Hub",
@@ -24,6 +25,7 @@ export default function PlanPage() {
           there&apos;s nothing to edit by hand.
         </p>
       </div>
+      <Ornament />
       <WeeklyPlan domains={domains} />
     </div>
   );

@@ -1,5 +1,6 @@
 import { getDomains } from "@/lib/curriculum";
 import CurriculumList from "@/components/CurriculumList";
+import Ornament from "@/components/Ornament";
 
 export const metadata = {
   title: "Curriculum — Polymath Hub",
@@ -22,6 +23,7 @@ export default function CurriculumPage() {
           domain page as you complete them — progress here updates automatically.
         </p>
       </div>
+      <Ornament />
       <CurriculumList domains={domains} />
     </div>
   );

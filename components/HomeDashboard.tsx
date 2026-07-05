@@ -6,6 +6,8 @@ import { computeDomainProgress, computeOverallProgress } from "@/lib/curriculum"
 import { useCompletedResources } from "@/lib/progress-store";
 import ProgressBar from "@/components/ProgressBar";
 import StatusBadge from "@/components/StatusBadge";
+import DomainIcon from "@/components/DomainIcon";
+import Ornament from "@/components/Ornament";
 import WhatsNext from "@/components/WhatsNext";
 
 function overallMilestoneMessage(percent: number): string | null {
@@ -23,7 +25,9 @@ export default function HomeDashboard({ domains }: { domains: Domain[] }) {
 
   return (
     <>
-      <section className="flex flex-col gap-4 border border-border bg-surface p-6">
+      <Ornament />
+
+      <section className="flex flex-col gap-4 border border-border bg-surface p-6 shadow-[inset_0_1px_0_rgba(255,255,255,0.04),0_16px_32px_-20px_rgba(0,0,0,0.85)]">
         <div className="flex items-baseline justify-between">
           <h2 className="font-display text-sm uppercase tracking-[0.2em] text-muted">
             The Ledger
@@ -40,12 +44,12 @@ export default function HomeDashboard({ domains }: { domains: Domain[] }) {
           <span className="text-gold-dim">·</span>
           <span>{overall.notStartedTopics} uncharted</span>
         </div>
-        {milestone && (
-          <p className="text-xs italic text-gold">{milestone}</p>
-        )}
+        {milestone && <p className="text-xs italic text-gold">{milestone}</p>}
       </section>
 
       <WhatsNext domains={domains} />
+
+      <Ornament />
 
       <section className="flex flex-col gap-4">
         <div className="flex items-baseline justify-between">
@@ -66,12 +70,18 @@ export default function HomeDashboard({ domains }: { domains: Domain[] }) {
               <Link
                 key={domain.id}
                 href={`/curriculum/${domain.id}`}
-                className="flex flex-col gap-3 border border-border border-t-2 border-t-gold-dim bg-surface p-4 transition-colors hover:border-t-gold hover:bg-surface-hover"
+                className="group flex flex-col gap-3 border border-border border-t-2 border-t-gold-dim bg-surface p-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.03),0_10px_24px_-16px_rgba(0,0,0,0.8)] transition-all duration-200 hover:-translate-y-0.5 hover:border-t-gold hover:bg-surface-hover hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.05),0_18px_32px_-16px_rgba(0,0,0,0.9)]"
               >
                 <div className="flex items-center justify-between gap-2">
-                  <span className="font-display text-base text-foreground">
-                    {domain.name}
-                  </span>
+                  <div className="flex items-center gap-2.5">
+                    <DomainIcon
+                      domainId={domain.id}
+                      className="h-5 w-5 shrink-0 text-gold-dim transition-colors group-hover:text-gold"
+                    />
+                    <span className="font-display text-base text-foreground">
+                      {domain.name}
+                    </span>
+                  </div>
                   {progress.percent === 100 && <StatusBadge status="done" />}
                 </div>
                 <ProgressBar percent={progress.percent} />

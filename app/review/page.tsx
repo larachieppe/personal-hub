@@ -1,6 +1,7 @@
 import { getDomains } from "@/lib/curriculum";
 import { getHabits } from "@/lib/habits";
 import WeeklyReview from "@/components/WeeklyReview";
+import Ornament from "@/components/Ornament";
 
 export const metadata = {
   title: "Weekly Review — Polymath Hub",
@@ -23,6 +24,7 @@ export default function ReviewPage() {
           A quick look back at the last seven days.
         </p>
       </div>
+      <Ornament />
       <WeeklyReview domains={domains} habits={habits} />
     </div>
   );

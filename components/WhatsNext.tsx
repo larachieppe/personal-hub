@@ -21,7 +21,7 @@ export default function WhatsNext({ domains }: { domains: Domain[] }) {
 
   if (unchecked.length === 0) {
     return (
-      <section className="flex flex-col gap-2 border border-border bg-surface p-6">
+      <section className="flex flex-col gap-2 border border-border bg-surface p-6 shadow-[inset_0_1px_0_rgba(255,255,255,0.04),0_16px_32px_-20px_rgba(0,0,0,0.85)]">
         <h2 className="font-display text-sm uppercase tracking-[0.2em] text-muted">
           What&apos;s Next
         </h2>
@@ -40,7 +40,7 @@ export default function WhatsNext({ domains }: { domains: Domain[] }) {
   const key = resourceKey(pick.domainId, pick.topicId, pick);
 
   return (
-    <section className="flex flex-col gap-3 border border-border bg-surface p-6">
+    <section className="flex flex-col gap-3 border border-border bg-surface p-6 shadow-[inset_0_1px_0_rgba(255,255,255,0.04),0_16px_32px_-20px_rgba(0,0,0,0.85)]">
       <div className="flex items-baseline justify-between">
         <h2 className="font-display text-sm uppercase tracking-[0.2em] text-muted">
           What&apos;s Next
