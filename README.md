@@ -20,7 +20,8 @@ Live site (once Pages is enabled): `https://<your-username>.github.io/personal-h
   each weekday, weekends left as rest/review days.
 - **Meals** (`/meals`) — your weekly menu (breakfast/lunch/dinner for each day), with a checkbox per
   meal. A day counts as fully followed once all its meals are checked, which drives a streak and an
-  all-time total, the same as the Habits page.
+  all-time total, the same as the Habits page. Click **Edit plan** to rewrite any meal directly on
+  the page — no file editing required.
 - **Review** (`/review`) — a weekly retrospective: how consistent you were with each habit over
   the last 7 days, and which resources you checked off in that window.
 - **Backup** (`/backup`) — export all progress (curriculum + habits) to a JSON file, or import one
@@ -50,15 +51,19 @@ once per calendar day. A streak stays alive if you've checked in today or yester
 if you miss a full day; the all-time total never resets. To add, remove, or rename habits, edit
 [`data/habits.json`](data/habits.json).
 
-The Meals page is a fixed weekly menu template — edit [`data/meals.json`](data/meals.json) to
-change what's planned for each day of the week (it repeats every week until you edit it again).
-Checking off a meal logs it against that specific calendar date, so it doesn't carry over week to
-week. A day's streak/total is based on all of that day's meals being checked, using the same
-today-or-yesterday grace period as habit streaks.
+The Meals page is a weekly menu template that repeats every week. [`data/meals.json`](data/meals.json)
+defines the default plan (what a fresh browser sees), but the **Edit plan** button on the page lets
+you rewrite any meal's text right there — those edits are saved as overrides in `localStorage` and
+take priority over the JSON default. "Reset to default" clears all overrides and reverts to what's
+in the file. Checking off a meal logs it against that specific calendar date, so it doesn't carry
+over week to week, but editing a meal's *text* changes the recurring template (e.g. every future
+Monday), since that's a different kind of edit than checking a box. A day's streak/total is based
+on all of that day's meals being checked, using the same today-or-yesterday grace period as habit
+streaks.
 
 Because everything lives in `localStorage` and nowhere else, use the **Backup** page periodically
-(or before switching browsers/devices) to export a JSON snapshot of your curriculum progress,
-habit log, and meal log, and import it back in on the other side.
+(or before switching browsers/devices) to export a JSON snapshot of your curriculum progress, habit
+log, meal log, and any meal plan edits — and import it back in on the other side.
 
 ### How the Weekly Plan "auto-updates"
 

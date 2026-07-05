@@ -3,12 +3,16 @@ import type { DayMenu } from "@/lib/meals";
 import { addDays, toDateString } from "@/lib/date-utils";
 
 const STORAGE_KEY = "polymath-hub:meal-log";
+const OVERRIDES_KEY = "polymath-hub:meal-plan-overrides";
 const EMPTY_SET: ReadonlySet<string> = new Set();
+const EMPTY_OVERRIDES: Readonly<Record<string, string>> = {};
 
 type Listener = () => void;
+type Overrides = Record<string, string>;
 
 let listeners: Listener[] = [];
 let cache: ReadonlySet<string> | null = null;
+let overridesCache: Readonly<Overrides> | null = null;
 
 function readFromStorage(): Set<string> {
   if (typeof window === "undefined") return new Set();
@@ -20,6 +24,16 @@ function readFromStorage(): Set<string> {
   }
 }
 
+function readOverridesFromStorage(): Overrides {
+  if (typeof window === "undefined") return {};
+  try {
+    const raw = window.localStorage.getItem(OVERRIDES_KEY);
+    return raw ? (JSON.parse(raw) as Overrides) : {};
+  } catch {
+    return {};
+  }
+}
+
 function getSnapshot(): ReadonlySet<string> {
   if (cache === null) cache = readFromStorage();
   return cache;
@@ -27,6 +41,15 @@ function getSnapshot(): ReadonlySet<string> {
 
 function getServerSnapshot(): ReadonlySet<string> {
   return EMPTY_SET;
+}
+
+function getOverridesSnapshot(): Readonly<Overrides> {
+  if (overridesCache === null) overridesCache = readOverridesFromStorage();
+  return overridesCache;
+}
+
+function getServerOverridesSnapshot(): Readonly<Overrides> {
+  return EMPTY_OVERRIDES;
 }
 
 function subscribe(listener: Listener): () => void {
@@ -42,6 +65,45 @@ function persist(next: Set<string>) {
     window.localStorage.setItem(STORAGE_KEY, JSON.stringify(Array.from(next)));
   }
   listeners.forEach((listener) => listener());
+}
+
+function persistOverrides(next: Overrides) {
+  overridesCache = next;
+  if (typeof window !== "undefined") {
+    window.localStorage.setItem(OVERRIDES_KEY, JSON.stringify(next));
+  }
+  listeners.forEach((listener) => listener());
+}
+
+export function overrideKey(day: string, mealId: string): string {
+  return `${day}/${mealId}`;
+}
+
+export function setMealOverride(day: string, mealId: string, name: string) {
+  const next = { ...getOverridesSnapshot() };
+  const trimmed = name.trim();
+  if (trimmed) {
+    next[overrideKey(day, mealId)] = trimmed;
+  } else {
+    delete next[overrideKey(day, mealId)];
+  }
+  persistOverrides(next);
+}
+
+export function clearMealOverrides() {
+  persistOverrides({});
+}
+
+export function useMealOverrides(): Readonly<Overrides> {
+  return useSyncExternalStore(subscribe, getOverridesSnapshot, getServerOverridesSnapshot);
+}
+
+export function exportMealOverrides(): Overrides {
+  return { ...getOverridesSnapshot() };
+}
+
+export function replaceMealOverrides(next: Overrides) {
+  persistOverrides(next ?? {});
 }
 
 export function mealKey(dateStr: string, mealId: string): string {

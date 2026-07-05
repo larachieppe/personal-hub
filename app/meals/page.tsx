@@ -20,11 +20,9 @@ export default function MealsPage() {
         </h1>
         <p className="mt-2 text-sm text-muted">
           Your weekly menu — check off each meal as you eat it. A day counts as
-          fully followed once all three meals are checked. Edit{" "}
-          <code className="border border-border bg-surface px-1 py-0.5 text-foreground">
-            data/meals.json
-          </code>{" "}
-          to change what&apos;s planned.
+          fully followed once all three meals are checked. Click{" "}
+          <span className="text-gold">Edit plan</span> to change what&apos;s planned
+          right here — no file editing required.
         </p>
       </div>
       <Ornament />
