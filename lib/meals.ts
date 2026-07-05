@@ -4,6 +4,7 @@ export interface Meal {
   id: string;
   label: string;
   name: string;
+  calories: number;
 }
 
 export interface DayMenu {
@@ -13,4 +14,8 @@ export interface DayMenu {
 
 export function getMealPlan(): DayMenu[] {
   return mealsData.days;
+}
+
+export function getDailyCalorieGoal(): number {
+  return mealsData.dailyCalorieGoal;
 }

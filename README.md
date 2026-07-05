@@ -18,10 +18,12 @@ Live site (once Pages is enabled): `https://<your-username>.github.io/personal-h
   (Week/Month/Century/Year Streak), a full-year heatmap, and an all-time total.
 - **Plan** (`/plan`) — a day-by-day plan for the current week: one unchecked resource assigned to
   each weekday, weekends left as rest/review days.
-- **Meals** (`/meals`) — your weekly menu (breakfast/lunch/dinner for each day), with a checkbox per
-  meal. A day counts as fully followed once all its meals are checked, which drives a streak and an
-  all-time total, the same as the Habits page. Click **Edit plan** to rewrite any meal directly on
-  the page — no file editing required.
+- **Meals** (`/meals`) — your weekly menu (breakfast/lunch/snack/dinner for each day), with a
+  checkbox and a calorie count per meal. Each day shows calories eaten so far against your daily
+  goal (1750 by default, editable right on the page). A day counts as fully followed once all its
+  meals are checked, which drives a streak and an all-time total, the same as the Habits page.
+  Click **Edit plan** to rewrite any meal's name or calorie count directly on the page — no file
+  editing required.
 - **Review** (`/review`) — a weekly retrospective: how consistent you were with each habit over
   the last 7 days, and which resources you checked off in that window.
 - **Backup** (`/backup`) — export all progress (curriculum + habits) to a JSON file, or import one
@@ -52,18 +54,21 @@ if you miss a full day; the all-time total never resets. To add, remove, or rena
 [`data/habits.json`](data/habits.json).
 
 The Meals page is a weekly menu template that repeats every week. [`data/meals.json`](data/meals.json)
-defines the default plan (what a fresh browser sees), but the **Edit plan** button on the page lets
-you rewrite any meal's text right there — those edits are saved as overrides in `localStorage` and
+defines the default plan (what a fresh browser sees) — each meal has a `calories` value, and there's
+a top-level `dailyCalorieGoal` (1750 by default). The **Edit plan** button lets you rewrite any
+meal's name or calorie count right there; those edits are saved as overrides in `localStorage` and
 take priority over the JSON default. "Reset to default" clears all overrides and reverts to what's
-in the file. Checking off a meal logs it against that specific calendar date, so it doesn't carry
-over week to week, but editing a meal's *text* changes the recurring template (e.g. every future
-Monday), since that's a different kind of edit than checking a box. A day's streak/total is based
-on all of that day's meals being checked, using the same today-or-yesterday grace period as habit
-streaks.
+in the file. The **Daily goal** field next to the streak badges is always editable (not gated behind
+Edit plan) and is stored the same way. Checking off a meal logs it against that specific calendar
+date, so it doesn't carry over week to week, but editing a meal's *name or calories* changes the
+recurring template (e.g. every future Monday), since that's a different kind of edit than checking a
+box. Each day shows "calories eaten / goal" based on the checked meals for that date (turning red if
+over goal), and a day's streak/total is based on all of that day's meals being checked, using the
+same today-or-yesterday grace period as habit streaks.
 
 Because everything lives in `localStorage` and nowhere else, use the **Backup** page periodically
 (or before switching browsers/devices) to export a JSON snapshot of your curriculum progress, habit
-log, meal log, and any meal plan edits — and import it back in on the other side.
+log, meal log, meal plan edits, and calorie goal — and import it back in on the other side.
 
 ### How the Weekly Plan "auto-updates"
 

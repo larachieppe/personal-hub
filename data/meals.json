@@ -1,59 +1,67 @@
 {
+  "dailyCalorieGoal": 1750,
   "days": [
     {
       "day": "monday",
       "meals": [
-        { "id": "breakfast", "label": "Breakfast", "name": "Greek yogurt, berries, and granola" },
-        { "id": "lunch", "label": "Lunch", "name": "Grilled chicken salad with olive oil dressing" },
-        { "id": "dinner", "label": "Dinner", "name": "Salmon, roasted vegetables, and quinoa" }
+        { "id": "breakfast", "label": "Breakfast", "name": "Greek yogurt, berries, and granola", "calories": 380 },
+        { "id": "lunch", "label": "Lunch", "name": "Grilled chicken salad with olive oil dressing", "calories": 480 },
+        { "id": "snack", "label": "Snack", "name": "Apple with peanut butter", "calories": 190 },
+        { "id": "dinner", "label": "Dinner", "name": "Salmon, roasted vegetables, and quinoa", "calories": 700 }
       ]
     },
     {
       "day": "tuesday",
       "meals": [
-        { "id": "breakfast", "label": "Breakfast", "name": "Oatmeal with banana and peanut butter" },
-        { "id": "lunch", "label": "Lunch", "name": "Turkey and avocado wrap" },
-        { "id": "dinner", "label": "Dinner", "name": "Stir-fried tofu and vegetables over rice" }
+        { "id": "breakfast", "label": "Breakfast", "name": "Oatmeal with banana and peanut butter", "calories": 420 },
+        { "id": "lunch", "label": "Lunch", "name": "Turkey and avocado wrap", "calories": 500 },
+        { "id": "snack", "label": "Snack", "name": "Handful of almonds and a piece of fruit", "calories": 200 },
+        { "id": "dinner", "label": "Dinner", "name": "Stir-fried tofu and vegetables over rice", "calories": 630 }
       ]
     },
     {
       "day": "wednesday",
       "meals": [
-        { "id": "breakfast", "label": "Breakfast", "name": "Scrambled eggs with spinach and toast" },
-        { "id": "lunch", "label": "Lunch", "name": "Lentil soup with a side salad" },
-        { "id": "dinner", "label": "Dinner", "name": "Grilled steak with sweet potato" }
+        { "id": "breakfast", "label": "Breakfast", "name": "Scrambled eggs with spinach and toast", "calories": 400 },
+        { "id": "lunch", "label": "Lunch", "name": "Lentil soup with a side salad", "calories": 450 },
+        { "id": "snack", "label": "Snack", "name": "Cottage cheese with pineapple", "calories": 180 },
+        { "id": "dinner", "label": "Dinner", "name": "Grilled steak with sweet potato", "calories": 720 }
       ]
     },
     {
       "day": "thursday",
       "meals": [
-        { "id": "breakfast", "label": "Breakfast", "name": "Smoothie: spinach, banana, protein, almond milk" },
-        { "id": "lunch", "label": "Lunch", "name": "Chicken burrito bowl" },
-        { "id": "dinner", "label": "Dinner", "name": "Baked cod with asparagus and brown rice" }
+        { "id": "breakfast", "label": "Breakfast", "name": "Smoothie: spinach, banana, protein, almond milk", "calories": 350 },
+        { "id": "lunch", "label": "Lunch", "name": "Chicken burrito bowl", "calories": 550 },
+        { "id": "snack", "label": "Snack", "name": "Rice cakes with almond butter", "calories": 200 },
+        { "id": "dinner", "label": "Dinner", "name": "Baked cod with asparagus and brown rice", "calories": 650 }
       ]
     },
     {
       "day": "friday",
       "meals": [
-        { "id": "breakfast", "label": "Breakfast", "name": "Greek yogurt with honey and walnuts" },
-        { "id": "lunch", "label": "Lunch", "name": "Leftovers or meal-prep bowl" },
-        { "id": "dinner", "label": "Dinner", "name": "Homemade pizza night" }
+        { "id": "breakfast", "label": "Breakfast", "name": "Greek yogurt with honey and walnuts", "calories": 380 },
+        { "id": "lunch", "label": "Lunch", "name": "Leftovers or meal-prep bowl", "calories": 500 },
+        { "id": "snack", "label": "Snack", "name": "Trail mix", "calories": 220 },
+        { "id": "dinner", "label": "Dinner", "name": "Homemade pizza night", "calories": 650 }
       ]
     },
     {
       "day": "saturday",
       "meals": [
-        { "id": "breakfast", "label": "Breakfast", "name": "Pancakes with fruit" },
-        { "id": "lunch", "label": "Lunch", "name": "Poke bowl or sushi" },
-        { "id": "dinner", "label": "Dinner", "name": "Whatever sounds good — rest day for the plan too" }
+        { "id": "breakfast", "label": "Breakfast", "name": "Pancakes with fruit", "calories": 450 },
+        { "id": "lunch", "label": "Lunch", "name": "Poke bowl or sushi", "calories": 550 },
+        { "id": "snack", "label": "Snack", "name": "Popcorn", "calories": 150 },
+        { "id": "dinner", "label": "Dinner", "name": "Whatever sounds good — still budget for the day", "calories": 600 }
       ]
     },
     {
       "day": "sunday",
       "meals": [
-        { "id": "breakfast", "label": "Breakfast", "name": "Omelet with peppers and cheese" },
-        { "id": "lunch", "label": "Lunch", "name": "Big salad with grilled shrimp" },
-        { "id": "dinner", "label": "Dinner", "name": "Roast chicken and vegetables — meal prep for the week" }
+        { "id": "breakfast", "label": "Breakfast", "name": "Omelet with peppers and cheese", "calories": 400 },
+        { "id": "lunch", "label": "Lunch", "name": "Big salad with grilled shrimp", "calories": 450 },
+        { "id": "snack", "label": "Snack", "name": "Greek yogurt with berries", "calories": 180 },
+        { "id": "dinner", "label": "Dinner", "name": "Roast chicken and vegetables — meal prep for the week", "calories": 720 }
       ]
     }
   ]

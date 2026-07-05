@@ -1,18 +1,25 @@
 import { useSyncExternalStore } from "react";
-import type { DayMenu } from "@/lib/meals";
+import type { DayMenu, Meal } from "@/lib/meals";
 import { addDays, toDateString } from "@/lib/date-utils";
 
 const STORAGE_KEY = "polymath-hub:meal-log";
 const OVERRIDES_KEY = "polymath-hub:meal-plan-overrides";
+const GOAL_KEY = "polymath-hub:meal-calorie-goal-override";
 const EMPTY_SET: ReadonlySet<string> = new Set();
-const EMPTY_OVERRIDES: Readonly<Record<string, string>> = {};
+const EMPTY_OVERRIDES: Readonly<Record<string, MealOverride>> = {};
+
+export interface MealOverride {
+  name?: string;
+  calories?: number;
+}
 
 type Listener = () => void;
-type Overrides = Record<string, string>;
+type Overrides = Record<string, MealOverride>;
 
 let listeners: Listener[] = [];
 let cache: ReadonlySet<string> | null = null;
 let overridesCache: Readonly<Overrides> | null = null;
+let goalCache: number | null | undefined;
 
 function readFromStorage(): Set<string> {
   if (typeof window === "undefined") return new Set();
@@ -24,13 +31,37 @@ function readFromStorage(): Set<string> {
   }
 }
 
+function normalizeOverride(raw: unknown): MealOverride {
+  if (typeof raw === "string") return { name: raw };
+  if (raw && typeof raw === "object") return raw as MealOverride;
+  return {};
+}
+
 function readOverridesFromStorage(): Overrides {
   if (typeof window === "undefined") return {};
   try {
     const raw = window.localStorage.getItem(OVERRIDES_KEY);
-    return raw ? (JSON.parse(raw) as Overrides) : {};
+    if (!raw) return {};
+    const parsed = JSON.parse(raw) as Record<string, unknown>;
+    const normalized: Overrides = {};
+    for (const key of Object.keys(parsed)) {
+      normalized[key] = normalizeOverride(parsed[key]);
+    }
+    return normalized;
   } catch {
     return {};
+  }
+}
+
+function readGoalFromStorage(): number | null {
+  if (typeof window === "undefined") return null;
+  try {
+    const raw = window.localStorage.getItem(GOAL_KEY);
+    if (!raw) return null;
+    const value = Number(raw);
+    return Number.isFinite(value) && value > 0 ? value : null;
+  } catch {
+    return null;
   }
 }
 
@@ -50,6 +81,15 @@ function getOverridesSnapshot(): Readonly<Overrides> {
 
 function getServerOverridesSnapshot(): Readonly<Overrides> {
   return EMPTY_OVERRIDES;
+}
+
+function getGoalSnapshot(): number | null {
+  if (goalCache === undefined) goalCache = readGoalFromStorage();
+  return goalCache;
+}
+
+function getServerGoalSnapshot(): number | null {
+  return null;
 }
 
 function subscribe(listener: Listener): () => void {
@@ -75,19 +115,46 @@ function persistOverrides(next: Overrides) {
   listeners.forEach((listener) => listener());
 }
 
+function persistGoal(value: number | null) {
+  goalCache = value;
+  if (typeof window !== "undefined") {
+    if (value === null) {
+      window.localStorage.removeItem(GOAL_KEY);
+    } else {
+      window.localStorage.setItem(GOAL_KEY, String(value));
+    }
+  }
+  listeners.forEach((listener) => listener());
+}
+
 export function overrideKey(day: string, mealId: string): string {
   return `${day}/${mealId}`;
 }
 
-export function setMealOverride(day: string, mealId: string, name: string) {
-  const next = { ...getOverridesSnapshot() };
-  const trimmed = name.trim();
-  if (trimmed) {
-    next[overrideKey(day, mealId)] = trimmed;
-  } else {
-    delete next[overrideKey(day, mealId)];
+export function setMealOverride(day: string, mealId: string, patch: Partial<MealOverride>) {
+  const key = overrideKey(day, mealId);
+  const overrides = { ...getOverridesSnapshot() };
+  const current = { ...(overrides[key] ?? {}) };
+
+  if (patch.name !== undefined) {
+    const trimmed = patch.name.trim();
+    if (trimmed) current.name = trimmed;
+    else delete current.name;
   }
-  persistOverrides(next);
+  if (patch.calories !== undefined) {
+    if (Number.isFinite(patch.calories) && (patch.calories as number) > 0) {
+      current.calories = patch.calories;
+    } else {
+      delete current.calories;
+    }
+  }
+
+  if (Object.keys(current).length === 0) {
+    delete overrides[key];
+  } else {
+    overrides[key] = current;
+  }
+  persistOverrides(overrides);
 }
 
 export function clearMealOverrides() {
@@ -104,6 +171,45 @@ export function exportMealOverrides(): Overrides {
 
 export function replaceMealOverrides(next: Overrides) {
   persistOverrides(next ?? {});
+}
+
+export interface ResolvedMeal {
+  name: string;
+  calories: number;
+}
+
+export function resolveMeal(
+  day: string,
+  meal: Meal,
+  overrides: Readonly<Overrides>
+): ResolvedMeal {
+  const override = overrides[overrideKey(day, meal.id)];
+  return {
+    name: override?.name ?? meal.name,
+    calories: override?.calories ?? meal.calories,
+  };
+}
+
+export function setDailyGoalOverride(value: number) {
+  if (Number.isFinite(value) && value > 0) {
+    persistGoal(Math.round(value));
+  }
+}
+
+export function clearDailyGoalOverride() {
+  persistGoal(null);
+}
+
+export function useDailyGoalOverride(): number | null {
+  return useSyncExternalStore(subscribe, getGoalSnapshot, getServerGoalSnapshot);
+}
+
+export function exportDailyGoalOverride(): number | null {
+  return getGoalSnapshot();
+}
+
+export function replaceDailyGoalOverride(value: number | null) {
+  persistGoal(value ?? null);
 }
 
 export function mealKey(dateStr: string, mealId: string): string {

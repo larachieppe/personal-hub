@@ -6,9 +6,11 @@ import {
   clearMealOverrides,
   computeMealPlanStats,
   mealKey,
-  overrideKey,
+  resolveMeal,
+  setDailyGoalOverride,
   setMealOverride,
   toggleMeal,
+  useDailyGoalOverride,
   useMealLog,
   useMealOverrides,
 } from "@/lib/meal-store";
@@ -34,9 +36,17 @@ const DAY_LABELS: Record<string, string> = {
   sunday: "Sunday",
 };
 
-export default function MealPlan({ days }: { days: DayMenu[] }) {
+export default function MealPlan({
+  days,
+  defaultGoal,
+}: {
+  days: DayMenu[];
+  defaultGoal: number;
+}) {
   const completed = useMealLog();
   const overrides = useMealOverrides();
+  const goalOverride = useDailyGoalOverride();
+  const goal = goalOverride ?? defaultGoal;
   const todayStr = useTodayString();
   const today = parseDateString(todayStr);
   const weekStart = getWeekStart(today);
@@ -60,6 +70,17 @@ export default function MealPlan({ days }: { days: DayMenu[] }) {
           <span className="text-xs uppercase tracking-wide text-muted">
             {stats.totalDaysCompleted} days fully followed
           </span>
+          <label className="flex items-center gap-2 text-xs uppercase tracking-wide text-muted">
+            Daily goal
+            <input
+              type="number"
+              defaultValue={goal}
+              onBlur={(e) => setDailyGoalOverride(Number(e.target.value))}
+              className="w-20 border border-border bg-surface px-2 py-1 text-sm text-foreground outline-none focus:border-gold"
+              aria-label="Daily calorie goal"
+            />
+            cal
+          </label>
         </div>
         <div className="flex items-center gap-3">
           {hasOverrides && (
@@ -97,6 +118,12 @@ export default function MealPlan({ days }: { days: DayMenu[] }) {
           const dateStr = toDateString(date);
           const isToday = dateStr === todayStr;
 
+          const eatenCalories = menu.meals.reduce((sum, meal) => {
+            if (!completed.has(mealKey(dateStr, meal.id))) return sum;
+            return sum + resolveMeal(dayKey, meal, overrides).calories;
+          }, 0);
+          const overGoal = eatenCalories > goal;
+
           return (
             <div
               key={dayKey}
@@ -111,13 +138,22 @@ export default function MealPlan({ days }: { days: DayMenu[] }) {
                     </span>
                   )}
                 </h2>
-                <span className="text-xs uppercase tracking-wide text-muted">{dateStr}</span>
+                <div className="flex items-baseline gap-3">
+                  <span
+                    className={`text-xs uppercase tracking-wide ${
+                      overGoal ? "text-wine" : "text-muted"
+                    }`}
+                  >
+                    {eatenCalories} / {goal} cal
+                  </span>
+                  <span className="text-xs uppercase tracking-wide text-muted">{dateStr}</span>
+                </div>
               </div>
               <ul className="flex flex-col gap-2">
                 {menu.meals.map((meal) => {
                   const key = mealKey(dateStr, meal.id);
                   const isChecked = completed.has(key);
-                  const resolvedName = overrides[overrideKey(dayKey, meal.id)] ?? meal.name;
+                  const resolved = resolveMeal(dayKey, meal, overrides);
 
                   return (
                     <li key={meal.id} className="flex items-start gap-2.5 text-sm">
@@ -132,16 +168,32 @@ export default function MealPlan({ days }: { days: DayMenu[] }) {
                         {meal.label}
                       </span>
                       {isEditing ? (
-                        <input
-                          type="text"
-                          defaultValue={resolvedName}
-                          onBlur={(e) => setMealOverride(dayKey, meal.id, e.target.value)}
-                          className="flex-1 border border-border bg-surface px-2 py-1 text-sm text-foreground outline-none focus:border-gold"
-                          aria-label={`Edit ${DAY_LABELS[dayKey]} ${meal.label}`}
-                        />
+                        <div className="flex flex-1 items-center gap-2">
+                          <input
+                            type="text"
+                            defaultValue={resolved.name}
+                            onBlur={(e) =>
+                              setMealOverride(dayKey, meal.id, { name: e.target.value })
+                            }
+                            className="flex-1 border border-border bg-surface px-2 py-1 text-sm text-foreground outline-none focus:border-gold"
+                            aria-label={`Edit ${DAY_LABELS[dayKey]} ${meal.label}`}
+                          />
+                          <input
+                            type="number"
+                            defaultValue={resolved.calories}
+                            onBlur={(e) =>
+                              setMealOverride(dayKey, meal.id, { calories: Number(e.target.value) })
+                            }
+                            className="w-20 border border-border bg-surface px-2 py-1 text-sm text-foreground outline-none focus:border-gold"
+                            aria-label={`Edit ${DAY_LABELS[dayKey]} ${meal.label} calories`}
+                          />
+                        </div>
                       ) : (
                         <span className={isChecked ? "text-muted line-through" : "text-foreground"}>
-                          {resolvedName}
+                          {resolved.name}
+                          <span className="ml-2 text-xs uppercase tracking-wide text-muted">
+                            {resolved.calories} cal
+                          </span>
                         </span>
                       )}
                     </li>
