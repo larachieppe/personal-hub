@@ -4,6 +4,7 @@ import MobileNav from "./MobileNav";
 
 const LINKS = [
   { href: "/", label: "Dashboard" },
+  { href: "/plan", label: "Plan" },
   { href: "/curriculum", label: "Curriculum" },
   { href: "/habits", label: "Habits" },
   { href: "/review", label: "Review" },

@@ -16,6 +16,8 @@ Live site (once Pages is enabled): `https://<your-username>.github.io/personal-h
 - **Habits** (`/habits`) — daily check-off for a fixed set of habits (weight lifting, cardio,
   studying 8+ hours, reading before sleep), each with a streak counter, a milestone label
   (Week/Month/Century/Year Streak), a full-year heatmap, and an all-time total.
+- **Plan** (`/plan`) — a day-by-day plan for the current week: one unchecked resource assigned to
+  each weekday, weekends left as rest/review days.
 - **Review** (`/review`) — a weekly retrospective: how consistent you were with each habit over
   the last 7 days, and which resources you checked off in that window.
 - **Backup** (`/backup`) — export all progress (curriculum + habits) to a JSON file, or import one
@@ -48,6 +50,18 @@ if you miss a full day; the all-time total never resets. To add, remove, or rena
 Because everything lives in `localStorage` and nowhere else, use the **Backup** page periodically
 (or before switching browsers/devices) to export a JSON snapshot of both your curriculum progress
 and habit log, and import it back in on the other side.
+
+### How the Weekly Plan "auto-updates"
+
+There's no stored plan data anywhere — `/plan` is computed fresh on every page load from two
+inputs: the current date and whatever's still unchecked in the curriculum. The Monday-to-Friday
+assignment is shuffled using a seed derived from that week's Monday date, so:
+- Reloading the page during the same week always shows the same plan (it's stable, not random
+  every render).
+- A new week automatically gets a fresh shuffle, with no manual editing required.
+- Checking off resources shrinks the pool the plan draws from, so completed items stop showing up
+  — as a side effect, checking something off mid-week can shift what later days in that same week
+  show, since the shuffle re-runs over a shorter list.
 
 ## Editing your curriculum
 
