@@ -100,3 +100,20 @@ export function ensureAssignments(
 
   if (changed) persist(next);
 }
+
+/**
+ * Swaps one assigned resource key for another within a single date's list,
+ * keeping its position. Used by the "Change" control so a suggestion can be
+ * replaced without waiting for it to be completed or discarded first.
+ */
+export function replaceAssignment(dateStr: string, oldKey: string, newKey: string) {
+  if (oldKey === newKey) return;
+  const current = getSnapshot();
+  const list = current[dateStr] ?? [];
+  if (!list.includes(oldKey)) return;
+  const next: PlanAssignments = {
+    ...current,
+    [dateStr]: list.map((key) => (key === oldKey ? newKey : key)),
+  };
+  persist(next);
+}

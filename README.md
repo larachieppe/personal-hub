@@ -16,12 +16,13 @@ Live site (once Pages is enabled): `https://<your-username>.github.io/personal-h
 - **Habits** (`/habits`) — daily check-off for a fixed set of habits (weight lifting, cardio,
   studying 8+ hours, reading before sleep), each with a streak counter, a milestone label
   (Week/Month/Century/Year Streak), a full-year heatmap, and an all-time total.
-- **Plan** (`/plan`) — a day-by-day plan for the current week. Each weekday gets resources assigned
-  in sequence (never a later lesson before an earlier one in the same topic); checking one off keeps
-  it marked on that day and appends a new suggestion below it. Weekends are rest/review days. Every
-  day (weekdays and weekends alike) also has its own free-form **To-Do** list — type anything into
-  the box and hit Add, check items off, or remove them — so the Plan page doubles as a plain weekly
-  to-do list alongside the curriculum assignments.
+- **Plan** (`/plan`) — a day-by-day plan for every day of the week, including weekends. Each day gets
+  a resource assigned in sequence (never a later lesson before an earlier one in the same topic);
+  checking one off keeps it marked on that day and appends a new suggestion below it. Don't want the
+  one it picked? Click **Change** to swap in a different eligible resource from the same pool.
+  Every day also has its own free-form **To-Do** list — type anything into the box and hit Add, check
+  items off, or remove them — so the Plan page doubles as a plain weekly to-do list alongside the
+  curriculum assignments.
 - **Kitchen** (`/kitchen`) — meal plan and pantry together on one page behind a tab switcher.
   - **Meal Plan** tab: your weekly menu (breakfast/lunch/snack/dinner for each day), with a
     checkbox and a calorie count per meal. Each day shows calories eaten so far against your daily
@@ -122,12 +123,18 @@ Two rules, both enforced in `lib/curriculum.ts`'s `getNextResources()`:
 1. **Sequential within a topic.** The only resource ever eligible to be suggested from a topic is
    the earliest one (in `curriculum.json`'s array order) that isn't checked off yet. A later lesson
    simply isn't in the pool until every earlier one in that topic is done.
-2. **Persistent per day.** Each weekday (Mon–Fri) keeps an accumulating list of assigned resources
-   in `localStorage` (`polymath-hub:plan-assignments`, via `lib/plan-store.ts`) instead of picking
-   one fresh resource every render. Checking off (or discarding) the active item for a day appends a
-   new one below it — the completed item stays right where it was, struck through. A resource
-   already pending on another day that week is skipped, so the same suggestion never shows up twice
-   at once.
+2. **Persistent per day.** Every day of the week (Monday through Sunday) keeps an accumulating list
+   of assigned resources in `localStorage` (`polymath-hub:plan-assignments`, via `lib/plan-store.ts`)
+   instead of picking one fresh resource every render. Checking off (or discarding) the active item
+   for a day appends a new one below it — the completed item stays right where it was, struck
+   through. A resource already pending on another day that week is skipped, so the same suggestion
+   never shows up twice at once.
+
+Each assigned resource also has a **Change** button, which reveals a dropdown of the other resources
+currently eligible under the sequential rule above (i.e. still respecting topic order) and not
+already pending elsewhere that week. Picking one calls `replaceAssignment()` in `lib/plan-store.ts`,
+swapping it into that exact slot in place — the day keeps its position in the list, nothing is
+appended or removed, and the swap is just as persistent as the original assignment.
 
 A new calendar week means new (empty) date keys, so Monday of a new week always starts fresh —
 there's nothing to reset by hand.

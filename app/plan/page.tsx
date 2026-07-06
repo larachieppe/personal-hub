@@ -19,10 +19,12 @@ export default function PlanPage() {
           Weekly Plan
         </h1>
         <p className="mt-2 text-sm text-muted">
-          One resource a day, Monday through Friday, picked in order — a later lesson
-          is never suggested ahead of an earlier one in the same topic. Check
-          something off and it stays marked right there, with the next one appearing
-          below it. Weekends are for rest and review, and a new week starts fresh.
+          One resource a day, every day of the week including weekends, picked in
+          order — a later lesson is never suggested ahead of an earlier one in the
+          same topic. Check something off and it stays marked right there, with the
+          next one appearing below it, or click <strong>Change</strong> to swap in a
+          different one. Each day also has its own free-form to-do list, and a new
+          week starts fresh.
         </p>
       </div>
       <Ornament />
