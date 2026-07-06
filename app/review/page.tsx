@@ -1,15 +1,17 @@
 import { getDomains } from "@/lib/curriculum";
 import { getHabits } from "@/lib/habits";
-import WeeklyReview from "@/components/WeeklyReview";
+import { getMealPlan } from "@/lib/meals";
+import Review from "@/components/Review";
 import Ornament from "@/components/Ornament";
 
 export const metadata = {
-  title: "Weekly Review — Polymath Hub",
+  title: "Review — Polymath Hub",
 };
 
 export default function ReviewPage() {
   const domains = getDomains();
   const habits = getHabits();
+  const mealDays = getMealPlan();
 
   return (
     <div className="flex flex-col gap-6">
@@ -18,14 +20,16 @@ export default function ReviewPage() {
           Retrospective
         </p>
         <h1 className="font-display mt-2 text-3xl italic text-foreground">
-          This Week
+          Review
         </h1>
         <p className="mt-2 text-sm text-muted">
-          A quick look back at the last seven days.
+          Nothing here is ever deleted — habit check-ins, completed resources, and
+          meal logs are kept indefinitely. Switch between Week, Month, and Year to
+          look back further.
         </p>
       </div>
       <Ornament />
-      <WeeklyReview domains={domains} habits={habits} />
+      <Review domains={domains} habits={habits} mealDays={mealDays} />
     </div>
   );
 }

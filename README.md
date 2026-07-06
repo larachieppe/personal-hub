@@ -28,8 +28,9 @@ Live site (once Pages is enabled): `https://<your-username>.github.io/personal-h
   Proteins, Produce, etc). Check an item off once you have it; unchecked items are what's missing.
   Click **Edit pantry** to rename items/categories or add and remove them — this list is fully
   yours to shape, unlike the fixed weekly structure of Habits/Meals.
-- **Review** (`/review`) — a weekly retrospective: how consistent you were with each habit over
-  the last 7 days, and which resources you checked off in that window.
+- **Review** (`/review`) — a retrospective with a **Week / Month / Year** toggle: habit consistency,
+  meal plan adherence, and resources completed, all computed against however much of that period has
+  elapsed so far (e.g. 6/6 days if you're on day 6 of the month, not 6/31).
 - **Backup** (`/backup`) — export all progress (curriculum + habits + meals + pantry) to a JSON
   file, or import one to restore it. Linked from the footer on every page.
 
@@ -43,6 +44,15 @@ Any resource — on a domain page, in the Athenaeum, in What's Next, or in the W
 topic's progress, and won't be picked by What's Next or the Weekly Plan). It's not deleted from
 `curriculum.json` — the Athenaeum has a **Show discarded** toggle where you can **Restore** anything
 you change your mind about.
+
+## Nothing is ever deleted on a schedule
+
+Habit check-ins, resource-completion timestamps, and meal logs are never pruned or rotated out —
+they accumulate in `localStorage` indefinitely. The **Review** page only ever showed a rolling
+7-day window in earlier versions of this site, which made it *look* like older progress had
+vanished once the week passed; it hadn't, there was just no view into it. Review now has a
+**Week / Month / Year** toggle that re-slices the same underlying data over longer ranges, so a
+whole year of history is visible without adding any new storage or snapshotting.
 
 ## How progress works
 

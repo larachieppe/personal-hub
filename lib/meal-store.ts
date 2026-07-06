@@ -265,6 +265,21 @@ export function isDateFullyLogged(
   return menu.meals.every((meal) => completed.has(mealKey(dateStr, meal.id)));
 }
 
+export function countFullyLoggedDaysInRange(
+  days: DayMenu[],
+  completed: ReadonlySet<string>,
+  start: Date,
+  end: Date
+): number {
+  let count = 0;
+  let cursor = start;
+  while (cursor <= end) {
+    if (isDateFullyLogged(days, completed, cursor)) count += 1;
+    cursor = addDays(cursor, 1);
+  }
+  return count;
+}
+
 export interface MealPlanStats {
   streak: number;
   totalDaysCompleted: number;

@@ -103,6 +103,17 @@ export function computeHabitStats(dates: string[]): HabitStats {
   };
 }
 
+export function countHabitDaysInRange(dates: string[], start: Date, end: Date): number {
+  const set = new Set(dates);
+  let count = 0;
+  let cursor = start;
+  while (cursor <= end) {
+    if (set.has(toDateString(cursor))) count += 1;
+    cursor = addDays(cursor, 1);
+  }
+  return count;
+}
+
 export interface HeatmapDay {
   date: string;
   done: boolean;
