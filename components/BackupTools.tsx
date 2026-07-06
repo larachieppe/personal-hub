@@ -17,6 +17,8 @@ import { exportPantry, replacePantry } from "@/lib/pantry-store";
 import type { PlanAssignments } from "@/lib/plan-store";
 import { exportPlanAssignments, replacePlanAssignments } from "@/lib/plan-store";
 import { exportProgressData, replaceProgressData } from "@/lib/progress-store";
+import type { TodosByDate } from "@/lib/todo-store";
+import { exportTodos, replaceTodos } from "@/lib/todo-store";
 
 interface BackupFile {
   version: 1;
@@ -30,6 +32,7 @@ interface BackupFile {
   pantry: PantryCategoryState[];
   discardedResources: string[];
   planAssignments: PlanAssignments;
+  weeklyTodos: TodosByDate;
 }
 
 export default function BackupTools() {
@@ -49,6 +52,7 @@ export default function BackupTools() {
       pantry: exportPantry(),
       discardedResources: exportDiscardedResources(),
       planAssignments: exportPlanAssignments(),
+      weeklyTodos: exportTodos(),
     };
     const blob = new Blob([JSON.stringify(payload, null, 2)], {
       type: "application/json",
@@ -75,6 +79,7 @@ export default function BackupTools() {
         replacePantry(parsed.pantry ?? []);
         replaceDiscardedResources(parsed.discardedResources ?? []);
         replacePlanAssignments(parsed.planAssignments ?? {});
+        replaceTodos(parsed.weeklyTodos ?? {});
         setMessage("Backup restored. Reload any open pages to see the change everywhere.");
       } catch {
         setMessage("That file couldn't be read as a valid backup.");

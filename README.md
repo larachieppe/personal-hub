@@ -18,7 +18,10 @@ Live site (once Pages is enabled): `https://<your-username>.github.io/personal-h
   (Week/Month/Century/Year Streak), a full-year heatmap, and an all-time total.
 - **Plan** (`/plan`) — a day-by-day plan for the current week. Each weekday gets resources assigned
   in sequence (never a later lesson before an earlier one in the same topic); checking one off keeps
-  it marked on that day and appends a new suggestion below it. Weekends are rest/review days.
+  it marked on that day and appends a new suggestion below it. Weekends are rest/review days. Every
+  day (weekdays and weekends alike) also has its own free-form **To-Do** list — type anything into
+  the box and hit Add, check items off, or remove them — so the Plan page doubles as a plain weekly
+  to-do list alongside the curriculum assignments.
 - **Kitchen** (`/kitchen`) — meal plan and pantry together on one page behind a tab switcher.
   - **Meal Plan** tab: your weekly menu (breakfast/lunch/snack/dinner for each day), with a
     checkbox and a calorie count per meal. Each day shows calories eaten so far against your daily
@@ -109,8 +112,8 @@ doesn't exist until you restore it.
 
 Because everything lives in `localStorage` and nowhere else, use the **Backup** page periodically
 (or before switching browsers/devices) to export a JSON snapshot of your curriculum progress, habit
-log, meal log, meal plan edits, calorie goal, pantry list, discarded resources, and Weekly Plan
-assignment history — and import it back in on the other side.
+log, meal log, meal plan edits, calorie goal, pantry list, discarded resources, Weekly Plan
+assignment history, and to-do lists — and import it back in on the other side.
 
 ### How the Weekly Plan actually works
 
@@ -128,6 +131,16 @@ Two rules, both enforced in `lib/curriculum.ts`'s `getNextResources()`:
 
 A new calendar week means new (empty) date keys, so Monday of a new week always starts fresh —
 there's nothing to reset by hand.
+
+### The to-do list on the Plan page
+
+Independent of curriculum resources, every day on `/plan` has its own free-form list backed by
+`lib/todo-store.ts` (`localStorage` key `polymath-hub:weekly-todos`, keyed by calendar date the same
+way plan assignments are). Type into the box under a day and hit Add (or press Enter) to add an
+item; check it off or remove it with the buttons next to it. Nothing here is generated or suggested
+— it's just yours, for whatever a normal to-do list is for (errands, one-off tasks, reminders) — and
+since it's keyed by the actual date, a new calendar week starts with empty lists just like the
+curriculum assignments do.
 
 ## Editing your curriculum
 

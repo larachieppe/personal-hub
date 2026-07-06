@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import type { Domain } from "@/lib/curriculum";
 import {
   filterOutDiscarded,
@@ -11,6 +11,7 @@ import {
 import { toggleResourceCompleted, useCompletedResources } from "@/lib/progress-store";
 import { discardResource, useDiscardedResources } from "@/lib/discard-store";
 import { ensureAssignments, usePlanAssignments } from "@/lib/plan-store";
+import { addTodo, deleteTodo, toggleTodo, useTodos } from "@/lib/todo-store";
 import { addDays, getWeekStart, parseDateString, toDateString, useTodayString } from "@/lib/date-utils";
 
 const DAY_NAMES = [
@@ -27,6 +28,7 @@ export default function WeeklyPlan({ domains }: { domains: Domain[] }) {
   const completed = useCompletedResources();
   const discarded = useDiscardedResources();
   const assignments = usePlanAssignments();
+  const todosByDate = useTodos();
   const todayStr = useTodayString();
 
   const today = parseDateString(todayStr);
@@ -55,6 +57,7 @@ export default function WeeklyPlan({ domains }: { domains: Domain[] }) {
         const isToday = dateStr === todayStr;
         const isRestDay = index >= 5;
         const assignedKeys = isRestDay ? [] : (assignments[dateStr] ?? []);
+        const todos = todosByDate[dateStr] ?? [];
 
         return (
           <div
@@ -131,9 +134,78 @@ export default function WeeklyPlan({ domains }: { domains: Domain[] }) {
                 })}
               </ul>
             )}
+
+            <div className="flex flex-col gap-2 border-t border-border/60 pt-3">
+              <h3 className="text-xs font-semibold uppercase tracking-wide text-muted">
+                To-Do
+              </h3>
+              {todos.length > 0 && (
+                <ul className="flex flex-col gap-1.5">
+                  {todos.map((todo) => (
+                    <li key={todo.id} className="flex items-center gap-2.5">
+                      <input
+                        type="checkbox"
+                        checked={todo.done}
+                        onChange={() => toggleTodo(dateStr, todo.id)}
+                        className="h-4 w-4 shrink-0 cursor-pointer accent-gold"
+                        aria-label={`Mark "${todo.text}" as done`}
+                      />
+                      <span
+                        className={
+                          todo.done
+                            ? "flex-1 text-sm text-muted line-through"
+                            : "flex-1 text-sm text-foreground"
+                        }
+                      >
+                        {todo.text}
+                      </span>
+                      <button
+                        type="button"
+                        onClick={() => deleteTodo(dateStr, todo.id)}
+                        className="shrink-0 text-xs uppercase tracking-wide text-muted transition-colors hover:text-wine"
+                        aria-label={`Remove "${todo.text}"`}
+                      >
+                        Remove
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              )}
+              <TodoAddForm dateStr={dateStr} />
+            </div>
           </div>
         );
       })}
     </div>
+  );
+}
+
+function TodoAddForm({ dateStr }: { dateStr: string }) {
+  const [text, setText] = useState("");
+
+  function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    const trimmed = text.trim();
+    if (!trimmed) return;
+    addTodo(dateStr, trimmed);
+    setText("");
+  }
+
+  return (
+    <form onSubmit={handleSubmit} className="flex gap-2">
+      <input
+        type="text"
+        value={text}
+        onChange={(e) => setText(e.target.value)}
+        placeholder="Add a to-do…"
+        className="flex-1 border border-border bg-transparent px-2 py-1 text-sm text-foreground placeholder:text-muted focus:border-gold focus:outline-none"
+      />
+      <button
+        type="submit"
+        className="shrink-0 border border-border px-3 py-1 text-xs uppercase tracking-wide text-muted transition-colors hover:border-gold-dim hover:text-foreground"
+      >
+        Add
+      </button>
+    </form>
   );
 }
