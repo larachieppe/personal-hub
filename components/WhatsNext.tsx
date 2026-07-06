@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import type { Domain } from "@/lib/curriculum";
-import { getAllResources, resourceKey } from "@/lib/curriculum";
+import { getNextResources, resourceKey } from "@/lib/curriculum";
 import { toggleResourceCompleted, useCompletedResources } from "@/lib/progress-store";
 import { discardResource } from "@/lib/discard-store";
 
@@ -16,9 +16,10 @@ export default function WhatsNext({ domains }: { domains: Domain[] }) {
   const completed = useCompletedResources();
   const [seed, setSeed] = useState(0);
 
-  const unchecked = getAllResources(domains).filter(
-    (resource) => !completed.has(resourceKey(resource.domainId, resource.topicId, resource))
-  );
+  // One candidate per topic — the earliest resource in that topic that
+  // isn't checked off yet — so a later lesson is never suggested ahead of
+  // an earlier one in the same topic.
+  const unchecked = getNextResources(domains, completed);
 
   if (unchecked.length === 0) {
     return (

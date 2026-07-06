@@ -16,8 +16,9 @@ Live site (once Pages is enabled): `https://<your-username>.github.io/personal-h
 - **Habits** (`/habits`) — daily check-off for a fixed set of habits (weight lifting, cardio,
   studying 8+ hours, reading before sleep), each with a streak counter, a milestone label
   (Week/Month/Century/Year Streak), a full-year heatmap, and an all-time total.
-- **Plan** (`/plan`) — a day-by-day plan for the current week: one unchecked resource assigned to
-  each weekday, weekends left as rest/review days.
+- **Plan** (`/plan`) — a day-by-day plan for the current week. Each weekday gets resources assigned
+  in sequence (never a later lesson before an earlier one in the same topic); checking one off keeps
+  it marked on that day and appends a new suggestion below it. Weekends are rest/review days.
 - **Meals** (`/meals`) — your weekly menu (breakfast/lunch/snack/dinner for each day), with a
   checkbox and a calorie count per meal. Each day shows calories eaten so far against your daily
   goal (1750 by default, editable right on the page). A day counts as fully followed once all its
@@ -34,10 +35,12 @@ Live site (once Pages is enabled): `https://<your-username>.github.io/personal-h
 - **Backup** (`/backup`) — export all progress (curriculum + habits + meals + pantry) to a JSON
   file, or import one to restore it. Linked from the footer on every page.
 
-The homepage also surfaces a **What's Next** pick — one random unchecked resource from the whole
-curriculum, with a checkbox and a "Shuffle" button — for days you want to make progress without
-deciding where. Domains and the homepage Ledger show milestone callouts once you cross 25/50/75/100%
-overall, or fully master a domain (a "Mastered" badge appears next to its name everywhere).
+The homepage also surfaces a **What's Next** pick — one resource from the whole curriculum, with a
+checkbox and a "Shuffle" button — for days you want to make progress without deciding where. Both
+What's Next and the Weekly Plan only ever pick from each topic's *earliest unchecked* resource, so
+you'll never see "Lesson 4" suggested while "Lesson 1" is still sitting unchecked in the same topic.
+Domains and the homepage Ledger show milestone callouts once you cross 25/50/75/100% overall, or
+fully master a domain (a "Mastered" badge appears next to its name everywhere).
 
 Any resource — on a domain page, in the Athenaeum, in What's Next, or in the Weekly Plan — has a
 **Discard** button. Discarding a resource removes it everywhere (it no longer counts toward that
@@ -99,20 +102,25 @@ doesn't exist until you restore it.
 
 Because everything lives in `localStorage` and nowhere else, use the **Backup** page periodically
 (or before switching browsers/devices) to export a JSON snapshot of your curriculum progress, habit
-log, meal log, meal plan edits, calorie goal, pantry list, and discarded resources — and import it
-back in on the other side.
+log, meal log, meal plan edits, calorie goal, pantry list, discarded resources, and Weekly Plan
+assignment history — and import it back in on the other side.
 
-### How the Weekly Plan "auto-updates"
+### How the Weekly Plan actually works
 
-There's no stored plan data anywhere — `/plan` is computed fresh on every page load from two
-inputs: the current date and whatever's still unchecked in the curriculum. The Monday-to-Friday
-assignment is shuffled using a seed derived from that week's Monday date, so:
-- Reloading the page during the same week always shows the same plan (it's stable, not random
-  every render).
-- A new week automatically gets a fresh shuffle, with no manual editing required.
-- Checking off resources shrinks the pool the plan draws from, so completed items stop showing up
-  — as a side effect, checking something off mid-week can shift what later days in that same week
-  show, since the shuffle re-runs over a shorter list.
+Two rules, both enforced in `lib/curriculum.ts`'s `getNextResources()`:
+
+1. **Sequential within a topic.** The only resource ever eligible to be suggested from a topic is
+   the earliest one (in `curriculum.json`'s array order) that isn't checked off yet. A later lesson
+   simply isn't in the pool until every earlier one in that topic is done.
+2. **Persistent per day.** Each weekday (Mon–Fri) keeps an accumulating list of assigned resources
+   in `localStorage` (`polymath-hub:plan-assignments`, via `lib/plan-store.ts`) instead of picking
+   one fresh resource every render. Checking off (or discarding) the active item for a day appends a
+   new one below it — the completed item stays right where it was, struck through. A resource
+   already pending on another day that week is skipped, so the same suggestion never shows up twice
+   at once.
+
+A new calendar week means new (empty) date keys, so Monday of a new week always starts fresh —
+there's nothing to reset by hand.
 
 ## Editing your curriculum
 

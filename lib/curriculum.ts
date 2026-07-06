@@ -178,6 +178,37 @@ export function getAllResources(domains: Domain[]): ResourceWithContext[] {
   );
 }
 
+/**
+ * Returns at most one resource per topic: the first one (in the topic's own
+ * array order) that isn't checked off yet. This is the eligible-to-suggest
+ * pool for What's Next / the Weekly Plan — a later resource in a topic (e.g.
+ * "Lesson 4") is never eligible while an earlier one in that same topic
+ * (e.g. "Lesson 1") is still unchecked.
+ */
+export function getNextResources(
+  domains: Domain[],
+  completed: ReadonlySet<string>
+): ResourceWithContext[] {
+  const result: ResourceWithContext[] = [];
+  for (const domain of domains) {
+    for (const topic of domain.topics) {
+      const next = topic.resources.find(
+        (resource) => !completed.has(resourceKey(domain.id, topic.id, resource))
+      );
+      if (next) {
+        result.push({
+          ...next,
+          domainId: domain.id,
+          domainName: domain.name,
+          topicId: topic.id,
+          topicTitle: topic.title,
+        });
+      }
+    }
+  }
+  return result;
+}
+
 export interface CompletedResource extends ResourceWithContext {
   completedAt: string;
 }

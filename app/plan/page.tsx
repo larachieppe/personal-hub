@@ -19,10 +19,10 @@ export default function PlanPage() {
           Weekly Plan
         </h1>
         <p className="mt-2 text-sm text-muted">
-          One resource a day, Monday through Friday, picked from whatever&apos;s still
-          unchecked in the curriculum — weekends are for rest and review. This
-          regenerates every week and skips anything you&apos;ve already completed, so
-          there&apos;s nothing to edit by hand.
+          One resource a day, Monday through Friday, picked in order — a later lesson
+          is never suggested ahead of an earlier one in the same topic. Check
+          something off and it stays marked right there, with the next one appearing
+          below it. Weekends are for rest and review, and a new week starts fresh.
         </p>
       </div>
       <Ornament />
