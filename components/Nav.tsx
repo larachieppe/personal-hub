@@ -7,8 +7,7 @@ const LINKS = [
   { href: "/plan", label: "Plan" },
   { href: "/curriculum", label: "Curriculum" },
   { href: "/habits", label: "Habits" },
-  { href: "/meals", label: "Meals" },
-  { href: "/pantry", label: "Pantry" },
+  { href: "/kitchen", label: "Kitchen" },
   { href: "/review", label: "Review" },
   { href: "/resources", label: "Athenaeum" },
 ];

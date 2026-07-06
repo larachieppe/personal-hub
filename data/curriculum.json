@@ -27,8 +27,8 @@
               "type": "article"
             },
             {
-              "title": "Positioning with April Dunford (playlist)",
-              "url": "https://www.youtube.com/playlist?list=PLmO9xFBjnc9erRlqDZiltzRC4YkDpF2-p",
+              "title": "How to Nail Your Product Positioning | April Dunford (Lenny's Podcast)",
+              "url": "https://www.youtube.com/watch?v=hdjlCLb9Hl8",
               "type": "video"
             }
           ]
@@ -44,8 +44,8 @@
               "type": "video"
             },
             {
-              "title": "Josh Braun - cold outreach & buyer-based selling",
-              "url": "https://www.youtube.com/channel/UCK9rfCmYHBIaC9o-qOsNtLg",
+              "title": "Josh Braun on Cold Emails That Get Responses",
+              "url": "https://www.youtube.com/watch?v=cANfDSKS_ps",
               "type": "video"
             },
             {
@@ -97,13 +97,13 @@
         {
           "id": "systems-databases",
           "title": "Computer Systems & Databases",
-          "notes": "CMU's 15-445/645, broken into its major units rather than one long lecture archive.",
+          "notes": "CMU's 15-445/645, one specific lecture per unit rather than the whole playlist.",
           "resources": [
-            { "title": "CMU 15-445: Data & Storage Models", "url": "https://www.youtube.com/playlist?list=PLSE8ODhjZXjYMAgsGH-GtY5rJYZ6zjsd5", "type": "course" },
-            { "title": "CMU 15-445: Indexes & Filters", "url": "https://www.youtube.com/playlist?list=PLSE8ODhjZXjYMAgsGH-GtY5rJYZ6zjsd5", "type": "course" },
-            { "title": "CMU 15-445: Query Processing & Optimization", "url": "https://www.youtube.com/playlist?list=PLSE8ODhjZXjYMAgsGH-GtY5rJYZ6zjsd5", "type": "course" },
-            { "title": "CMU 15-445: Transaction Processing & Concurrency Control", "url": "https://www.youtube.com/playlist?list=PLSE8ODhjZXjYMAgsGH-GtY5rJYZ6zjsd5", "type": "course" },
-            { "title": "CMU 15-445: Database Recovery", "url": "https://www.youtube.com/playlist?list=PLSE8ODhjZXjYMAgsGH-GtY5rJYZ6zjsd5", "type": "course" }
+            { "title": "CMU 15-445: Storage Models & Compression", "url": "https://www.youtube.com/watch?v=nhlpwmOBEiE", "type": "video" },
+            { "title": "CMU 15-445: Vector Indexes, Inverted Indexes & Filters", "url": "https://www.youtube.com/watch?v=foMMYyycRgk", "type": "video" },
+            { "title": "CMU 15-445: Query Planning & Optimization", "url": "https://www.youtube.com/watch?v=X8EHO8VLeG0", "type": "video" },
+            { "title": "CMU 15-445: Concurrency Control Theory", "url": "https://www.youtube.com/watch?v=4y656idl8ZU", "type": "video" },
+            { "title": "CMU 15-445: Database Recovery with ARIES", "url": "https://www.youtube.com/watch?v=yVpzHdAP0TY", "type": "video" }
           ]
         },
         {
@@ -111,19 +111,19 @@
           "title": "Machine Learning Fundamentals",
           "notes": "Google's Crash Course, split into its real units — go through them in order.",
           "resources": [
-            { "title": "ML Crash Course: Linear Regression", "url": "https://developers.google.com/machine-learning/crash-course/linear-regression", "type": "course" },
-            { "title": "ML Crash Course: Logistic Regression", "url": "https://developers.google.com/machine-learning/crash-course/logistic-regression", "type": "course" },
-            { "title": "ML Crash Course: Classification", "url": "https://developers.google.com/machine-learning/crash-course/classification", "type": "course" },
-            { "title": "ML Crash Course: Working with Numerical Data", "url": "https://developers.google.com/machine-learning/crash-course/numerical-data", "type": "course" },
-            { "title": "ML Crash Course: Working with Categorical Data", "url": "https://developers.google.com/machine-learning/crash-course/categorical-data", "type": "course" },
-            { "title": "ML Crash Course: Datasets, Generalization & Overfitting", "url": "https://developers.google.com/machine-learning/crash-course/overfitting", "type": "course" },
-            { "title": "ML Crash Course: Neural Networks", "url": "https://developers.google.com/machine-learning/crash-course/neural-networks", "type": "course" },
-            { "title": "ML Crash Course: Embeddings", "url": "https://developers.google.com/machine-learning/crash-course/embeddings", "type": "course" },
-            { "title": "ML Crash Course: Intro to Large Language Models", "url": "https://developers.google.com/machine-learning/crash-course/llm", "type": "course" },
-            { "title": "ML Crash Course: Production ML Systems", "url": "https://developers.google.com/machine-learning/crash-course/production-ml-systems", "type": "course" },
-            { "title": "ML Crash Course: AutoML", "url": "https://developers.google.com/machine-learning/crash-course/automl", "type": "course" },
-            { "title": "ML Crash Course: ML Fairness", "url": "https://developers.google.com/machine-learning/crash-course/fairness", "type": "course" },
-            { "title": "StatQuest with Josh Starmer", "url": "https://www.youtube.com/c/joshstarmer", "type": "video" },
+            { "title": "ML Crash Course: Linear Regression", "url": "https://developers.google.com/machine-learning/crash-course/linear-regression", "type": "article" },
+            { "title": "ML Crash Course: Logistic Regression", "url": "https://developers.google.com/machine-learning/crash-course/logistic-regression", "type": "article" },
+            { "title": "ML Crash Course: Classification", "url": "https://developers.google.com/machine-learning/crash-course/classification", "type": "article" },
+            { "title": "ML Crash Course: Working with Numerical Data", "url": "https://developers.google.com/machine-learning/crash-course/numerical-data", "type": "article" },
+            { "title": "ML Crash Course: Working with Categorical Data", "url": "https://developers.google.com/machine-learning/crash-course/categorical-data", "type": "article" },
+            { "title": "ML Crash Course: Datasets, Generalization & Overfitting", "url": "https://developers.google.com/machine-learning/crash-course/overfitting", "type": "article" },
+            { "title": "ML Crash Course: Neural Networks", "url": "https://developers.google.com/machine-learning/crash-course/neural-networks", "type": "article" },
+            { "title": "ML Crash Course: Embeddings", "url": "https://developers.google.com/machine-learning/crash-course/embeddings", "type": "article" },
+            { "title": "ML Crash Course: Intro to Large Language Models", "url": "https://developers.google.com/machine-learning/crash-course/llm", "type": "article" },
+            { "title": "ML Crash Course: Production ML Systems", "url": "https://developers.google.com/machine-learning/crash-course/production-ml-systems", "type": "article" },
+            { "title": "ML Crash Course: AutoML", "url": "https://developers.google.com/machine-learning/crash-course/automl", "type": "article" },
+            { "title": "ML Crash Course: ML Fairness", "url": "https://developers.google.com/machine-learning/crash-course/fairness", "type": "article" },
+            { "title": "StatQuest: Linear Regression, Clearly Explained!!!", "url": "https://www.youtube.com/watch?v=7ArmBVF2dCs", "type": "video" },
             { "title": "Jay Alammar: The Illustrated Transformer", "url": "https://jalammar.github.io/illustrated-transformer/", "type": "article" }
           ]
         },
@@ -146,14 +146,14 @@
           "title": "Practical Deep Learning (fast.ai)",
           "notes": "Part 1 of fast.ai's course — hands-on and code-first, the complement to the more theoretical resources above.",
           "resources": [
-            { "title": "fast.ai Lesson 1: Getting Started", "url": "https://course.fast.ai/Lessons/lesson1.html", "type": "course" },
-            { "title": "fast.ai Lesson 2: Deployment", "url": "https://course.fast.ai/Lessons/lesson2.html", "type": "course" },
-            { "title": "fast.ai Lesson 3: Neural Net Foundations", "url": "https://course.fast.ai/Lessons/lesson3.html", "type": "course" },
-            { "title": "fast.ai Lesson 4: Natural Language (NLP)", "url": "https://course.fast.ai/Lessons/lesson4.html", "type": "course" },
-            { "title": "fast.ai Lesson 5: From-Scratch Model", "url": "https://course.fast.ai/Lessons/lesson5.html", "type": "course" },
-            { "title": "fast.ai Lesson 6: Random Forests", "url": "https://course.fast.ai/Lessons/lesson6.html", "type": "course" },
-            { "title": "fast.ai Lesson 7: Collaborative Filtering", "url": "https://course.fast.ai/Lessons/lesson7.html", "type": "course" },
-            { "title": "fast.ai Lesson 8: Convolutions (CNNs)", "url": "https://course.fast.ai/Lessons/lesson8.html", "type": "course" }
+            { "title": "fast.ai Lesson 1: Getting Started", "url": "https://course.fast.ai/Lessons/lesson1.html", "type": "video" },
+            { "title": "fast.ai Lesson 2: Deployment", "url": "https://course.fast.ai/Lessons/lesson2.html", "type": "video" },
+            { "title": "fast.ai Lesson 3: Neural Net Foundations", "url": "https://course.fast.ai/Lessons/lesson3.html", "type": "video" },
+            { "title": "fast.ai Lesson 4: Natural Language (NLP)", "url": "https://course.fast.ai/Lessons/lesson4.html", "type": "video" },
+            { "title": "fast.ai Lesson 5: From-Scratch Model", "url": "https://course.fast.ai/Lessons/lesson5.html", "type": "video" },
+            { "title": "fast.ai Lesson 6: Random Forests", "url": "https://course.fast.ai/Lessons/lesson6.html", "type": "video" },
+            { "title": "fast.ai Lesson 7: Collaborative Filtering", "url": "https://course.fast.ai/Lessons/lesson7.html", "type": "video" },
+            { "title": "fast.ai Lesson 8: Convolutions (CNNs)", "url": "https://course.fast.ai/Lessons/lesson8.html", "type": "video" }
           ]
         },
         {
@@ -181,32 +181,32 @@
         {
           "id": "software-engineering",
           "title": "Software Engineering Practices",
-          "notes": "freeCodeCamp's JS Algorithms & Data Structures certification, split into its real sections.",
+          "notes": "freeCodeCamp's certification pages aren't individually linkable, so these are single articles covering the same JS fundamentals, one topic each.",
           "resources": [
-            { "title": "freeCodeCamp: Basic JavaScript", "url": "https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/", "type": "course" },
-            { "title": "freeCodeCamp: ES6", "url": "https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/", "type": "course" },
-            { "title": "freeCodeCamp: Regular Expressions", "url": "https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/", "type": "course" },
-            { "title": "freeCodeCamp: Debugging", "url": "https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/", "type": "course" },
-            { "title": "freeCodeCamp: Basic Data Structures", "url": "https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/", "type": "course" },
-            { "title": "freeCodeCamp: Basic Algorithm Scripting", "url": "https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/", "type": "course" },
-            { "title": "freeCodeCamp: Object Oriented Programming", "url": "https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/", "type": "course" },
-            { "title": "freeCodeCamp: Functional Programming", "url": "https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/", "type": "course" },
-            { "title": "freeCodeCamp: Intermediate Algorithm Scripting", "url": "https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/", "type": "course" },
-            { "title": "Google Engineering Practices Documentation", "url": "https://google.github.io/eng-practices/", "type": "article" }
+            { "title": "JavaScript Basics", "url": "https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/JavaScript_basics", "type": "article" },
+            { "title": "ES6 In Depth: An Introduction", "url": "https://hacks.mozilla.org/2015/04/es6-in-depth-an-introduction/", "type": "article" },
+            { "title": "Regular Expressions", "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_expressions", "type": "article" },
+            { "title": "What Went Wrong? Troubleshooting JavaScript", "url": "https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Scripting/What_went_wrong", "type": "article" },
+            { "title": "Indexed Collections", "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Indexed_collections", "type": "article" },
+            { "title": "Introduction to Algorithms Handbook — with JavaScript Examples", "url": "https://www.freecodecamp.org/news/introduction-to-algorithms-with-javascript-examples/", "type": "article" },
+            { "title": "Object-Oriented Programming", "url": "https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Advanced_JavaScript_objects/Object-oriented_programming", "type": "article" },
+            { "title": "What Is Functional Programming? A Beginner's JavaScript Guide", "url": "https://www.freecodecamp.org/news/functional-programming-in-javascript/", "type": "article" },
+            { "title": "Top 10 JavaScript Algorithms for Coding Challenges", "url": "https://www.freecodecamp.org/news/top-10-javascript-algorithms-for-coding-challenges/", "type": "article" },
+            { "title": "The Standard of Code Review", "url": "https://google.github.io/eng-practices/review/reviewer/standard.html", "type": "article" }
           ]
         },
         {
           "id": "cloud-infrastructure",
           "title": "Cloud & Infrastructure",
-          "notes": "AWS Cloud Practitioner Essentials, split into its major modules.",
+          "notes": "AWS Skill Builder's course modules aren't individually linkable, so these are single AWS docs/explainer pages, one topic each.",
           "resources": [
-            { "title": "AWS Cloud Practitioner: Introduction to AWS", "url": "https://skillbuilder.aws/learn/XUFYCSXHEU/aws-cloud-practitioner-essentials/GKB2YNYHCF", "type": "course" },
-            { "title": "AWS Cloud Practitioner: Compute in the Cloud", "url": "https://skillbuilder.aws/learn/XUFYCSXHEU/aws-cloud-practitioner-essentials/GKB2YNYHCF", "type": "course" },
-            { "title": "AWS Cloud Practitioner: Global Infrastructure & Reliability", "url": "https://skillbuilder.aws/learn/XUFYCSXHEU/aws-cloud-practitioner-essentials/GKB2YNYHCF", "type": "course" },
-            { "title": "AWS Cloud Practitioner: Networking", "url": "https://skillbuilder.aws/learn/XUFYCSXHEU/aws-cloud-practitioner-essentials/GKB2YNYHCF", "type": "course" },
-            { "title": "AWS Cloud Practitioner: Storage & Databases", "url": "https://skillbuilder.aws/learn/XUFYCSXHEU/aws-cloud-practitioner-essentials/GKB2YNYHCF", "type": "course" },
-            { "title": "AWS Cloud Practitioner: Security", "url": "https://skillbuilder.aws/learn/XUFYCSXHEU/aws-cloud-practitioner-essentials/GKB2YNYHCF", "type": "course" },
-            { "title": "AWS Cloud Practitioner: Monitoring, Compliance & Pricing", "url": "https://skillbuilder.aws/learn/XUFYCSXHEU/aws-cloud-practitioner-essentials/GKB2YNYHCF", "type": "course" },
+            { "title": "What Is Cloud Computing?", "url": "https://aws.amazon.com/what-is-cloud-computing/", "type": "article" },
+            { "title": "What Is Amazon EC2?", "url": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/concepts.html", "type": "article" },
+            { "title": "AWS Global Infrastructure", "url": "https://aws.amazon.com/about-aws/global-infrastructure/", "type": "article" },
+            { "title": "What Is Amazon VPC?", "url": "https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html", "type": "article" },
+            { "title": "What Is Cloud Storage?", "url": "https://aws.amazon.com/what-is/cloud-storage/", "type": "article" },
+            { "title": "AWS Shared Responsibility Model", "url": "https://aws.amazon.com/compliance/shared-responsibility-model/", "type": "article" },
+            { "title": "What Is Amazon CloudWatch?", "url": "https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/WhatIsCloudWatch.html", "type": "article" },
             { "title": "The Twelve-Factor App", "url": "https://12factor.net/", "type": "article" }
           ]
         },
@@ -215,13 +215,13 @@
           "title": "Product & UX Design",
           "resources": [
             {
-              "title": "Product Talk - Teresa Torres",
-              "url": "https://www.producttalk.org/",
+              "title": "Opportunity Solution Trees: Visualize Your Discovery to Stay Aligned and Drive Outcomes",
+              "url": "https://www.producttalk.org/opportunity-solution-trees/",
               "type": "article"
             },
             {
-              "title": "Nielsen Norman Group: UX Articles",
-              "url": "https://www.nngroup.com/articles/",
+              "title": "10 Usability Heuristics for User Interface Design",
+              "url": "https://www.nngroup.com/articles/ten-usability-heuristics/",
               "type": "article"
             }
           ]
@@ -231,13 +231,13 @@
           "title": "Emerging Tech (AI, hardware, protocols)",
           "resources": [
             {
-              "title": "Simon Willison's Weblog",
-              "url": "https://simonwillison.net/",
+              "title": "Here's How I Use LLMs to Help Me Write Code",
+              "url": "https://simonwillison.net/2025/Mar/11/using-llms-for-code/",
               "type": "article"
             },
             {
-              "title": "Latent Space: The AI Engineer Podcast (YouTube)",
-              "url": "https://www.youtube.com/channel/UCxBcwypKK-W3GHd_RZ9FZrQ",
+              "title": "The AI Frontier: From Gemini 3 Deep Think Distilling to Flash — Jeff Dean (Latent Space)",
+              "url": "https://www.youtube.com/watch?v=F_1oDPWxpFQ",
               "type": "video"
             }
           ]
@@ -254,10 +254,10 @@
           "title": "Biology & Life Sciences Fundamentals",
           "notes": "Start here if it's been a while since biology class — everything else in this domain assumes this vocabulary.",
           "resources": [
-            { "title": "MIT 7.01SC: Biochemistry", "url": "https://ocw.mit.edu/courses/7-01sc-fundamentals-of-biology-fall-2011/", "type": "course" },
-            { "title": "MIT 7.01SC: Molecular Biology", "url": "https://ocw.mit.edu/courses/7-01sc-fundamentals-of-biology-fall-2011/", "type": "course" },
-            { "title": "MIT 7.01SC: Genetics", "url": "https://ocw.mit.edu/courses/7-01sc-fundamentals-of-biology-fall-2011/", "type": "course" },
-            { "title": "MIT 7.01SC: Recombinant DNA", "url": "https://ocw.mit.edu/courses/7-01sc-fundamentals-of-biology-fall-2011/", "type": "course" }
+            { "title": "MIT 7.01SC: Biochemical Reactions, Enzymes, and ATP", "url": "https://ocw.mit.edu/courses/7-01sc-fundamentals-of-biology-fall-2011/resources/biochemical-reactions-enzymes-and-atp/", "type": "video" },
+            { "title": "MIT 7.01SC: DNA Replication", "url": "https://ocw.mit.edu/courses/7-01sc-fundamentals-of-biology-fall-2011/resources/dna-replication/", "type": "video" },
+            { "title": "MIT 7.01SC: Mendel's Laws", "url": "https://ocw.mit.edu/courses/7-01sc-fundamentals-of-biology-fall-2011/pages/genetics/mendels-laws/", "type": "video" },
+            { "title": "MIT 7.01SC: Development of Recombinant DNA", "url": "https://ocw.mit.edu/courses/7-01sc-fundamentals-of-biology-fall-2011/pages/recombinant-dna/development-of-recombinant-dna/", "type": "video" }
           ]
         },
         {
@@ -282,11 +282,11 @@
               "url": "https://deepmind.google/blog/alphafold-reveals-the-structure-of-the-protein-universe/",
               "type": "article"
             },
-            { "title": "Fundamentals of Bioinformatics: Biological Information", "url": "https://www.youtube.com/playlist?list=PLbVDKwGpb3XnwBACQ5w8L8NzjZ-6D0M8u", "type": "course" },
-            { "title": "Fundamentals of Bioinformatics: Pairwise Sequence Alignment", "url": "https://www.youtube.com/playlist?list=PLbVDKwGpb3XnwBACQ5w8L8NzjZ-6D0M8u", "type": "course" },
-            { "title": "Fundamentals of Bioinformatics: Sequence Homology Searching", "url": "https://www.youtube.com/playlist?list=PLbVDKwGpb3XnwBACQ5w8L8NzjZ-6D0M8u", "type": "course" },
-            { "title": "Fundamentals of Bioinformatics: Microbiome Analysis Methods", "url": "https://www.youtube.com/playlist?list=PLbVDKwGpb3XnwBACQ5w8L8NzjZ-6D0M8u", "type": "course" },
-            { "title": "Fundamentals of Bioinformatics: Machine Learning in Bioinformatics", "url": "https://www.youtube.com/playlist?list=PLbVDKwGpb3XnwBACQ5w8L8NzjZ-6D0M8u", "type": "course" }
+            { "title": "Fundamentals of Bioinformatics: Biological Information (Part 1)", "url": "https://www.youtube.com/watch?v=U1KH9GCz4Xs", "type": "video" },
+            { "title": "Fundamentals of Bioinformatics: Pairwise Sequence Alignment (Part 1)", "url": "https://www.youtube.com/watch?v=FWD0fdozHcY", "type": "video" },
+            { "title": "Fundamentals of Bioinformatics: Sequence Homology Searching (Part 1)", "url": "https://www.youtube.com/watch?v=NfjXWy0mnEA", "type": "video" },
+            { "title": "Fundamentals of Bioinformatics: Microbiome Analysis Methods (Part 1)", "url": "https://www.youtube.com/watch?v=VqcLbKKa7j8", "type": "video" },
+            { "title": "Fundamentals of Bioinformatics: Machine Learning in Bioinformatics (Part 1)", "url": "https://www.youtube.com/watch?v=46aAVSRpFes", "type": "video" }
           ]
         },
         {
@@ -295,13 +295,13 @@
           "notes": "Biotech financing, licensing, and M&A run on different logic than software startups — don't assume SaaS playbooks transfer.",
           "resources": [
             {
-              "title": "LifeSciVC (Bruce Booth)",
-              "url": "https://lifescivc.com/",
+              "title": "LifeSciVC: Process-Driven Cadence: Biotech IPOs Demystified",
+              "url": "https://lifescivc.com/2026/03/process-driven-cadence-biotech-ipos-demystified/",
               "type": "article"
             },
             {
-              "title": "a16z Bio + Health",
-              "url": "https://a16z.com/bio-health/",
+              "title": "a16z: The Biggest Company in the World",
+              "url": "https://a16z.com/the-biggest-company-in-the-world/",
               "type": "article"
             }
           ]
@@ -333,8 +333,8 @@
           "title": "Fundraising & Venture Capital",
           "resources": [
             {
-              "title": "Y Combinator Startup Library",
-              "url": "https://www.ycombinator.com/library",
+              "title": "Y Combinator: A Guide to Seed Fundraising",
+              "url": "https://www.ycombinator.com/blog/how-to-raise-a-seed-round/",
               "type": "article"
             },
             {
@@ -353,8 +353,8 @@
               "type": "video"
             },
             {
-              "title": "First Round Review: Fundraising",
-              "url": "https://review.firstround.com/articles/fundraising/",
+              "title": "First Round Review: The Fundraising Wisdom That Helped Our Founders Raise $18B in Follow-On Capital",
+              "url": "https://review.firstround.com/the-fundraising-wisdom-that-helped-our-founders-raise-18b-in-follow-on-capital/",
               "type": "article"
             }
           ]
@@ -364,17 +364,17 @@
           "title": "Growth & Go-To-Market",
           "resources": [
             {
-              "title": "Lenny's Newsletter",
-              "url": "https://www.lennysnewsletter.com/",
+              "title": "Lenny's Newsletter: Scaling Your B2B Growth Engine",
+              "url": "https://www.lennysnewsletter.com/p/scaling-your-b2b-growth-engine",
               "type": "article"
             },
             {
-              "title": "Lenny's Podcast",
-              "url": "https://www.youtube.com/@LennysPodcast",
+              "title": "Lenny's Podcast: 10 Growth Tactics That Never Work | Elena Verna",
+              "url": "https://www.youtube.com/watch?v=IHwS2By9UKM",
               "type": "video"
             },
             {
-              "title": "First Round Review: Founder-Led Growth Playbook",
+              "title": "First Round Review: You're Not Ready for a Head of Growth — Run This Founder-Led Growth Playbook Instead",
               "url": "https://review.firstround.com/founder-led-growth-playbook/",
               "type": "article"
             }
@@ -385,13 +385,13 @@
           "title": "Building & Leading a Team",
           "resources": [
             {
-              "title": "Paul Graham's Essays",
-              "url": "http://www.paulgraham.com/articles.html",
+              "title": "Paul Graham: Startups in 13 Sentences",
+              "url": "https://paulgraham.com/13sentences.html",
               "type": "article"
             },
             {
-              "title": "First Round Review: Hiring Engineers",
-              "url": "https://review.firstround.com/articles/hiring-engineers/",
+              "title": "First Round Review: My Lessons from Interviewing 400+ Engineers Over Three Startups",
+              "url": "https://review.firstround.com/my-lessons-from-interviewing-400-engineers-over-three-startups/",
               "type": "article"
             },
             {
@@ -407,19 +407,19 @@
           "notes": "Added this one deliberately: as a technical founder here, who you know shapes your fundraising, hiring, and early customers as much as what you build.",
           "resources": [
             {
-              "title": "Hacker News",
-              "url": "https://news.ycombinator.com/",
-              "type": "other"
+              "title": "First Round Review: Don't Just Network — Build Your 'Meaningful Network' to Maximize Your Impact",
+              "url": "https://review.firstround.com/dont-just-network-build-your-meaningful-network-to-maximize-your-impact/",
+              "type": "article"
             },
             {
-              "title": "Silicon Valley Entrepreneurs (SVE) Meetup",
-              "url": "https://www.meetup.com/sventrepreneurs/",
-              "type": "other"
+              "title": "Forbes: 4 Tactics for Improving Your Networking Skills as a Startup Founder",
+              "url": "https://www.forbes.com/sites/abdoriani/2024/08/29/4-tactics-for-improving-your-networking-skills-as-a-startup-founder/",
+              "type": "article"
             },
             {
-              "title": "Hackers/Founders Meetup",
-              "url": "https://www.meetup.com/hackers-and-founders/",
-              "type": "other"
+              "title": "Fortune: Startup Founders Turn to These Networking Groups to Rub Shoulders with Their Peers",
+              "url": "https://fortune.com/2023/01/30/best-startup-founder-networking-groups/",
+              "type": "article"
             }
           ]
         }
@@ -437,32 +437,32 @@
             { "title": "Khan Academy MCAT: Foundation 1 - Biomolecules", "url": "https://www.khanacademy.org/test-prep/mcat/biomolecules", "type": "course" },
             { "title": "Khan Academy MCAT: Foundation 2 - Cells", "url": "https://www.khanacademy.org/test-prep/mcat/cells", "type": "course" },
             { "title": "Khan Academy MCAT: Foundation 3 - Organ Systems", "url": "https://www.khanacademy.org/test-prep/mcat/organ-systems", "type": "course" },
-            { "title": "Crash Course Biology", "url": "https://thecrashcourse.com/topic/biology/", "type": "video" }
+            { "title": "Introduction to Biology: Crash Course Biology #1", "url": "https://www.youtube.com/watch?v=tZE_fQFK8EY", "type": "video" }
           ]
         },
         {
           "id": "chem-physics-foundations",
           "title": "Chemical & Physical Foundations of Biological Systems",
           "resources": [
-            { "title": "Crash Course Chemistry", "url": "https://thecrashcourse.com/topic/chemistry/", "type": "video" },
-            { "title": "Crash Course Physics", "url": "https://thecrashcourse.com/topic/physics/", "type": "video" }
+            { "title": "The Nucleus: Crash Course Chemistry #1", "url": "https://www.youtube.com/watch?v=FSyAehMdpyI", "type": "video" },
+            { "title": "Motion in a Straight Line: Crash Course Physics #1", "url": "https://www.youtube.com/watch?v=ZM8ECpBuQYE", "type": "video" }
           ]
         },
         {
           "id": "psych-soc-foundations",
           "title": "Psychological, Social & Biological Foundations of Behavior",
           "resources": [
-            { "title": "Crash Course Psychology", "url": "https://thecrashcourse.com/topic/psychology/", "type": "video" }
+            { "title": "Intro to Psychology: Crash Course Psychology #1", "url": "https://www.youtube.com/watch?v=vo4pMVb0R6M", "type": "video" }
           ]
         },
         {
           "id": "cars",
           "title": "Critical Analysis & Reasoning Skills (CARS)",
-          "notes": "CARS rewards consistency over cramming — one passage a day, reviewed carefully, beats occasional large blocks.",
+          "notes": "CARS rewards consistency over cramming — one strategy article reviewed carefully beats occasional large blocks of passages.",
           "resources": [
-            { "title": "Jack Westin CARS: Phase 1 - Foundational Passage Mapping", "url": "https://jackwestin.com/daily/mcat-practice-passages/cars-practice-passages/", "type": "course" },
-            { "title": "Jack Westin CARS: Phase 2 - Timed Practice", "url": "https://jackwestin.com/daily/mcat-practice-passages/cars-practice-passages/", "type": "course" },
-            { "title": "Jack Westin CARS: Phase 3 - Full 9-Passage Section Simulation", "url": "https://jackwestin.com/daily/mcat-practice-passages/cars-practice-passages/", "type": "course" }
+            { "title": "Jack Westin: MCAT CARS Strategy — AAMC Logic, Passage Mapping, Timing, Practice Plan", "url": "https://jackwestin.com/blog/mcat-cars-strategy-2026/", "type": "article" },
+            { "title": "Blueprint MCAT: How to Dissect a CARS Passage", "url": "https://blog.blueprintprep.com/mcat/how-to-dissect-a-cars-passage/", "type": "article" },
+            { "title": "Cambridge Coaching: Why You Should Take the MCAT CARS Seriously", "url": "https://blog.cambridgecoaching.com/why-you-should-take-the-mcat-cars-seriously", "type": "article" }
           ]
         },
         {

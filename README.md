@@ -19,21 +19,28 @@ Live site (once Pages is enabled): `https://<your-username>.github.io/personal-h
 - **Plan** (`/plan`) — a day-by-day plan for the current week. Each weekday gets resources assigned
   in sequence (never a later lesson before an earlier one in the same topic); checking one off keeps
   it marked on that day and appends a new suggestion below it. Weekends are rest/review days.
-- **Meals** (`/meals`) — your weekly menu (breakfast/lunch/snack/dinner for each day), with a
-  checkbox and a calorie count per meal. Each day shows calories eaten so far against your daily
-  goal (1750 by default, editable right on the page). A day counts as fully followed once all its
-  meals are checked, which drives a streak and an all-time total, the same as the Habits page.
-  Click **Edit plan** to rewrite any meal's name or calorie count directly on the page — no file
-  editing required.
-- **Pantry** (`/pantry`) — a checklist of what you keep stocked, organized into categories (Grains,
-  Proteins, Produce, etc). Check an item off once you have it; unchecked items are what's missing.
-  Click **Edit pantry** to rename items/categories or add and remove them — this list is fully
-  yours to shape, unlike the fixed weekly structure of Habits/Meals.
+- **Kitchen** (`/kitchen`) — meal plan and pantry together on one page behind a tab switcher.
+  - **Meal Plan** tab: your weekly menu (breakfast/lunch/snack/dinner for each day), with a
+    checkbox and a calorie count per meal. Each day shows calories eaten so far against your daily
+    goal (1750 by default, editable right on the page). A day counts as fully followed once all its
+    meals are checked, which drives a streak and an all-time total, the same as the Habits page.
+    Click **Edit plan** to rewrite any meal's name or calorie count directly on the page — no file
+    editing required.
+  - **Pantry** tab: a checklist of what you keep stocked, organized into categories (Grains,
+    Proteins, Produce, etc). Check an item off once you have it; unchecked items are what's missing.
+    Click **Edit pantry** to rename items/categories or add and remove them — this list is fully
+    yours to shape, unlike the fixed weekly structure of Habits/Meals.
 - **Review** (`/review`) — a retrospective with a **Week / Month / Year** toggle: habit consistency,
   meal plan adherence, and resources completed, all computed against however much of that period has
   elapsed so far (e.g. 6/6 days if you're on day 6 of the month, not 6/31).
 - **Backup** (`/backup`) — export all progress (curriculum + habits + meals + pantry) to a JSON
   file, or import one to restore it. Linked from the footer on every page.
+
+Every resource in `curriculum.json` is a single, specific article, video, or lecture/reading page —
+never a bare YouTube channel, playlist, or a "hub" page that lists many pieces of content under one
+URL. Where a source (freeCodeCamp's certification pages, AWS Skill Builder's course modules) has no
+stable per-section URL, the resource points to a real, distinct alternative covering that same topic
+instead of reusing one shared link across several checklist rows.
 
 The homepage also surfaces a **What's Next** pick — one resource from the whole curriculum, with a
 checkbox and a "Shuffle" button — for days you want to make progress without deciding where. Both
@@ -76,7 +83,7 @@ once per calendar day. A streak stays alive if you've checked in today or yester
 if you miss a full day; the all-time total never resets. To add, remove, or rename habits, edit
 [`data/habits.json`](data/habits.json).
 
-The Meals page is a weekly menu template that repeats every week. [`data/meals.json`](data/meals.json)
+The Meal Plan tab (under Kitchen) is a weekly menu template that repeats every week. [`data/meals.json`](data/meals.json)
 defines the default plan (what a fresh browser sees) — each meal has a `calories` value, and there's
 a top-level `dailyCalorieGoal` (1750 by default). The **Edit plan** button lets you rewrite any
 meal's name or calorie count right there; those edits are saved as overrides in `localStorage` and
@@ -89,7 +96,7 @@ box. Each day shows "calories eaten / goal" based on the checked meals for that 
 over goal), and a day's streak/total is based on all of that day's meals being checked, using the
 same today-or-yesterday grace period as habit streaks.
 
-The Pantry page works differently from Habits/Meals: instead of overriding a fixed JSON template,
+The Pantry tab (under Kitchen) works differently from Habits/Meal Plan: instead of overriding a fixed JSON template,
 the *entire* list lives in `localStorage` from the moment you first visit (seeded once from
 [`data/pantry.json`](data/pantry.json)). That's because a pantry naturally needs items and whole
 categories added and removed, not just text edits to fixed slots — there's no JSON file to keep
