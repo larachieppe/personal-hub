@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { exportDiscardedResources, replaceDiscardedResources } from "@/lib/discard-store";
 import { exportHabitLog, replaceHabitLog } from "@/lib/habit-store";
 import type { MealOverride } from "@/lib/meal-store";
 import {
@@ -25,6 +26,7 @@ interface BackupFile {
   mealOverrides: Record<string, MealOverride>;
   dailyCalorieGoalOverride: number | null;
   pantry: PantryCategoryState[];
+  discardedResources: string[];
 }
 
 export default function BackupTools() {
@@ -42,6 +44,7 @@ export default function BackupTools() {
       mealOverrides: exportMealOverrides(),
       dailyCalorieGoalOverride: exportDailyGoalOverride(),
       pantry: exportPantry(),
+      discardedResources: exportDiscardedResources(),
     };
     const blob = new Blob([JSON.stringify(payload, null, 2)], {
       type: "application/json",
@@ -66,6 +69,7 @@ export default function BackupTools() {
         replaceMealOverrides(parsed.mealOverrides ?? {});
         replaceDailyGoalOverride(parsed.dailyCalorieGoalOverride ?? null);
         replacePantry(parsed.pantry ?? []);
+        replaceDiscardedResources(parsed.discardedResources ?? []);
         setMessage("Backup restored. Reload any open pages to see the change everywhere.");
       } catch {
         setMessage("That file couldn't be read as a valid backup.");

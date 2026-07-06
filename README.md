@@ -38,6 +38,12 @@ curriculum, with a checkbox and a "Shuffle" button — for days you want to make
 deciding where. Domains and the homepage Ledger show milestone callouts once you cross 25/50/75/100%
 overall, or fully master a domain (a "Mastered" badge appears next to its name everywhere).
 
+Any resource — on a domain page, in the Athenaeum, in What's Next, or in the Weekly Plan — has a
+**Discard** button. Discarding a resource removes it everywhere (it no longer counts toward that
+topic's progress, and won't be picked by What's Next or the Weekly Plan). It's not deleted from
+`curriculum.json` — the Athenaeum has a **Show discarded** toggle where you can **Restore** anything
+you change your mind about.
+
 ## How progress works
 
 Every resource in a topic is a checkbox. Check one off and:
@@ -76,10 +82,15 @@ the *entire* list lives in `localStorage` from the moment you first visit (seede
 categories added and removed, not just text edits to fixed slots — there's no JSON file to keep
 editing afterwards. "Reset to default" wipes your customized list and reseeds it from the file.
 
+Discarding works the same way (`localStorage`, per-browser): it's a set of resource keys that gets
+filtered out of the curriculum before anything else runs — progress bars, topic status, What's Next,
+and the Weekly Plan all operate on that filtered view, so a discarded resource behaves as if it
+doesn't exist until you restore it.
+
 Because everything lives in `localStorage` and nowhere else, use the **Backup** page periodically
 (or before switching browsers/devices) to export a JSON snapshot of your curriculum progress, habit
-log, meal log, meal plan edits, calorie goal, and pantry list — and import it back in on the other
-side.
+log, meal log, meal plan edits, calorie goal, pantry list, and discarded resources — and import it
+back in on the other side.
 
 ### How the Weekly Plan "auto-updates"
 

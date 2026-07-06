@@ -2,18 +2,21 @@
 
 import Link from "next/link";
 import type { Domain } from "@/lib/curriculum";
-import { computeDomainProgress } from "@/lib/curriculum";
+import { computeDomainProgress, filterOutDiscarded } from "@/lib/curriculum";
 import { useCompletedResources } from "@/lib/progress-store";
+import { useDiscardedResources } from "@/lib/discard-store";
 import ProgressBar from "@/components/ProgressBar";
 import StatusBadge from "@/components/StatusBadge";
 import DomainIcon from "@/components/DomainIcon";
 
 export default function CurriculumList({ domains }: { domains: Domain[] }) {
   const completed = useCompletedResources();
+  const discarded = useDiscardedResources();
+  const visibleDomains = filterOutDiscarded(domains, discarded);
 
   return (
     <div className="flex flex-col divide-y divide-border">
-      {domains.map((domain) => {
+      {visibleDomains.map((domain) => {
         const progress = computeDomainProgress(domain, completed);
         return (
           <Link

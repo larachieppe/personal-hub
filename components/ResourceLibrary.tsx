@@ -4,6 +4,7 @@ import { useMemo, useState } from "react";
 import { resourceKey } from "@/lib/curriculum";
 import type { ResourceWithContext } from "@/lib/curriculum";
 import { toggleResourceCompleted, useCompletedResources } from "@/lib/progress-store";
+import { discardResource, restoreResource, useDiscardedResources } from "@/lib/discard-store";
 
 export default function ResourceLibrary({
   resources,
@@ -11,20 +12,35 @@ export default function ResourceLibrary({
   resources: ResourceWithContext[];
 }) {
   const completed = useCompletedResources();
+  const discarded = useDiscardedResources();
   const [query, setQuery] = useState("");
   const [domainFilter, setDomainFilter] = useState("all");
   const [typeFilter, setTypeFilter] = useState("all");
+  const [showDiscarded, setShowDiscarded] = useState(false);
+
+  const visibleResources = useMemo(
+    () =>
+      resources.filter(
+        (r) => !discarded.has(resourceKey(r.domainId, r.topicId, r))
+      ),
+    [resources, discarded]
+  );
+  const discardedResources = useMemo(
+    () =>
+      resources.filter((r) => discarded.has(resourceKey(r.domainId, r.topicId, r))),
+    [resources, discarded]
+  );
 
   const domains = useMemo(
-    () => Array.from(new Set(resources.map((r) => r.domainName))).sort(),
-    [resources]
+    () => Array.from(new Set(visibleResources.map((r) => r.domainName))).sort(),
+    [visibleResources]
   );
   const types = useMemo(
-    () => Array.from(new Set(resources.map((r) => r.type))).sort(),
-    [resources]
+    () => Array.from(new Set(visibleResources.map((r) => r.type))).sort(),
+    [visibleResources]
   );
 
-  const filtered = resources.filter((resource) => {
+  const filtered = visibleResources.filter((resource) => {
     const matchesQuery =
       query.trim() === "" ||
       resource.title.toLowerCase().includes(query.toLowerCase()) ||
@@ -125,10 +141,59 @@ export default function ResourceLibrary({
                     {resource.domainName} · {resource.topicTitle}
                   </span>
                 </div>
+                <button
+                  type="button"
+                  onClick={() => discardResource(key)}
+                  className="mt-1 shrink-0 text-xs uppercase tracking-wide text-muted transition-colors hover:text-wine"
+                  aria-label={`Discard "${resource.title}"`}
+                >
+                  Discard
+                </button>
               </li>
             );
           })}
         </ul>
+      )}
+
+      {discardedResources.length > 0 && (
+        <div className="flex flex-col gap-3 border-t border-border pt-6">
+          <button
+            type="button"
+            onClick={() => setShowDiscarded((s) => !s)}
+            className="w-fit text-xs uppercase tracking-wide text-muted transition-colors hover:text-foreground"
+          >
+            {showDiscarded ? "Hide" : "Show"} discarded ({discardedResources.length})
+          </button>
+          {showDiscarded && (
+            <ul className="flex flex-col divide-y divide-border">
+              {discardedResources.map((resource, i) => {
+                const key = resourceKey(resource.domainId, resource.topicId, resource);
+                return (
+                  <li
+                    key={`discarded-${resource.topicId}-${resource.title}-${i}`}
+                    className="flex items-center justify-between gap-4 py-3"
+                  >
+                    <div className="flex flex-col gap-1">
+                      <span className="font-display text-base italic text-muted line-through">
+                        {resource.title}
+                      </span>
+                      <span className="text-xs uppercase tracking-wide text-muted">
+                        {resource.domainName} · {resource.topicTitle}
+                      </span>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => restoreResource(key)}
+                      className="shrink-0 text-xs uppercase tracking-wide text-gold transition-colors hover:text-foreground"
+                    >
+                      Restore
+                    </button>
+                  </li>
+                );
+              })}
+            </ul>
+          )}
+        </div>
       )}
     </div>
   );

@@ -4,6 +4,7 @@ import { useState } from "react";
 import type { Domain } from "@/lib/curriculum";
 import { getAllResources, resourceKey } from "@/lib/curriculum";
 import { toggleResourceCompleted, useCompletedResources } from "@/lib/progress-store";
+import { discardResource } from "@/lib/discard-store";
 
 function pickIndex(seed: number, length: number): number {
   if (length === 0) return 0;
@@ -45,13 +46,22 @@ export default function WhatsNext({ domains }: { domains: Domain[] }) {
         <h2 className="font-display text-sm uppercase tracking-[0.2em] text-muted">
           What&apos;s Next
         </h2>
-        <button
-          type="button"
-          onClick={() => setSeed((s) => s + 1)}
-          className="text-xs uppercase tracking-wide text-gold transition-colors hover:text-foreground"
-        >
-          Shuffle
-        </button>
+        <div className="flex items-center gap-3">
+          <button
+            type="button"
+            onClick={() => discardResource(key)}
+            className="text-xs uppercase tracking-wide text-muted transition-colors hover:text-wine"
+          >
+            Discard
+          </button>
+          <button
+            type="button"
+            onClick={() => setSeed((s) => s + 1)}
+            className="text-xs uppercase tracking-wide text-gold transition-colors hover:text-foreground"
+          >
+            Shuffle
+          </button>
+        </div>
       </div>
       <div className="flex items-start gap-2.5">
         <input

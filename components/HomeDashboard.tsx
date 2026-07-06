@@ -2,8 +2,9 @@
 
 import Link from "next/link";
 import type { Domain } from "@/lib/curriculum";
-import { computeDomainProgress, computeOverallProgress } from "@/lib/curriculum";
+import { computeDomainProgress, computeOverallProgress, filterOutDiscarded } from "@/lib/curriculum";
 import { useCompletedResources } from "@/lib/progress-store";
+import { useDiscardedResources } from "@/lib/discard-store";
 import ProgressBar from "@/components/ProgressBar";
 import StatusBadge from "@/components/StatusBadge";
 import DomainIcon from "@/components/DomainIcon";
@@ -20,7 +21,9 @@ function overallMilestoneMessage(percent: number): string | null {
 
 export default function HomeDashboard({ domains }: { domains: Domain[] }) {
   const completed = useCompletedResources();
-  const overall = computeOverallProgress(domains, completed);
+  const discarded = useDiscardedResources();
+  const visibleDomains = filterOutDiscarded(domains, discarded);
+  const overall = computeOverallProgress(visibleDomains, completed);
   const milestone = overallMilestoneMessage(overall.percent);
 
   return (
@@ -47,7 +50,7 @@ export default function HomeDashboard({ domains }: { domains: Domain[] }) {
         {milestone && <p className="text-xs italic text-gold">{milestone}</p>}
       </section>
 
-      <WhatsNext domains={domains} />
+      <WhatsNext domains={visibleDomains} />
 
       <Ornament />
 
@@ -64,7 +67,7 @@ export default function HomeDashboard({ domains }: { domains: Domain[] }) {
           </Link>
         </div>
         <div className="grid gap-4 sm:grid-cols-2">
-          {domains.map((domain) => {
+          {visibleDomains.map((domain) => {
             const progress = computeDomainProgress(domain, completed);
             return (
               <Link

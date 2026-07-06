@@ -1,10 +1,11 @@
 "use client";
 
 import type { Domain } from "@/lib/curriculum";
-import { getResourcesCompletedSince } from "@/lib/curriculum";
+import { filterOutDiscarded, getResourcesCompletedSince } from "@/lib/curriculum";
 import type { Habit } from "@/lib/habits";
 import { computeHabitStats, useHabitLog } from "@/lib/habit-store";
 import { useCompletionTimestamps } from "@/lib/progress-store";
+import { useDiscardedResources } from "@/lib/discard-store";
 import { addDays, parseDateString, toDateString, useTodayString } from "@/lib/date-utils";
 
 function formatShort(date: Date): string {
@@ -20,6 +21,7 @@ export default function WeeklyReview({
 }) {
   const habitLog = useHabitLog();
   const timestamps = useCompletionTimestamps();
+  const discarded = useDiscardedResources();
   const todayStr = useTodayString();
 
   const today = parseDateString(todayStr);
@@ -27,7 +29,8 @@ export default function WeeklyReview({
   const sinceStr = toDateString(sevenDaysAgo);
   const rangeLabel = `${formatShort(sevenDaysAgo)} – ${formatShort(today)}`;
 
-  const resourcesThisWeek = getResourcesCompletedSince(domains, timestamps, sinceStr);
+  const visibleDomains = filterOutDiscarded(domains, discarded);
+  const resourcesThisWeek = getResourcesCompletedSince(visibleDomains, timestamps, sinceStr);
 
   return (
     <div className="flex flex-col gap-8">

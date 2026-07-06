@@ -1,15 +1,18 @@
 "use client";
 
 import type { Domain } from "@/lib/curriculum";
-import { resourceKey } from "@/lib/curriculum";
+import { filterOutDiscarded, resourceKey } from "@/lib/curriculum";
 import { toggleResourceCompleted, useCompletedResources } from "@/lib/progress-store";
+import { discardResource, useDiscardedResources } from "@/lib/discard-store";
 import { parseDateString, useTodayString } from "@/lib/date-utils";
 import { buildWeeklyPlan } from "@/lib/weekly-plan";
 
 export default function WeeklyPlan({ domains }: { domains: Domain[] }) {
   const completed = useCompletedResources();
+  const discarded = useDiscardedResources();
+  const visibleDomains = filterOutDiscarded(domains, discarded);
   const todayStr = useTodayString();
-  const plan = buildWeeklyPlan(domains, completed, parseDateString(todayStr));
+  const plan = buildWeeklyPlan(visibleDomains, completed, parseDateString(todayStr));
 
   return (
     <div className="flex flex-col divide-y divide-border">
@@ -47,7 +50,7 @@ export default function WeeklyPlan({ domains }: { domains: Domain[] }) {
                   className="mt-1 h-4 w-4 shrink-0 cursor-pointer accent-gold"
                   aria-label={`Mark "${resource.title}" as done`}
                 />
-                <div className="flex flex-col gap-1">
+                <div className="flex flex-1 flex-col gap-1">
                   {resource.url ? (
                     <a
                       href={resource.url}
@@ -64,6 +67,16 @@ export default function WeeklyPlan({ domains }: { domains: Domain[] }) {
                     {resource.domainName} · {resource.topicTitle} · {resource.type}
                   </span>
                 </div>
+                <button
+                  type="button"
+                  onClick={() =>
+                    discardResource(resourceKey(resource.domainId, resource.topicId, resource))
+                  }
+                  className="shrink-0 text-xs uppercase tracking-wide text-muted transition-colors hover:text-wine"
+                  aria-label={`Discard "${resource.title}"`}
+                >
+                  Discard
+                </button>
               </div>
             ) : (
               <p className="text-sm italic text-muted">

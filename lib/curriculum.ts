@@ -148,6 +148,22 @@ export function computeOverallProgress(
   };
 }
 
+export function filterOutDiscarded(
+  domains: Domain[],
+  discarded: ReadonlySet<string>
+): Domain[] {
+  if (discarded.size === 0) return domains;
+  return domains.map((domain) => ({
+    ...domain,
+    topics: domain.topics.map((topic) => ({
+      ...topic,
+      resources: topic.resources.filter(
+        (resource) => !discarded.has(resourceKey(domain.id, topic.id, resource))
+      ),
+    })),
+  }));
+}
+
 export function getAllResources(domains: Domain[]): ResourceWithContext[] {
   return domains.flatMap((domain) =>
     domain.topics.flatMap((topic) =>

@@ -1,16 +1,28 @@
 "use client";
 
+import { useMemo } from "react";
 import Link from "next/link";
 import type { Domain } from "@/lib/curriculum";
-import { computeDomainProgress, computeTopicProgress, resourceKey } from "@/lib/curriculum";
+import {
+  computeDomainProgress,
+  computeTopicProgress,
+  filterOutDiscarded,
+  resourceKey,
+} from "@/lib/curriculum";
 import { toggleResourceCompleted, useCompletedResources } from "@/lib/progress-store";
+import { discardResource, useDiscardedResources } from "@/lib/discard-store";
 import ProgressBar from "@/components/ProgressBar";
 import StatusBadge from "@/components/StatusBadge";
 import DomainIcon from "@/components/DomainIcon";
 import Ornament from "@/components/Ornament";
 
-export default function DomainDetail({ domain }: { domain: Domain }) {
+export default function DomainDetail({ domain: rawDomain }: { domain: Domain }) {
   const completed = useCompletedResources();
+  const discarded = useDiscardedResources();
+  const domain = useMemo(
+    () => filterOutDiscarded([rawDomain], discarded)[0],
+    [rawDomain, discarded]
+  );
   const progress = computeDomainProgress(domain, completed);
 
   return (
@@ -69,7 +81,7 @@ export default function DomainDetail({ domain }: { domain: Domain }) {
                           className="mt-0.5 h-4 w-4 shrink-0 cursor-pointer accent-gold"
                           aria-label={`Mark "${resource.title}" as done`}
                         />
-                        <span className={isChecked ? "text-muted line-through" : ""}>
+                        <span className={`flex-1 ${isChecked ? "text-muted line-through" : ""}`}>
                           {resource.url ? (
                             <a
                               href={resource.url}
@@ -92,6 +104,14 @@ export default function DomainDetail({ domain }: { domain: Domain }) {
                             {resource.type}
                           </span>
                         </span>
+                        <button
+                          type="button"
+                          onClick={() => discardResource(key)}
+                          className="shrink-0 text-xs uppercase tracking-wide text-muted transition-colors hover:text-wine"
+                          aria-label={`Discard "${resource.title}"`}
+                        >
+                          Discard
+                        </button>
                       </li>
                     );
                   })}
