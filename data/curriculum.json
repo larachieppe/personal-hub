@@ -99,11 +99,18 @@
           "title": "Computer Systems & Databases",
           "notes": "CMU's 15-445/645, one specific lecture per unit rather than the whole playlist.",
           "resources": [
-            { "title": "CMU 15-445: Storage Models & Compression", "url": "https://www.youtube.com/watch?v=nhlpwmOBEiE", "type": "video" },
-            { "title": "CMU 15-445: Vector Indexes, Inverted Indexes & Filters", "url": "https://www.youtube.com/watch?v=foMMYyycRgk", "type": "video" },
-            { "title": "CMU 15-445: Query Planning & Optimization", "url": "https://www.youtube.com/watch?v=X8EHO8VLeG0", "type": "video" },
-            { "title": "CMU 15-445: Concurrency Control Theory", "url": "https://www.youtube.com/watch?v=4y656idl8ZU", "type": "video" },
-            { "title": "CMU 15-445: Database Recovery with ARIES", "url": "https://www.youtube.com/watch?v=yVpzHdAP0TY", "type": "video" }
+            {
+              "title": "CMU 15-445: Database Systems",
+              "type": "course",
+              "sectionType": "video",
+              "sections": [
+                { "title": "Storage Models & Compression", "url": "https://www.youtube.com/watch?v=nhlpwmOBEiE" },
+                { "title": "Vector Indexes, Inverted Indexes & Filters", "url": "https://www.youtube.com/watch?v=foMMYyycRgk" },
+                { "title": "Query Planning & Optimization", "url": "https://www.youtube.com/watch?v=X8EHO8VLeG0" },
+                { "title": "Concurrency Control Theory", "url": "https://www.youtube.com/watch?v=4y656idl8ZU" },
+                { "title": "Database Recovery with ARIES", "url": "https://www.youtube.com/watch?v=yVpzHdAP0TY" }
+              ]
+            }
           ]
         },
         {
@@ -111,18 +118,25 @@
           "title": "Machine Learning Fundamentals",
           "notes": "Google's Crash Course, split into its real units — go through them in order.",
           "resources": [
-            { "title": "ML Crash Course: Linear Regression", "url": "https://developers.google.com/machine-learning/crash-course/linear-regression", "type": "article" },
-            { "title": "ML Crash Course: Logistic Regression", "url": "https://developers.google.com/machine-learning/crash-course/logistic-regression", "type": "article" },
-            { "title": "ML Crash Course: Classification", "url": "https://developers.google.com/machine-learning/crash-course/classification", "type": "article" },
-            { "title": "ML Crash Course: Working with Numerical Data", "url": "https://developers.google.com/machine-learning/crash-course/numerical-data", "type": "article" },
-            { "title": "ML Crash Course: Working with Categorical Data", "url": "https://developers.google.com/machine-learning/crash-course/categorical-data", "type": "article" },
-            { "title": "ML Crash Course: Datasets, Generalization & Overfitting", "url": "https://developers.google.com/machine-learning/crash-course/overfitting", "type": "article" },
-            { "title": "ML Crash Course: Neural Networks", "url": "https://developers.google.com/machine-learning/crash-course/neural-networks", "type": "article" },
-            { "title": "ML Crash Course: Embeddings", "url": "https://developers.google.com/machine-learning/crash-course/embeddings", "type": "article" },
-            { "title": "ML Crash Course: Intro to Large Language Models", "url": "https://developers.google.com/machine-learning/crash-course/llm", "type": "article" },
-            { "title": "ML Crash Course: Production ML Systems", "url": "https://developers.google.com/machine-learning/crash-course/production-ml-systems", "type": "article" },
-            { "title": "ML Crash Course: AutoML", "url": "https://developers.google.com/machine-learning/crash-course/automl", "type": "article" },
-            { "title": "ML Crash Course: ML Fairness", "url": "https://developers.google.com/machine-learning/crash-course/fairness", "type": "article" },
+            {
+              "title": "Google's Machine Learning Crash Course",
+              "type": "course",
+              "sectionType": "article",
+              "sections": [
+                { "title": "Linear Regression", "url": "https://developers.google.com/machine-learning/crash-course/linear-regression" },
+                { "title": "Logistic Regression", "url": "https://developers.google.com/machine-learning/crash-course/logistic-regression" },
+                { "title": "Classification", "url": "https://developers.google.com/machine-learning/crash-course/classification" },
+                { "title": "Working with Numerical Data", "url": "https://developers.google.com/machine-learning/crash-course/numerical-data" },
+                { "title": "Working with Categorical Data", "url": "https://developers.google.com/machine-learning/crash-course/categorical-data" },
+                { "title": "Datasets, Generalization & Overfitting", "url": "https://developers.google.com/machine-learning/crash-course/overfitting" },
+                { "title": "Neural Networks", "url": "https://developers.google.com/machine-learning/crash-course/neural-networks" },
+                { "title": "Embeddings", "url": "https://developers.google.com/machine-learning/crash-course/embeddings" },
+                { "title": "Intro to Large Language Models", "url": "https://developers.google.com/machine-learning/crash-course/llm" },
+                { "title": "Production ML Systems", "url": "https://developers.google.com/machine-learning/crash-course/production-ml-systems" },
+                { "title": "AutoML", "url": "https://developers.google.com/machine-learning/crash-course/automl" },
+                { "title": "ML Fairness", "url": "https://developers.google.com/machine-learning/crash-course/fairness" }
+              ]
+            },
             { "title": "StatQuest: Linear Regression, Clearly Explained!!!", "url": "https://www.youtube.com/watch?v=7ArmBVF2dCs", "type": "video" },
             { "title": "Jay Alammar: The Illustrated Transformer", "url": "https://jalammar.github.io/illustrated-transformer/", "type": "article" }
           ]
@@ -146,14 +160,21 @@
           "title": "Practical Deep Learning (fast.ai)",
           "notes": "Part 1 of fast.ai's course — hands-on and code-first, the complement to the more theoretical resources above.",
           "resources": [
-            { "title": "fast.ai Lesson 1: Getting Started", "url": "https://course.fast.ai/Lessons/lesson1.html", "type": "video" },
-            { "title": "fast.ai Lesson 2: Deployment", "url": "https://course.fast.ai/Lessons/lesson2.html", "type": "video" },
-            { "title": "fast.ai Lesson 3: Neural Net Foundations", "url": "https://course.fast.ai/Lessons/lesson3.html", "type": "video" },
-            { "title": "fast.ai Lesson 4: Natural Language (NLP)", "url": "https://course.fast.ai/Lessons/lesson4.html", "type": "video" },
-            { "title": "fast.ai Lesson 5: From-Scratch Model", "url": "https://course.fast.ai/Lessons/lesson5.html", "type": "video" },
-            { "title": "fast.ai Lesson 6: Random Forests", "url": "https://course.fast.ai/Lessons/lesson6.html", "type": "video" },
-            { "title": "fast.ai Lesson 7: Collaborative Filtering", "url": "https://course.fast.ai/Lessons/lesson7.html", "type": "video" },
-            { "title": "fast.ai Lesson 8: Convolutions (CNNs)", "url": "https://course.fast.ai/Lessons/lesson8.html", "type": "video" }
+            {
+              "title": "fast.ai: Practical Deep Learning for Coders",
+              "type": "course",
+              "sectionType": "video",
+              "sections": [
+                { "title": "Lesson 1: Getting Started", "url": "https://course.fast.ai/Lessons/lesson1.html" },
+                { "title": "Lesson 2: Deployment", "url": "https://course.fast.ai/Lessons/lesson2.html" },
+                { "title": "Lesson 3: Neural Net Foundations", "url": "https://course.fast.ai/Lessons/lesson3.html" },
+                { "title": "Lesson 4: Natural Language (NLP)", "url": "https://course.fast.ai/Lessons/lesson4.html" },
+                { "title": "Lesson 5: From-Scratch Model", "url": "https://course.fast.ai/Lessons/lesson5.html" },
+                { "title": "Lesson 6: Random Forests", "url": "https://course.fast.ai/Lessons/lesson6.html" },
+                { "title": "Lesson 7: Collaborative Filtering", "url": "https://course.fast.ai/Lessons/lesson7.html" },
+                { "title": "Lesson 8: Convolutions (CNNs)", "url": "https://course.fast.ai/Lessons/lesson8.html" }
+              ]
+            }
           ]
         },
         {
@@ -161,14 +182,21 @@
           "title": "Building Neural Nets From Scratch (Karpathy)",
           "notes": "The most hands-on of the four — you write the code yourself, line by line.",
           "resources": [
-            { "title": "The Spelled-Out Intro to Neural Networks: Building micrograd", "url": "https://youtu.be/VMj-3S1tku0", "type": "video" },
-            { "title": "The Spelled-Out Intro to Language Modeling: Building makemore", "url": "https://youtu.be/PaCmpygFfXo", "type": "video" },
-            { "title": "Building makemore Part 2: MLP", "url": "https://youtu.be/TCH_1BHY58I", "type": "video" },
-            { "title": "Building makemore Part 3: Activations & Gradients, BatchNorm", "url": "https://youtu.be/P6sfmUTpUmc", "type": "video" },
-            { "title": "Building makemore Part 4: Becoming a Backprop Ninja", "url": "https://youtu.be/q8SA3rM6ckI", "type": "video" },
-            { "title": "Building makemore Part 5: Building a WaveNet", "url": "https://youtu.be/t3YJ5hKiMQ0", "type": "video" },
-            { "title": "Let's Build GPT: From Scratch, in Code, Spelled Out", "url": "https://www.youtube.com/watch?v=kCc8FmEb1nY", "type": "video" },
-            { "title": "Let's Build the GPT Tokenizer", "url": "https://youtu.be/zduSFxRajkE", "type": "video" }
+            {
+              "title": "Neural Networks: Zero to Hero (Karpathy)",
+              "type": "course",
+              "sectionType": "video",
+              "sections": [
+                { "title": "The Spelled-Out Intro to Neural Networks: Building micrograd", "url": "https://youtu.be/VMj-3S1tku0" },
+                { "title": "The Spelled-Out Intro to Language Modeling: Building makemore", "url": "https://youtu.be/PaCmpygFfXo" },
+                { "title": "Building makemore Part 2: MLP", "url": "https://youtu.be/TCH_1BHY58I" },
+                { "title": "Building makemore Part 3: Activations & Gradients, BatchNorm", "url": "https://youtu.be/P6sfmUTpUmc" },
+                { "title": "Building makemore Part 4: Becoming a Backprop Ninja", "url": "https://youtu.be/q8SA3rM6ckI" },
+                { "title": "Building makemore Part 5: Building a WaveNet", "url": "https://youtu.be/t3YJ5hKiMQ0" },
+                { "title": "Let's Build GPT: From Scratch, in Code, Spelled Out", "url": "https://www.youtube.com/watch?v=kCc8FmEb1nY" },
+                { "title": "Let's Build the GPT Tokenizer", "url": "https://youtu.be/zduSFxRajkE" }
+              ]
+            }
           ]
         }
       ]
@@ -229,10 +257,17 @@
           "title": "Biology & Life Sciences Fundamentals",
           "notes": "Start here if it's been a while since biology class — everything else in this domain assumes this vocabulary.",
           "resources": [
-            { "title": "MIT 7.01SC: Biochemical Reactions, Enzymes, and ATP", "url": "https://ocw.mit.edu/courses/7-01sc-fundamentals-of-biology-fall-2011/resources/biochemical-reactions-enzymes-and-atp/", "type": "video" },
-            { "title": "MIT 7.01SC: DNA Replication", "url": "https://ocw.mit.edu/courses/7-01sc-fundamentals-of-biology-fall-2011/resources/dna-replication/", "type": "video" },
-            { "title": "MIT 7.01SC: Mendel's Laws", "url": "https://ocw.mit.edu/courses/7-01sc-fundamentals-of-biology-fall-2011/pages/genetics/mendels-laws/", "type": "video" },
-            { "title": "MIT 7.01SC: Development of Recombinant DNA", "url": "https://ocw.mit.edu/courses/7-01sc-fundamentals-of-biology-fall-2011/pages/recombinant-dna/development-of-recombinant-dna/", "type": "video" }
+            {
+              "title": "MIT 7.01SC: Fundamentals of Biology",
+              "type": "course",
+              "sectionType": "video",
+              "sections": [
+                { "title": "Biochemical Reactions, Enzymes, and ATP", "url": "https://ocw.mit.edu/courses/7-01sc-fundamentals-of-biology-fall-2011/resources/biochemical-reactions-enzymes-and-atp/" },
+                { "title": "DNA Replication", "url": "https://ocw.mit.edu/courses/7-01sc-fundamentals-of-biology-fall-2011/resources/dna-replication/" },
+                { "title": "Mendel's Laws", "url": "https://ocw.mit.edu/courses/7-01sc-fundamentals-of-biology-fall-2011/pages/genetics/mendels-laws/" },
+                { "title": "Development of Recombinant DNA", "url": "https://ocw.mit.edu/courses/7-01sc-fundamentals-of-biology-fall-2011/pages/recombinant-dna/development-of-recombinant-dna/" }
+              ]
+            }
           ]
         },
         {
@@ -257,11 +292,18 @@
               "url": "https://deepmind.google/blog/alphafold-reveals-the-structure-of-the-protein-universe/",
               "type": "article"
             },
-            { "title": "Fundamentals of Bioinformatics: Biological Information (Part 1)", "url": "https://www.youtube.com/watch?v=U1KH9GCz4Xs", "type": "video" },
-            { "title": "Fundamentals of Bioinformatics: Pairwise Sequence Alignment (Part 1)", "url": "https://www.youtube.com/watch?v=FWD0fdozHcY", "type": "video" },
-            { "title": "Fundamentals of Bioinformatics: Sequence Homology Searching (Part 1)", "url": "https://www.youtube.com/watch?v=NfjXWy0mnEA", "type": "video" },
-            { "title": "Fundamentals of Bioinformatics: Microbiome Analysis Methods (Part 1)", "url": "https://www.youtube.com/watch?v=VqcLbKKa7j8", "type": "video" },
-            { "title": "Fundamentals of Bioinformatics: Machine Learning in Bioinformatics (Part 1)", "url": "https://www.youtube.com/watch?v=46aAVSRpFes", "type": "video" }
+            {
+              "title": "Fundamentals of Bioinformatics",
+              "type": "course",
+              "sectionType": "video",
+              "sections": [
+                { "title": "Biological Information (Part 1)", "url": "https://www.youtube.com/watch?v=U1KH9GCz4Xs" },
+                { "title": "Pairwise Sequence Alignment (Part 1)", "url": "https://www.youtube.com/watch?v=FWD0fdozHcY" },
+                { "title": "Sequence Homology Searching (Part 1)", "url": "https://www.youtube.com/watch?v=NfjXWy0mnEA" },
+                { "title": "Microbiome Analysis Methods (Part 1)", "url": "https://www.youtube.com/watch?v=VqcLbKKa7j8" },
+                { "title": "Machine Learning in Bioinformatics (Part 1)", "url": "https://www.youtube.com/watch?v=46aAVSRpFes" }
+              ]
+            }
           ]
         },
         {
@@ -298,9 +340,16 @@
               "url": "https://www.youtube.com/watch?v=hyYCn_kAngI",
               "type": "video"
             },
-            { "title": "How to Start a Startup, Lecture 1: How to Start a Startup (Sam Altman)", "url": "https://startupclass.samaltman.com/courses/lec1/", "type": "video" },
-            { "title": "How to Start a Startup, Lecture 2: Ideas, Products, Teams and Execution (Sam Altman)", "url": "https://startupclass.samaltman.com/courses/lec2/", "type": "video" },
-            { "title": "How to Start a Startup, Lecture 4: Building Product, Talking to Users, and Growing (Adora Cheung)", "url": "https://startupclass.samaltman.com/courses/lec4/", "type": "video" }
+            {
+              "title": "How to Start a Startup (Y Combinator)",
+              "type": "course",
+              "sectionType": "video",
+              "sections": [
+                { "title": "Lecture 1: How to Start a Startup (Sam Altman)", "url": "https://startupclass.samaltman.com/courses/lec1/" },
+                { "title": "Lecture 2: Ideas, Products, Teams and Execution (Sam Altman)", "url": "https://startupclass.samaltman.com/courses/lec2/" },
+                { "title": "Lecture 4: Building Product, Talking to Users, and Growing (Adora Cheung)", "url": "https://startupclass.samaltman.com/courses/lec4/" }
+              ]
+            }
           ]
         },
         {
@@ -409,9 +458,16 @@
           "id": "bio-biochem-foundations",
           "title": "Biological & Biochemical Foundations of Living Systems",
           "resources": [
-            { "title": "Khan Academy MCAT: Foundation 1 - Biomolecules", "url": "https://www.khanacademy.org/test-prep/mcat/biomolecules", "type": "course" },
-            { "title": "Khan Academy MCAT: Foundation 2 - Cells", "url": "https://www.khanacademy.org/test-prep/mcat/cells", "type": "course" },
-            { "title": "Khan Academy MCAT: Foundation 3 - Organ Systems", "url": "https://www.khanacademy.org/test-prep/mcat/organ-systems", "type": "course" },
+            {
+              "title": "Khan Academy MCAT Foundations",
+              "type": "course",
+              "sectionType": "article",
+              "sections": [
+                { "title": "Foundation 1 - Biomolecules", "url": "https://www.khanacademy.org/test-prep/mcat/biomolecules" },
+                { "title": "Foundation 2 - Cells", "url": "https://www.khanacademy.org/test-prep/mcat/cells" },
+                { "title": "Foundation 3 - Organ Systems", "url": "https://www.khanacademy.org/test-prep/mcat/organ-systems" }
+              ]
+            },
             { "title": "Introduction to Biology: Crash Course Biology #1", "url": "https://www.youtube.com/watch?v=tZE_fQFK8EY", "type": "video" }
           ]
         },

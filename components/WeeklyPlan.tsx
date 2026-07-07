@@ -7,7 +7,6 @@ import {
   getAllResources,
   getNextResources,
   mergeCustomResources,
-  resourceKey,
 } from "@/lib/curriculum";
 import { toggleResourceCompleted, useCompletedResources } from "@/lib/progress-store";
 import { discardResource, useDiscardedResources } from "@/lib/discard-store";
@@ -41,21 +40,17 @@ export default function WeeklyPlan({ domains }: { domains: Domain[] }) {
 
   useEffect(() => {
     const visibleDomains = filterOutDiscarded(mergeCustomResources(domains, custom), discarded);
-    const pool = getNextResources(visibleDomains, completed).map((r) => ({
-      key: resourceKey(r.domainId, r.topicId, r),
-    }));
+    const pool = getNextResources(visibleDomains, completed).map((r) => ({ key: r.key }));
     const wStart = getWeekStart(parseDateString(todayStr));
     const dates = Array.from({ length: 7 }, (_, i) => toDateString(addDays(wStart, i)));
     ensureAssignments(dates, pool, completed, discarded);
   }, [domains, custom, discarded, completed, todayStr]);
 
   const visibleDomains = filterOutDiscarded(mergeCustomResources(domains, custom), discarded);
-  const resourceByKey = new Map(
-    getAllResources(visibleDomains).map((r) => [resourceKey(r.domainId, r.topicId, r), r])
-  );
+  const resourceByKey = new Map(getAllResources(visibleDomains).map((r) => [r.key, r]));
 
   const swapCandidates = getNextResources(visibleDomains, completed).map((r) => ({
-    key: resourceKey(r.domainId, r.topicId, r),
+    key: r.key,
     resource: r,
   }));
   const pendingElsewhere = new Set<string>();
@@ -134,7 +129,8 @@ export default function WeeklyPlan({ domains }: { domains: Domain[] }) {
                             </span>
                           )}
                           <span className="text-xs uppercase tracking-wide text-muted">
-                            {resource.domainName} · {resource.topicTitle} · {resource.type}
+                            {resource.domainName} · {resource.topicTitle}
+                            {resource.courseTitle && <> · {resource.courseTitle}</>} · {resource.type}
                           </span>
                         </div>
                         <button
@@ -170,7 +166,8 @@ export default function WeeklyPlan({ domains }: { domains: Domain[] }) {
                           </option>
                           {options.map((c) => (
                             <option key={c.key} value={c.key}>
-                              {c.resource.domainName} · {c.resource.topicTitle}: {c.resource.title}
+                              {c.resource.domainName} · {c.resource.topicTitle}
+                              {c.resource.courseTitle ? ` · ${c.resource.courseTitle}` : ""}: {c.resource.title}
                             </option>
                           ))}
                         </select>

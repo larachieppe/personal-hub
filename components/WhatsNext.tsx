@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import type { Domain } from "@/lib/curriculum";
-import { getNextResources, resourceKey } from "@/lib/curriculum";
+import { getNextResources } from "@/lib/curriculum";
 import { toggleResourceCompleted, useCompletedResources } from "@/lib/progress-store";
 import { discardResource } from "@/lib/discard-store";
 
@@ -39,7 +39,7 @@ export default function WhatsNext({ domains }: { domains: Domain[] }) {
   }
 
   const pick = unchecked[pickIndex(seed, unchecked.length)];
-  const key = resourceKey(pick.domainId, pick.topicId, pick);
+  const key = pick.key;
 
   return (
     <section className="flex flex-col gap-3 border border-border bg-surface p-6 shadow-[inset_0_1px_0_rgba(255,255,255,0.04),0_16px_32px_-20px_rgba(0,0,0,0.85)]">
@@ -88,7 +88,8 @@ export default function WhatsNext({ domains }: { domains: Domain[] }) {
             </span>
           )}
           <span className="text-xs uppercase tracking-wide text-muted">
-            {pick.domainName} · {pick.topicTitle} · {pick.type}
+            {pick.domainName} · {pick.topicTitle}
+            {pick.courseTitle && <> · {pick.courseTitle}</>} · {pick.type}
           </span>
         </div>
       </div>

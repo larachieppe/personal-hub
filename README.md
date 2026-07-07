@@ -177,10 +177,21 @@ Content lives in plain data files — no database, no login, just edit and commi
   - Add a domain by adding an object to the `domains` array.
   - Add a topic by adding an object to a domain's `topics` array (no `status` field needed —
     it's derived from the checklist).
-  - Add a resource to a topic's `resources` array: `{ "title": "...", "url": "...", "type": "article" }`
-    (`type` is one of `book`, `course`, `video`, `article`, `paper`, `other`; `url` can be `""` if
-    you don't have a link yet). For one-off additions you don't need to touch this file at all —
-    use the **+ Add a resource** link on the topic itself (see above).
+  - A topic's `resources` array holds two kinds of things:
+    - A plain resource: `{ "title": "...", "url": "...", "type": "article" }` (`type` is one of
+      `book`, `video`, `article`, `paper`, `other`; `url` can be `""` if you don't have a link yet).
+      For one-off additions you don't need to touch this file at all — use the **+ Add a resource**
+      link on the topic itself (see above).
+    - A multi-part course: `{ "title": "...", "type": "course", "sectionType": "video", "sections": [{ "title": "...", "url": "..." }, ...] }`.
+      Use this instead of several flat resources whenever a source is genuinely one course with
+      real sections (Google's ML Crash Course, fast.ai, a CMU lecture series, Khan Academy's
+      Foundations, etc.) — `sectionType` is whatever every section actually is (almost always
+      homogeneous: all `video` or all `article`), shown as each section's badge. On the domain page
+      a course renders as one row (title + a "checked/total sections" count) that expands to show
+      each section as its own checkbox; sections are still individually checkable, sequential, and
+      discardable — they just aren't several indistinguishable rows that happen to share a title
+      prefix. The **+ Add a resource** form only ever adds plain resources, never a nested course —
+      building a new course means editing this file directly.
 - [`data/motivation.json`](data/motivation.json) — your mission statement and the pool of quotes
   shown on the dashboard (one is picked per day).
 

@@ -2,13 +2,16 @@
 
 import { useMemo, useState } from "react";
 import Link from "next/link";
-import type { Domain, Resource, ResourceType } from "@/lib/curriculum";
+import type { Course, Domain, Resource, ResourceType, TopicStatus } from "@/lib/curriculum";
 import {
+  computeCourseProgress,
   computeDomainProgress,
   computeTopicProgress,
   filterOutDiscarded,
+  isCourse,
   mergeCustomResources,
   resourceKey,
+  sectionKey,
 } from "@/lib/curriculum";
 import { toggleResourceCompleted, useCompletedResources } from "@/lib/progress-store";
 import { discardResource, useDiscardedResources } from "@/lib/discard-store";
@@ -76,62 +79,25 @@ export default function DomainDetail({ domain: rawDomain }: { domain: Domain }) 
               )}
               {topic.resources.length > 0 && (
                 <ul className="mt-1 flex flex-col gap-2">
-                  {topic.resources.map((resource) => {
-                    const key = resourceKey(domain.id, topic.id, resource);
-                    const isChecked = completed.has(key);
-                    return (
-                      <li key={key} className="flex items-start gap-2.5 text-sm">
-                        <input
-                          type="checkbox"
-                          checked={isChecked}
-                          onChange={() => toggleResourceCompleted(key)}
-                          className="mt-0.5 h-4 w-4 shrink-0 cursor-pointer accent-gold"
-                          aria-label={`Mark "${resource.title}" as done`}
-                        />
-                        <span className={`flex-1 ${isChecked ? "text-muted line-through" : ""}`}>
-                          {resource.url ? (
-                            <a
-                              href={resource.url}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className={
-                                isChecked
-                                  ? "hover:underline"
-                                  : "text-gold hover:text-foreground hover:underline"
-                              }
-                            >
-                              {resource.title}
-                            </a>
-                          ) : (
-                            <span className={isChecked ? "" : "text-foreground"}>
-                              {resource.title}
-                            </span>
-                          )}
-                          <span className="ml-2 text-xs uppercase tracking-wide text-muted">
-                            {resource.type}
-                          </span>
-                        </span>
-                        <button
-                          type="button"
-                          onClick={() => discardResource(key)}
-                          className="shrink-0 text-xs uppercase tracking-wide text-muted transition-colors hover:text-wine"
-                          aria-label={`Discard "${resource.title}"`}
-                        >
-                          Discard
-                        </button>
-                        {resource.custom && (
-                          <button
-                            type="button"
-                            onClick={() => removeCustomResource(domain.id, topic.id, resource.title)}
-                            className="shrink-0 text-xs uppercase tracking-wide text-muted transition-colors hover:text-wine"
-                            aria-label={`Remove "${resource.title}"`}
-                          >
-                            Remove
-                          </button>
-                        )}
-                      </li>
-                    );
-                  })}
+                  {topic.resources.map((item) =>
+                    isCourse(item) ? (
+                      <CourseGroup
+                        key={item.title}
+                        domainId={domain.id}
+                        topicId={topic.id}
+                        course={item}
+                        completed={completed}
+                      />
+                    ) : (
+                      <FlatResourceRow
+                        key={resourceKey(domain.id, topic.id, item)}
+                        domainId={domain.id}
+                        topicId={topic.id}
+                        resource={item}
+                        completed={completed}
+                      />
+                    )
+                  )}
                 </ul>
               )}
               <AddResourceForm domainId={domain.id} topicId={topic.id} />
@@ -143,7 +109,158 @@ export default function DomainDetail({ domain: rawDomain }: { domain: Domain }) 
   );
 }
 
-const RESOURCE_TYPES: ResourceType[] = ["article", "video", "book", "course", "paper", "other"];
+function FlatResourceRow({
+  domainId,
+  topicId,
+  resource,
+  completed,
+}: {
+  domainId: string;
+  topicId: string;
+  resource: Resource;
+  completed: ReadonlySet<string>;
+}) {
+  const key = resourceKey(domainId, topicId, resource);
+  const isChecked = completed.has(key);
+
+  return (
+    <li className="flex items-start gap-2.5 text-sm">
+      <input
+        type="checkbox"
+        checked={isChecked}
+        onChange={() => toggleResourceCompleted(key)}
+        className="mt-0.5 h-4 w-4 shrink-0 cursor-pointer accent-gold"
+        aria-label={`Mark "${resource.title}" as done`}
+      />
+      <span className={`flex-1 ${isChecked ? "text-muted line-through" : ""}`}>
+        {resource.url ? (
+          <a
+            href={resource.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={
+              isChecked
+                ? "hover:underline"
+                : "text-gold hover:text-foreground hover:underline"
+            }
+          >
+            {resource.title}
+          </a>
+        ) : (
+          <span className={isChecked ? "" : "text-foreground"}>{resource.title}</span>
+        )}
+        <span className="ml-2 text-xs uppercase tracking-wide text-muted">
+          {resource.type}
+        </span>
+      </span>
+      <button
+        type="button"
+        onClick={() => discardResource(key)}
+        className="shrink-0 text-xs uppercase tracking-wide text-muted transition-colors hover:text-wine"
+        aria-label={`Discard "${resource.title}"`}
+      >
+        Discard
+      </button>
+      {resource.custom && (
+        <button
+          type="button"
+          onClick={() => removeCustomResource(domainId, topicId, resource.title)}
+          className="shrink-0 text-xs uppercase tracking-wide text-muted transition-colors hover:text-wine"
+          aria-label={`Remove "${resource.title}"`}
+        >
+          Remove
+        </button>
+      )}
+    </li>
+  );
+}
+
+function courseStatus(checked: number, total: number): TopicStatus {
+  return total === 0 || checked === 0 ? "not-started" : checked === total ? "done" : "in-progress";
+}
+
+function CourseGroup({
+  domainId,
+  topicId,
+  course,
+  completed,
+}: {
+  domainId: string;
+  topicId: string;
+  course: Course;
+  completed: ReadonlySet<string>;
+}) {
+  const [expanded, setExpanded] = useState(false);
+  const progress = computeCourseProgress(domainId, topicId, course, completed);
+
+  return (
+    <li className="flex flex-col gap-2 border border-border bg-surface p-3">
+      <button
+        type="button"
+        onClick={() => setExpanded((e) => !e)}
+        className="flex items-center justify-between gap-4 text-left"
+      >
+        <span className="flex items-center gap-2">
+          <span className="font-display text-sm text-foreground">{course.title}</span>
+          <span className="text-xs uppercase tracking-wide text-muted">
+            {expanded ? "▾" : "▸"} {progress.checked}/{progress.total} sections
+          </span>
+        </span>
+        <StatusBadge status={courseStatus(progress.checked, progress.total)} />
+      </button>
+      {expanded && (
+        <ul className="mt-1 flex flex-col gap-2 border-t border-border/60 pt-2">
+          {course.sections.map((section) => {
+            const key = sectionKey(domainId, topicId, course, section);
+            const isChecked = completed.has(key);
+            return (
+              <li key={key} className="flex items-start gap-2.5 pl-2 text-sm">
+                <input
+                  type="checkbox"
+                  checked={isChecked}
+                  onChange={() => toggleResourceCompleted(key)}
+                  className="mt-0.5 h-4 w-4 shrink-0 cursor-pointer accent-gold"
+                  aria-label={`Mark "${section.title}" as done`}
+                />
+                <span className={`flex-1 ${isChecked ? "text-muted line-through" : ""}`}>
+                  {section.url ? (
+                    <a
+                      href={section.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={
+                        isChecked
+                          ? "hover:underline"
+                          : "text-gold hover:text-foreground hover:underline"
+                      }
+                    >
+                      {section.title}
+                    </a>
+                  ) : (
+                    <span className={isChecked ? "" : "text-foreground"}>{section.title}</span>
+                  )}
+                  <span className="ml-2 text-xs uppercase tracking-wide text-muted">
+                    {course.sectionType}
+                  </span>
+                </span>
+                <button
+                  type="button"
+                  onClick={() => discardResource(key)}
+                  className="shrink-0 text-xs uppercase tracking-wide text-muted transition-colors hover:text-wine"
+                  aria-label={`Discard "${section.title}"`}
+                >
+                  Discard
+                </button>
+              </li>
+            );
+          })}
+        </ul>
+      )}
+    </li>
+  );
+}
+
+const RESOURCE_TYPES: ResourceType[] = ["article", "video", "book", "paper", "other"];
 
 function AddResourceForm({ domainId, topicId }: { domainId: string; topicId: string }) {
   const [title, setTitle] = useState("");

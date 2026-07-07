@@ -2,7 +2,7 @@ import curriculumData from "@/data/curriculum.json";
 
 export type TopicStatus = "not-started" | "in-progress" | "done";
 
-export type ResourceType = "book" | "course" | "video" | "article" | "paper" | "other";
+export type ResourceType = "book" | "video" | "article" | "paper" | "other";
 
 export interface Resource {
   title: string;
@@ -11,10 +11,36 @@ export interface Resource {
   custom?: boolean;
 }
 
+export interface CourseSection {
+  title: string;
+  url: string;
+}
+
+/**
+ * A multi-part course (Google's ML Crash Course, fast.ai, a CMU lecture
+ * series, etc.) — one entity with its own title, plus an ordered list of
+ * sections that are each individually checkable. `sectionType` describes
+ * what every section is (they're almost always homogeneous: all video, or
+ * all article-like pages), shown as that section's type badge.
+ */
+export interface Course {
+  title: string;
+  type: "course";
+  sectionType: ResourceType;
+  sections: CourseSection[];
+  custom?: boolean;
+}
+
+export type TopicItem = Resource | Course;
+
+export function isCourse(item: TopicItem): item is Course {
+  return item.type === "course";
+}
+
 export interface Topic {
   id: string;
   title: string;
-  resources: Resource[];
+  resources: TopicItem[];
   notes?: string;
 }
 
@@ -31,6 +57,11 @@ export interface TopicProgress {
   checked: number;
 }
 
+export interface CourseProgress {
+  total: number;
+  checked: number;
+}
+
 export interface DomainProgress {
   totalTopics: number;
   masteredTopics: number;
@@ -42,6 +73,8 @@ export interface DomainProgress {
 }
 
 export interface ResourceWithContext extends Resource {
+  key: string;
+  courseTitle?: string;
   domainId: string;
   domainName: string;
   topicId: string;
@@ -63,8 +96,60 @@ function slugify(text: string): string {
     .replace(/(^-+|-+$)/g, "");
 }
 
-export function resourceKey(domainId: string, topicId: string, resource: Resource): string {
+export function resourceKey(domainId: string, topicId: string, resource: { title: string }): string {
   return `${domainId}/${topicId}/${slugify(resource.title)}`;
+}
+
+export function sectionKey(
+  domainId: string,
+  topicId: string,
+  course: { title: string },
+  section: { title: string }
+): string {
+  return `${domainId}/${topicId}/${slugify(course.title)}--${slugify(section.title)}`;
+}
+
+interface FlatItem {
+  key: string;
+  title: string;
+  url: string;
+  type: ResourceType;
+  custom?: boolean;
+  courseTitle?: string;
+}
+
+/**
+ * Expands a topic's items — flat resources and course sections alike —
+ * into one ordered, flat list. This is the single place that understands
+ * the Resource/Course union; everything downstream (progress, sequencing,
+ * discarding) works off this flat view so a course's sections behave
+ * exactly like standalone resources wherever they end up in the sequence.
+ */
+function flattenTopicItems(domainId: string, topicId: string, items: TopicItem[]): FlatItem[] {
+  const result: FlatItem[] = [];
+  for (const item of items) {
+    if (isCourse(item)) {
+      for (const section of item.sections) {
+        result.push({
+          key: sectionKey(domainId, topicId, item, section),
+          title: section.title,
+          url: section.url,
+          type: item.sectionType,
+          custom: item.custom,
+          courseTitle: item.title,
+        });
+      }
+    } else {
+      result.push({
+        key: resourceKey(domainId, topicId, item),
+        title: item.title,
+        url: item.url,
+        type: item.type,
+        custom: item.custom,
+      });
+    }
+  }
+  return result;
 }
 
 export function computeTopicProgress(
@@ -72,13 +157,25 @@ export function computeTopicProgress(
   topic: Topic,
   completed: ReadonlySet<string>
 ): TopicProgress {
-  const total = topic.resources.length;
-  const checked = topic.resources.filter((resource) =>
-    completed.has(resourceKey(domainId, topic.id, resource))
-  ).length;
+  const flat = flattenTopicItems(domainId, topic.id, topic.resources);
+  const total = flat.length;
+  const checked = flat.filter((item) => completed.has(item.key)).length;
   const status: TopicStatus =
     total === 0 || checked === 0 ? "not-started" : checked === total ? "done" : "in-progress";
   return { status, total, checked };
+}
+
+export function computeCourseProgress(
+  domainId: string,
+  topicId: string,
+  course: Course,
+  completed: ReadonlySet<string>
+): CourseProgress {
+  const total = course.sections.length;
+  const checked = course.sections.filter((section) =>
+    completed.has(sectionKey(domainId, topicId, course, section))
+  ).length;
+  return { total, checked };
 }
 
 export function computeDomainProgress(
@@ -156,7 +253,7 @@ export type CustomResourceMap = Record<string, Record<string, Resource[]>>;
  * domains loaded from curriculum.json. Custom resources are appended to the
  * end of their topic's list — after the curriculum's own resources — and
  * tagged `custom: true` so the UI can offer a permanent "Remove" alongside
- * the usual Discard.
+ * the usual Discard. Custom resources are always flat (never a Course).
  */
 export function mergeCustomResources(domains: Domain[], custom: CustomResourceMap): Domain[] {
   if (Object.keys(custom).length === 0) return domains;
@@ -186,9 +283,17 @@ export function filterOutDiscarded(
     ...domain,
     topics: domain.topics.map((topic) => ({
       ...topic,
-      resources: topic.resources.filter(
-        (resource) => !discarded.has(resourceKey(domain.id, topic.id, resource))
-      ),
+      resources: topic.resources
+        .map((item): TopicItem | null => {
+          if (isCourse(item)) {
+            const sections = item.sections.filter(
+              (section) => !discarded.has(sectionKey(domain.id, topic.id, item, section))
+            );
+            return sections.length === 0 ? null : { ...item, sections };
+          }
+          return discarded.has(resourceKey(domain.id, topic.id, item)) ? null : item;
+        })
+        .filter((item): item is TopicItem => item !== null),
     })),
   }));
 }
@@ -196,8 +301,13 @@ export function filterOutDiscarded(
 export function getAllResources(domains: Domain[]): ResourceWithContext[] {
   return domains.flatMap((domain) =>
     domain.topics.flatMap((topic) =>
-      topic.resources.map((resource) => ({
-        ...resource,
+      flattenTopicItems(domain.id, topic.id, topic.resources).map((item) => ({
+        key: item.key,
+        title: item.title,
+        url: item.url,
+        type: item.type,
+        custom: item.custom,
+        courseTitle: item.courseTitle,
         domainId: domain.id,
         domainName: domain.name,
         topicId: topic.id,
@@ -209,10 +319,10 @@ export function getAllResources(domains: Domain[]): ResourceWithContext[] {
 
 /**
  * Returns at most one resource per topic: the first one (in the topic's own
- * array order) that isn't checked off yet. This is the eligible-to-suggest
- * pool for What's Next / the Weekly Plan — a later resource in a topic (e.g.
- * "Lesson 4") is never eligible while an earlier one in that same topic
- * (e.g. "Lesson 1") is still unchecked.
+ * flattened order — flat resources and course sections alike) that isn't
+ * checked off yet. This is the eligible-to-suggest pool for What's Next /
+ * the Weekly Plan — a later resource or course section is never eligible
+ * while an earlier one in that same topic is still unchecked.
  */
 export function getNextResources(
   domains: Domain[],
@@ -221,12 +331,16 @@ export function getNextResources(
   const result: ResourceWithContext[] = [];
   for (const domain of domains) {
     for (const topic of domain.topics) {
-      const next = topic.resources.find(
-        (resource) => !completed.has(resourceKey(domain.id, topic.id, resource))
-      );
+      const flat = flattenTopicItems(domain.id, topic.id, topic.resources);
+      const next = flat.find((item) => !completed.has(item.key));
       if (next) {
         result.push({
-          ...next,
+          key: next.key,
+          title: next.title,
+          url: next.url,
+          type: next.type,
+          custom: next.custom,
+          courseTitle: next.courseTitle,
           domainId: domain.id,
           domainName: domain.name,
           topicId: topic.id,
@@ -249,8 +363,7 @@ export function getResourcesCompletedSince(
 ): CompletedResource[] {
   return getAllResources(domains)
     .map((resource) => {
-      const key = resourceKey(resource.domainId, resource.topicId, resource);
-      const completedAt = timestamps[key];
+      const completedAt = timestamps[resource.key];
       return completedAt ? { ...resource, completedAt } : null;
     })
     .filter((resource): resource is CompletedResource => resource !== null && resource.completedAt >= sinceDateStr)

@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { getAllResources, mergeCustomResources, resourceKey } from "@/lib/curriculum";
+import { getAllResources, mergeCustomResources } from "@/lib/curriculum";
 import type { Domain } from "@/lib/curriculum";
 import { toggleResourceCompleted, useCompletedResources } from "@/lib/progress-store";
 import { discardResource, restoreResource, useDiscardedResources } from "@/lib/discard-store";
@@ -25,15 +25,11 @@ export default function ResourceLibrary({
   const [showDiscarded, setShowDiscarded] = useState(false);
 
   const visibleResources = useMemo(
-    () =>
-      resources.filter(
-        (r) => !discarded.has(resourceKey(r.domainId, r.topicId, r))
-      ),
+    () => resources.filter((r) => !discarded.has(r.key)),
     [resources, discarded]
   );
   const discardedResources = useMemo(
-    () =>
-      resources.filter((r) => discarded.has(resourceKey(r.domainId, r.topicId, r))),
+    () => resources.filter((r) => discarded.has(r.key)),
     [resources, discarded]
   );
 
@@ -99,7 +95,7 @@ export default function ResourceLibrary({
       ) : (
         <ul className="flex flex-col divide-y divide-border">
           {filtered.map((resource, i) => {
-            const key = resourceKey(resource.domainId, resource.topicId, resource);
+            const key = resource.key;
             const isChecked = completed.has(key);
             return (
               <li
@@ -145,6 +141,7 @@ export default function ResourceLibrary({
                   </div>
                   <span className="text-xs uppercase tracking-wide text-muted">
                     {resource.domainName} · {resource.topicTitle}
+                    {resource.courseTitle && <> · {resource.courseTitle}</>}
                   </span>
                 </div>
                 <button
@@ -183,7 +180,7 @@ export default function ResourceLibrary({
           {showDiscarded && (
             <ul className="flex flex-col divide-y divide-border">
               {discardedResources.map((resource, i) => {
-                const key = resourceKey(resource.domainId, resource.topicId, resource);
+                const key = resource.key;
                 return (
                   <li
                     key={`discarded-${resource.topicId}-${resource.title}-${i}`}
@@ -195,6 +192,7 @@ export default function ResourceLibrary({
                       </span>
                       <span className="text-xs uppercase tracking-wide text-muted">
                         {resource.domainName} · {resource.topicTitle}
+                        {resource.courseTitle && <> · {resource.courseTitle}</>}
                       </span>
                     </div>
                     <button
