@@ -208,6 +208,7 @@ function CourseGroup({
         </span>
         <StatusBadge status={courseStatus(progress.checked, progress.total)} />
       </button>
+      {course.notes && <p className="text-xs italic text-muted">{course.notes}</p>}
       {expanded && (
         <ul className="mt-1 flex flex-col gap-2 border-t border-border/60 pt-2">
           {course.sections.map((section) => {

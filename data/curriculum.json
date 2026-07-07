@@ -97,18 +97,38 @@
         {
           "id": "systems-databases",
           "title": "Computer Systems & Databases",
-          "notes": "CMU's 15-445/645, one specific lecture per unit rather than the whole playlist.",
+          "notes": "CMU's 15-445/645 (Fall 2024), the full semester of lectures.",
           "resources": [
             {
               "title": "CMU 15-445: Database Systems",
               "type": "course",
               "sectionType": "video",
               "sections": [
-                { "title": "Storage Models & Compression", "url": "https://www.youtube.com/watch?v=nhlpwmOBEiE" },
-                { "title": "Vector Indexes, Inverted Indexes & Filters", "url": "https://www.youtube.com/watch?v=foMMYyycRgk" },
-                { "title": "Query Planning & Optimization", "url": "https://www.youtube.com/watch?v=X8EHO8VLeG0" },
-                { "title": "Concurrency Control Theory", "url": "https://www.youtube.com/watch?v=4y656idl8ZU" },
-                { "title": "Database Recovery with ARIES", "url": "https://www.youtube.com/watch?v=yVpzHdAP0TY" }
+                { "title": "Lecture 1: Relational Model & Algebra", "url": "https://www.youtube.com/watch?v=APqWIjtzNGE" },
+                { "title": "Lecture 2: Modern SQL", "url": "https://www.youtube.com/watch?v=MzigBKf84aY" },
+                { "title": "Lecture 3: Database Storage I", "url": "https://www.youtube.com/watch?v=dSxV5Sob5V8" },
+                { "title": "Lecture 4: Database Storage II", "url": "https://www.youtube.com/watch?v=IHtVWGhG0Xg" },
+                { "title": "Lecture 5: Storage Models & Compression", "url": "https://www.youtube.com/watch?v=nhlpwmOBEiE" },
+                { "title": "Lecture 6: Memory Management", "url": "https://www.youtube.com/watch?v=aoewwZwVmv4" },
+                { "title": "Lecture 7: Hash Tables", "url": "https://www.youtube.com/watch?v=VkP_yLM5KBU" },
+                { "title": "Lecture 8: Indexes & Filters I", "url": "https://www.youtube.com/watch?v=scUtG_6M_lU" },
+                { "title": "Lecture 9: Indexes & Filters II", "url": "https://www.youtube.com/watch?v=foMMYyycRgk" },
+                { "title": "Lecture 10: Index Concurrency Control", "url": "https://www.youtube.com/watch?v=lgUNTj0Q54M" },
+                { "title": "Lecture 11: Sorting & Aggregations Algorithms", "url": "https://www.youtube.com/watch?v=mM3sFwSuGNY" },
+                { "title": "Lecture 12: Joins Algorithms", "url": "https://www.youtube.com/watch?v=MFazkaZKs1s" },
+                { "title": "Lecture 13: Query Execution I", "url": "https://www.youtube.com/watch?v=HNtlew7mCc4" },
+                { "title": "Lecture 14: Query Execution II", "url": "https://www.youtube.com/watch?v=Vy2t_wZx4Is" },
+                { "title": "Lecture 15: Query Planning & Optimization", "url": "https://www.youtube.com/watch?v=X8EHO8VLeG0" },
+                { "title": "Lecture 16: Concurrency Control Theory", "url": "https://www.youtube.com/watch?v=4y656idl8ZU" },
+                { "title": "Lecture 17: Two-Phase Locking Concurrency Control", "url": "https://www.youtube.com/watch?v=bXpkEt5P_Js" },
+                { "title": "Lecture 18: Timestamp Ordering Concurrency Control", "url": "https://www.youtube.com/watch?v=-TA0QIwFUnU" },
+                { "title": "Lecture 19: Multi-Version Concurrency Control", "url": "https://www.youtube.com/watch?v=niLwbfE3V9Q" },
+                { "title": "Lecture 20: Database Logging", "url": "https://www.youtube.com/watch?v=mbelzgz-97s" },
+                { "title": "Lecture 21: Database Recovery", "url": "https://www.youtube.com/watch?v=yVpzHdAP0TY" },
+                { "title": "Lecture 22: Introduction to Distributed Databases", "url": "https://www.youtube.com/watch?v=o7bjRUcDMx0" },
+                { "title": "Lecture 23: Distributed OLTP Database Systems", "url": "https://www.youtube.com/watch?v=3wNmpE6DsSs" },
+                { "title": "Lecture 24: Distributed OLAP Database Systems", "url": "https://www.youtube.com/watch?v=L6E75IyBgpk" },
+                { "title": "Lecture 25: Final Review + Systems Potpourri", "url": "https://www.youtube.com/watch?v=fr5lIchF6pw" }
               ]
             }
           ]
@@ -123,6 +143,7 @@
               "type": "course",
               "sectionType": "article",
               "sections": [
+                { "title": "Introduction to ML", "url": "https://developers.google.com/machine-learning/intro-to-ml" },
                 { "title": "Linear Regression", "url": "https://developers.google.com/machine-learning/crash-course/linear-regression" },
                 { "title": "Logistic Regression", "url": "https://developers.google.com/machine-learning/crash-course/logistic-regression" },
                 { "title": "Classification", "url": "https://developers.google.com/machine-learning/crash-course/classification" },
@@ -172,7 +193,8 @@
                 { "title": "Lesson 5: From-Scratch Model", "url": "https://course.fast.ai/Lessons/lesson5.html" },
                 { "title": "Lesson 6: Random Forests", "url": "https://course.fast.ai/Lessons/lesson6.html" },
                 { "title": "Lesson 7: Collaborative Filtering", "url": "https://course.fast.ai/Lessons/lesson7.html" },
-                { "title": "Lesson 8: Convolutions (CNNs)", "url": "https://course.fast.ai/Lessons/lesson8.html" }
+                { "title": "Lesson 8: Convolutions (CNNs)", "url": "https://course.fast.ai/Lessons/lesson8.html" },
+                { "title": "Lesson 9: Bonus — Data Ethics", "url": "https://course.fast.ai/Lessons/lesson8a.html" }
               ]
             }
           ]
@@ -262,10 +284,27 @@
               "type": "course",
               "sectionType": "video",
               "sections": [
+                { "title": "Types of Organisms, Cell Composition", "url": "https://ocw.mit.edu/courses/7-01sc-fundamentals-of-biology-fall-2011/pages/biochemistry/types-of-organisms-cell-composition/" },
+                { "title": "Covalent Bonds, Hydrogen Bonds", "url": "https://ocw.mit.edu/courses/7-01sc-fundamentals-of-biology-fall-2011/pages/biochemistry/covalent-bonds-hydrogen-bonds/" },
+                { "title": "Macromolecules: Lipids, Carbohydrates, Nucleic Acid", "url": "https://ocw.mit.edu/courses/7-01sc-fundamentals-of-biology-fall-2011/pages/biochemistry/macromolecules-lipids-carbohydrates-nucleic-acid/" },
+                { "title": "Proteins, Levels of Structure, Non-Covalent Forces", "url": "https://ocw.mit.edu/courses/7-01sc-fundamentals-of-biology-fall-2011/pages/biochemistry/proteins-levels-of-structure-non-covalent-forces/" },
                 { "title": "Biochemical Reactions, Enzymes, and ATP", "url": "https://ocw.mit.edu/courses/7-01sc-fundamentals-of-biology-fall-2011/resources/biochemical-reactions-enzymes-and-atp/" },
+                { "title": "Glycolysis, Respiration, and Fermentation", "url": "https://ocw.mit.edu/courses/7-01sc-fundamentals-of-biology-fall-2011/pages/biochemistry/respiration-and-fermentation/" },
+                { "title": "Photosynthesis", "url": "https://ocw.mit.edu/courses/7-01sc-fundamentals-of-biology-fall-2011/pages/biochemistry/chemiosmotic-principle-photosynthesis/" },
+                { "title": "DNA Structure, Classic Experiments", "url": "https://ocw.mit.edu/courses/7-01sc-fundamentals-of-biology-fall-2011/pages/molecular-biology/dna-structure-classic-experiments/" },
                 { "title": "DNA Replication", "url": "https://ocw.mit.edu/courses/7-01sc-fundamentals-of-biology-fall-2011/resources/dna-replication/" },
+                { "title": "Transcription, Translation", "url": "https://ocw.mit.edu/courses/7-01sc-fundamentals-of-biology-fall-2011/pages/molecular-biology/transcription-translation/" },
+                { "title": "Alternative Approaches to Molecular Biology", "url": "https://ocw.mit.edu/courses/7-01sc-fundamentals-of-biology-fall-2011/pages/molecular-biology/alternative-approaches-to-molecular-biology/" },
+                { "title": "Gene Regulation and the Lac Operon", "url": "https://ocw.mit.edu/courses/7-01sc-fundamentals-of-biology-fall-2011/pages/molecular-biology/gene-regulation-and-the-lac-operon/" },
                 { "title": "Mendel's Laws", "url": "https://ocw.mit.edu/courses/7-01sc-fundamentals-of-biology-fall-2011/pages/genetics/mendels-laws/" },
-                { "title": "Development of Recombinant DNA", "url": "https://ocw.mit.edu/courses/7-01sc-fundamentals-of-biology-fall-2011/pages/recombinant-dna/development-of-recombinant-dna/" }
+                { "title": "Linkage and Recombination, Genetic Maps", "url": "https://ocw.mit.edu/courses/7-01sc-fundamentals-of-biology-fall-2011/pages/genetics/linkage-and-recombination-genetic-maps/" },
+                { "title": "Pedigrees", "url": "https://ocw.mit.edu/courses/7-01sc-fundamentals-of-biology-fall-2011/pages/genetics/pedigrees/" },
+                { "title": "Biochemical Genetics", "url": "https://ocw.mit.edu/courses/7-01sc-fundamentals-of-biology-fall-2011/pages/genetics/biochemical-genetics/" },
+                { "title": "Development of Recombinant DNA", "url": "https://ocw.mit.edu/courses/7-01sc-fundamentals-of-biology-fall-2011/pages/recombinant-dna/development-of-recombinant-dna/" },
+                { "title": "Basic Mechanics of Cloning: Restriction Enzymes & Cloning Vectors", "url": "https://ocw.mit.edu/courses/7-01sc-fundamentals-of-biology-fall-2011/pages/recombinant-dna/basic-mechanics-of-cloning/" },
+                { "title": "Constructing and Screening a Recombinant DNA Library", "url": "https://ocw.mit.edu/courses/7-01sc-fundamentals-of-biology-fall-2011/pages/recombinant-dna/constructing-and-screening-a-recombinant-dna-library/" },
+                { "title": "cDNA Libraries and Expression Libraries", "url": "https://ocw.mit.edu/courses/7-01sc-fundamentals-of-biology-fall-2011/pages/recombinant-dna/cdna-libraries-and-expression-libraries/" },
+                { "title": "Agarose Gel Electrophoresis, DNA Sequencing, PCR", "url": "https://ocw.mit.edu/courses/7-01sc-fundamentals-of-biology-fall-2011/pages/recombinant-dna/agarose-gel-electrophoresis-dna-sequencing-pcr/" }
               ]
             }
           ]
@@ -297,11 +336,26 @@
               "type": "course",
               "sectionType": "video",
               "sections": [
+                { "title": "A Quick Introduction to Working on the Linux Command Line", "url": "https://www.youtube.com/watch?v=Zwg5olsGUn8" },
+                { "title": "A Quick Introduction to Python 3 Programming (Part 1)", "url": "https://www.youtube.com/watch?v=ffMYIKAinKM" },
+                { "title": "Text Manipulation with Regular Expressions (Part 1)", "url": "https://www.youtube.com/watch?v=tZxQED1Sz-8" },
+                { "title": "Text Manipulation with Regular Expressions (Part 2)", "url": "https://www.youtube.com/watch?v=uDosG3yaETc" },
                 { "title": "Biological Information (Part 1)", "url": "https://www.youtube.com/watch?v=U1KH9GCz4Xs" },
+                { "title": "Biological Information (Part 2)", "url": "https://www.youtube.com/watch?v=RT5C_xsxXo8" },
                 { "title": "Pairwise Sequence Alignment (Part 1)", "url": "https://www.youtube.com/watch?v=FWD0fdozHcY" },
+                { "title": "Pairwise Sequence Alignment (Part 2)", "url": "https://www.youtube.com/watch?v=DpZqo32lZjU" },
+                { "title": "Pairwise Sequence Alignment (Part 3)", "url": "https://www.youtube.com/watch?v=9e72ujGRio4" },
                 { "title": "Sequence Homology Searching (Part 1)", "url": "https://www.youtube.com/watch?v=NfjXWy0mnEA" },
+                { "title": "Sequence Homology Searching (Part 2)", "url": "https://www.youtube.com/watch?v=uOVrW5w3mmA" },
+                { "title": "Sequence Homology Searching (Part 3)", "url": "https://www.youtube.com/watch?v=tow0uMrBWO4" },
+                { "title": "An Introduction to Microbiome Science (Part 1)", "url": "https://www.youtube.com/watch?v=OIZmlVwSekY" },
+                { "title": "An Introduction to Microbiome Science (Part 2)", "url": "https://www.youtube.com/watch?v=C8qUeO6r0NE" },
                 { "title": "Microbiome Analysis Methods (Part 1)", "url": "https://www.youtube.com/watch?v=VqcLbKKa7j8" },
-                { "title": "Machine Learning in Bioinformatics (Part 1)", "url": "https://www.youtube.com/watch?v=46aAVSRpFes" }
+                { "title": "Microbiome Analysis Methods (Part 2)", "url": "https://www.youtube.com/watch?v=NfbXrJ1N_40" },
+                { "title": "Microbiome Analysis Methods (Part 3)", "url": "https://www.youtube.com/watch?v=MRKSwmCClAw" },
+                { "title": "Machine Learning in Bioinformatics (Part 1)", "url": "https://www.youtube.com/watch?v=46aAVSRpFes" },
+                { "title": "Machine Learning in Bioinformatics (Part 2)", "url": "https://www.youtube.com/watch?v=9YiRxPgxqAE" },
+                { "title": "Getting Help with Bioinformatics Software", "url": "https://www.youtube.com/watch?v=gkXsnal4oLA" }
               ]
             }
           ]
@@ -341,13 +395,31 @@
               "type": "video"
             },
             {
-              "title": "How to Start a Startup (Y Combinator)",
+              "title": "How to Start a Startup (Y Combinator, 2014)",
               "type": "course",
               "sectionType": "video",
+              "notes": "startupclass.samaltman.com is no longer online, so these link straight to the real lecture videos on YouTube.",
               "sections": [
-                { "title": "Lecture 1: How to Start a Startup (Sam Altman)", "url": "https://startupclass.samaltman.com/courses/lec1/" },
-                { "title": "Lecture 2: Ideas, Products, Teams and Execution (Sam Altman)", "url": "https://startupclass.samaltman.com/courses/lec2/" },
-                { "title": "Lecture 4: Building Product, Talking to Users, and Growing (Adora Cheung)", "url": "https://startupclass.samaltman.com/courses/lec4/" }
+                { "title": "Lecture 1: How to Start a Startup (Sam Altman, Dustin Moskovitz)", "url": "https://www.youtube.com/watch?v=CBYhVcO4WgI" },
+                { "title": "Lecture 2: Team and Execution (Sam Altman)", "url": "https://www.youtube.com/watch?v=crMVJAf5TjA" },
+                { "title": "Lecture 3: Before the Startup (Paul Graham)", "url": "https://www.youtube.com/watch?v=f4_14pZlJBs" },
+                { "title": "Lecture 4: Building Product, Talking to Users, and Growing (Adora Cheung)", "url": "https://www.youtube.com/watch?v=yP176MBG9Tk" },
+                { "title": "Lecture 5: Competition Is for Losers (Peter Thiel)", "url": "https://www.youtube.com/watch?v=3Fx5Q8xGU8k" },
+                { "title": "Lecture 6: Growth (Alex Schultz)", "url": "https://www.youtube.com/watch?v=n_yHZ_vKjno" },
+                { "title": "Lecture 7: How to Build Products Users Love (Kevin Hale)", "url": "https://www.youtube.com/watch?v=12D8zEdOPYo" },
+                { "title": "Lecture 8: How to Get Started, Doing Things that Don't Scale, and Press (Stanley Tang, Walker Williams, Justin Kan)", "url": "https://www.youtube.com/watch?v=sr0UabJd8qE" },
+                { "title": "Lecture 9: How to Raise Money (Marc Andreessen, Ron Conway, Parker Conrad)", "url": "https://www.youtube.com/watch?v=0JBOSmRo8js" },
+                { "title": "Lecture 10: Culture (Brian Chesky, Alfred Lin)", "url": "https://www.youtube.com/watch?v=px5rgcNjOTc" },
+                { "title": "Lecture 11: Hiring and Culture, Part 2 (Patrick Collison, John Collison, Ben Silbermann)", "url": "https://www.youtube.com/watch?v=H8Dl8rZ6qwE" },
+                { "title": "Lecture 12: Building for the Enterprise (Aaron Levie)", "url": "https://www.youtube.com/watch?v=Kd3CLs-vLtw" },
+                { "title": "Lecture 13: How to Be a Great Founder (Reid Hoffman)", "url": "https://www.youtube.com/watch?v=pkAum45ubWc" },
+                { "title": "Lecture 14: How to Operate (Keith Rabois)", "url": "https://www.youtube.com/watch?v=w19IBxDu2Y4" },
+                { "title": "Lecture 15: How to Manage (Ben Horowitz)", "url": "https://www.youtube.com/watch?v=j7tr3IlH5Ro" },
+                { "title": "Lecture 16: How to Run a User Interview (Emmett Shear)", "url": "https://www.youtube.com/watch?v=lHs9hQBSoJU" },
+                { "title": "Lecture 17: How to Design Hardware Products (Hosain Rahman)", "url": "https://www.youtube.com/watch?v=9u6-BL-Fskc" },
+                { "title": "Lecture 18: Legal and Accounting Basics for Startups (Kirsty Nathoo, Carolynn Levy)", "url": "https://www.youtube.com/watch?v=EHzvmyMJEK4" },
+                { "title": "Lecture 19: Sales and Marketing; How to Talk to Investors (Tyler Bosmeny, YC Partners)", "url": "https://www.youtube.com/watch?v=SHAh6WKBgiE" },
+                { "title": "Lecture 20: Later-Stage Advice (Sam Altman)", "url": "https://www.youtube.com/watch?v=59ZQ-rf6iIc" }
               ]
             }
           ]
@@ -463,9 +535,9 @@
               "type": "course",
               "sectionType": "article",
               "sections": [
-                { "title": "Foundation 1 - Biomolecules", "url": "https://www.khanacademy.org/test-prep/mcat/biomolecules" },
-                { "title": "Foundation 2 - Cells", "url": "https://www.khanacademy.org/test-prep/mcat/cells" },
-                { "title": "Foundation 3 - Organ Systems", "url": "https://www.khanacademy.org/test-prep/mcat/organ-systems" }
+                { "title": "Foundation 1: Biomolecules", "url": "https://www.khanacademy.org/test-prep/mcat/biomolecules" },
+                { "title": "Foundation 2: Cells", "url": "https://www.khanacademy.org/test-prep/mcat/cells" },
+                { "title": "Foundation 3: Organ Systems", "url": "https://www.khanacademy.org/test-prep/mcat/organ-systems" }
               ]
             },
             { "title": "Introduction to Biology: Crash Course Biology #1", "url": "https://www.youtube.com/watch?v=tZE_fQFK8EY", "type": "video" }

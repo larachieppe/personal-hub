@@ -190,8 +190,12 @@ Content lives in plain data files — no database, no login, just edit and commi
       a course renders as one row (title + a "checked/total sections" count) that expands to show
       each section as its own checkbox; sections are still individually checkable, sequential, and
       discardable — they just aren't several indistinguishable rows that happen to share a title
-      prefix. The **+ Add a resource** form only ever adds plain resources, never a nested course —
-      building a new course means editing this file directly.
+      prefix. A course can also take an optional `"notes": "..."` string, shown in italics under its
+      title (e.g. to flag that the original course site has gone offline and the sections now link
+      straight to the underlying videos instead). The **+ Add a resource** form only ever adds plain
+      resources, never a nested course — building a new course means editing this file directly, and
+      when you do, add every real section the course actually has, not just a few — a course entry
+      that's missing most of its sections is worse than one flat resource.
 - [`data/motivation.json`](data/motivation.json) — your mission statement and the pool of quotes
   shown on the dashboard (one is picked per day).
 
