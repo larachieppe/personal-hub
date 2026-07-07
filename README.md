@@ -10,7 +10,8 @@ Live site (once Pages is enabled): `https://<your-username>.github.io/personal-h
 
 - **Dashboard** (`/`) — mission statement, a rotating quote, and overall progress across every domain.
 - **Curriculum** (`/curriculum`, `/curriculum/[domain]`) — domains (Business, Computer Science,
-  Technology, Startups) broken into topics, each with a checklist of resources.
+  Technology, Biotech, Startups, Product Management) broken into topics, each with a checklist of
+  resources.
 - **Resources** (`/resources`) — every resource across the whole curriculum, searchable and
   filterable by domain/type, with the same checkboxes as the domain pages.
 - **Habits** (`/habits`) — daily check-off for a fixed set of habits (weight lifting, cardio,

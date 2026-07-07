@@ -522,57 +522,78 @@
       ]
     },
     {
-      "id": "mcat",
-      "name": "MCAT",
-      "description": "Preparing for the MCAT — the standardized exam for medical school admission.",
+      "id": "product-management",
+      "name": "Product Management",
+      "description": "Building the right thing, and knowing when you've actually found it.",
       "topics": [
         {
-          "id": "bio-biochem-foundations",
-          "title": "Biological & Biochemical Foundations of Living Systems",
+          "id": "user-research-discovery",
+          "title": "User Research & Discovery",
+          "notes": "Talking to users well is a skill, not an instinct — most of what goes wrong in product happens upstream of any code.",
           "resources": [
             {
-              "title": "Khan Academy MCAT Foundations",
-              "type": "course",
-              "sectionType": "article",
-              "sections": [
-                { "title": "Foundation 1: Biomolecules", "url": "https://www.khanacademy.org/test-prep/mcat/biomolecules" },
-                { "title": "Foundation 2: Cells", "url": "https://www.khanacademy.org/test-prep/mcat/cells" },
-                { "title": "Foundation 3: Organ Systems", "url": "https://www.khanacademy.org/test-prep/mcat/organ-systems" }
-              ]
+              "title": "Teresa Torres: Opportunity Solution Trees",
+              "url": "https://www.producttalk.org/opportunity-solution-trees/",
+              "type": "article"
             },
-            { "title": "Introduction to Biology: Crash Course Biology #1", "url": "https://www.youtube.com/watch?v=tZE_fQFK8EY", "type": "video" }
+            {
+              "title": "Intercom: Focus on the Job, Not the Customer",
+              "url": "https://www.intercom.com/blog/when-personas-fail-you/",
+              "type": "article"
+            }
           ]
         },
         {
-          "id": "chem-physics-foundations",
-          "title": "Chemical & Physical Foundations of Biological Systems",
+          "id": "product-strategy-prioritization",
+          "title": "Product Strategy & Prioritization",
           "resources": [
-            { "title": "The Nucleus: Crash Course Chemistry #1", "url": "https://www.youtube.com/watch?v=FSyAehMdpyI", "type": "video" },
-            { "title": "Motion in a Straight Line: Crash Course Physics #1", "url": "https://www.youtube.com/watch?v=ZM8ECpBuQYE", "type": "video" }
+            {
+              "title": "Shreyas Doshi: Good Product Strategy, Bad Product Strategy",
+              "url": "https://medium.com/@shreyashere/good-product-strategy-bad-product-strategy-826cdfe74818",
+              "type": "article"
+            },
+            {
+              "title": "Intercom: RICE — Simple Prioritization for Product Managers",
+              "url": "https://www.intercom.com/blog/rice-simple-prioritization-for-product-managers/",
+              "type": "article"
+            }
           ]
         },
         {
-          "id": "psych-soc-foundations",
-          "title": "Psychological, Social & Biological Foundations of Behavior",
+          "id": "metrics-analytics",
+          "title": "Metrics & Product Analytics",
           "resources": [
-            { "title": "Intro to Psychology: Crash Course Psychology #1", "url": "https://www.youtube.com/watch?v=vo4pMVb0R6M", "type": "video" }
+            {
+              "title": "Amplitude: Every Product Needs a North Star Metric",
+              "url": "https://amplitude.com/blog/product-north-star-metric",
+              "type": "article"
+            },
+            {
+              "title": "Amplitude: AARRR — Come Aboard the Pirate Metrics Framework",
+              "url": "https://amplitude.com/blog/pirate-metrics-framework",
+              "type": "article"
+            }
           ]
         },
         {
-          "id": "cars",
-          "title": "Critical Analysis & Reasoning Skills (CARS)",
-          "notes": "CARS rewards consistency over cramming — one strategy article reviewed carefully beats occasional large blocks of passages.",
+          "id": "product-market-fit",
+          "title": "Finding Product-Market Fit",
           "resources": [
-            { "title": "Jack Westin: MCAT CARS Strategy — AAMC Logic, Passage Mapping, Timing, Practice Plan", "url": "https://jackwestin.com/blog/mcat-cars-strategy-2026/", "type": "article" },
-            { "title": "Blueprint MCAT: How to Dissect a CARS Passage", "url": "https://blog.blueprintprep.com/mcat/how-to-dissect-a-cars-passage/", "type": "article" },
-            { "title": "Cambridge Coaching: Why You Should Take the MCAT CARS Seriously", "url": "https://blog.cambridgecoaching.com/why-you-should-take-the-mcat-cars-seriously", "type": "article" }
-          ]
-        },
-        {
-          "id": "test-strategy-practice",
-          "title": "Test Strategy & Full-Length Practice",
-          "resources": [
-            { "title": "AAMC: Free Planning and Study Resources", "url": "https://students-residents.aamc.org/prepare-mcat-exam/free-planning-and-study-resources", "type": "article" }
+            {
+              "title": "Marc Andreessen: The Only Thing That Matters",
+              "url": "https://pmarchive.com/guide_to_startups_part4.html",
+              "type": "article"
+            },
+            {
+              "title": "First Round Review: How Superhuman Built an Engine to Find Product-Market Fit",
+              "url": "https://review.firstround.com/how-superhuman-built-an-engine-to-find-product-market-fit/",
+              "type": "article"
+            },
+            {
+              "title": "Sean Ellis: Using Product/Market Fit to Drive Sustainable Growth",
+              "url": "https://medium.com/growthhackers/using-product-market-fit-to-drive-sustainable-growth-58e9124ee8db",
+              "type": "article"
+            }
           ]
         }
       ]

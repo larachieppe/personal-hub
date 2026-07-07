@@ -11,13 +11,19 @@ const PATHS: Record<string, string> = {
     "M12 2c2.5 2 4 5.5 4 9 0 2-.5 3.5-1 4.5l-3 2-3-2c-.5-1-1-2.5-1-4.5 0-3.5 1.5-7 4-9zM9 15l-2.5 1.5L7 20M15 15l2.5 1.5L17 20M10 18h4",
   biotech:
     "M7 3c0 4 10 4 10 8s-10 4-10 8M17 3c0 4-10 4-10 8s10 4 10 8M8 6h8M8 18h8M7 12h10",
-  mcat: "M3 12h4l2-6 4 12 2-6h6",
+  "product-management": "M12 2v4M12 18v4M2 12h4M18 12h4",
 };
 
 const EXTRA: Record<string, ReactNode> = {
   "computer-science": <rect x="7" y="7" width="10" height="10" rx="1" />,
   technology: <circle cx="12" cy="12" r="3" />,
   startups: <circle cx="12" cy="9" r="1.3" fill="currentColor" stroke="none" />,
+  "product-management": (
+    <>
+      <circle cx="12" cy="12" r="7" />
+      <circle cx="12" cy="12" r="3" />
+    </>
+  ),
 };
 
 export default function DomainIcon({
