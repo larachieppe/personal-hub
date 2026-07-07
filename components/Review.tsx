@@ -2,11 +2,12 @@
 
 import { useState } from "react";
 import type { Domain } from "@/lib/curriculum";
-import { filterOutDiscarded, getResourcesCompletedSince } from "@/lib/curriculum";
+import { filterOutDiscarded, getResourcesCompletedSince, mergeCustomResources } from "@/lib/curriculum";
 import type { Habit } from "@/lib/habits";
 import { countHabitDaysInRange, useHabitLog } from "@/lib/habit-store";
 import { useCompletionTimestamps } from "@/lib/progress-store";
 import { useDiscardedResources } from "@/lib/discard-store";
+import { useCustomResources } from "@/lib/custom-resources-store";
 import type { DayMenu } from "@/lib/meals";
 import { countFullyLoggedDaysInRange, useMealLog } from "@/lib/meal-store";
 import { addDays, parseDateString, toDateString, useTodayString } from "@/lib/date-utils";
@@ -48,6 +49,7 @@ export default function Review({
   const mealLog = useMealLog();
   const timestamps = useCompletionTimestamps();
   const discarded = useDiscardedResources();
+  const custom = useCustomResources();
   const todayStr = useTodayString();
   const today = parseDateString(todayStr);
 
@@ -55,7 +57,7 @@ export default function Review({
   const elapsed = daysElapsed(start, today);
   const rangeLabel = `${formatDate(start)} – ${formatDate(today)}`;
 
-  const visibleDomains = filterOutDiscarded(domains, discarded);
+  const visibleDomains = filterOutDiscarded(mergeCustomResources(domains, custom), discarded);
   const resourcesInPeriod = getResourcesCompletedSince(
     visibleDomains,
     timestamps,

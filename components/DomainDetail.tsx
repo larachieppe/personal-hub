@@ -1,16 +1,22 @@
 "use client";
 
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import Link from "next/link";
-import type { Domain } from "@/lib/curriculum";
+import type { Domain, Resource, ResourceType } from "@/lib/curriculum";
 import {
   computeDomainProgress,
   computeTopicProgress,
   filterOutDiscarded,
+  mergeCustomResources,
   resourceKey,
 } from "@/lib/curriculum";
 import { toggleResourceCompleted, useCompletedResources } from "@/lib/progress-store";
 import { discardResource, useDiscardedResources } from "@/lib/discard-store";
+import {
+  addCustomResource,
+  removeCustomResource,
+  useCustomResources,
+} from "@/lib/custom-resources-store";
 import ProgressBar from "@/components/ProgressBar";
 import StatusBadge from "@/components/StatusBadge";
 import DomainIcon from "@/components/DomainIcon";
@@ -19,9 +25,10 @@ import Ornament from "@/components/Ornament";
 export default function DomainDetail({ domain: rawDomain }: { domain: Domain }) {
   const completed = useCompletedResources();
   const discarded = useDiscardedResources();
+  const custom = useCustomResources();
   const domain = useMemo(
-    () => filterOutDiscarded([rawDomain], discarded)[0],
-    [rawDomain, discarded]
+    () => filterOutDiscarded(mergeCustomResources([rawDomain], custom), discarded)[0],
+    [rawDomain, custom, discarded]
   );
   const progress = computeDomainProgress(domain, completed);
 
@@ -112,15 +119,105 @@ export default function DomainDetail({ domain: rawDomain }: { domain: Domain }) 
                         >
                           Discard
                         </button>
+                        {resource.custom && (
+                          <button
+                            type="button"
+                            onClick={() => removeCustomResource(domain.id, topic.id, resource.title)}
+                            className="shrink-0 text-xs uppercase tracking-wide text-muted transition-colors hover:text-wine"
+                            aria-label={`Remove "${resource.title}"`}
+                          >
+                            Remove
+                          </button>
+                        )}
                       </li>
                     );
                   })}
                 </ul>
               )}
+              <AddResourceForm domainId={domain.id} topicId={topic.id} />
             </div>
           );
         })}
       </div>
     </div>
+  );
+}
+
+const RESOURCE_TYPES: ResourceType[] = ["article", "video", "book", "course", "paper", "other"];
+
+function AddResourceForm({ domainId, topicId }: { domainId: string; topicId: string }) {
+  const [title, setTitle] = useState("");
+  const [url, setUrl] = useState("");
+  const [type, setType] = useState<ResourceType>("article");
+  const [isOpen, setIsOpen] = useState(false);
+
+  function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    const trimmedTitle = title.trim();
+    if (!trimmedTitle) return;
+    const resource: Resource = { title: trimmedTitle, url: url.trim(), type };
+    addCustomResource(domainId, topicId, resource);
+    setTitle("");
+    setUrl("");
+    setType("article");
+    setIsOpen(false);
+  }
+
+  if (!isOpen) {
+    return (
+      <button
+        type="button"
+        onClick={() => setIsOpen(true)}
+        className="mt-1 w-fit text-xs uppercase tracking-wide text-gold transition-colors hover:text-foreground"
+      >
+        + Add a resource
+      </button>
+    );
+  }
+
+  return (
+    <form onSubmit={handleSubmit} className="mt-1 flex flex-col gap-2 border border-border bg-surface p-3">
+      <input
+        type="text"
+        value={title}
+        onChange={(e) => setTitle(e.target.value)}
+        placeholder="Title"
+        autoFocus
+        className="border border-border bg-transparent px-2 py-1 text-sm text-foreground placeholder:text-muted focus:border-gold focus:outline-none"
+      />
+      <input
+        type="text"
+        value={url}
+        onChange={(e) => setUrl(e.target.value)}
+        placeholder="URL (optional)"
+        className="border border-border bg-transparent px-2 py-1 text-sm text-foreground placeholder:text-muted focus:border-gold focus:outline-none"
+      />
+      <div className="flex flex-wrap items-center gap-2">
+        <select
+          value={type}
+          onChange={(e) => setType(e.target.value as ResourceType)}
+          className="border border-border bg-background px-2 py-1 text-sm text-foreground focus:border-gold focus:outline-none"
+        >
+          {RESOURCE_TYPES.map((t) => (
+            <option key={t} value={t}>
+              {t}
+            </option>
+          ))}
+        </select>
+        <button
+          type="submit"
+          className="border border-gold bg-gold px-3 py-1 text-xs uppercase tracking-wide text-background transition-colors hover:border-gold-dim hover:bg-gold-dim"
+        >
+          Add
+        </button>
+        <button
+          type="button"
+          onClick={() => setIsOpen(false)}
+          className="text-xs uppercase tracking-wide text-muted transition-colors hover:text-foreground"
+        >
+          Cancel
+        </button>
+      </div>
+    </form>
   );
 }

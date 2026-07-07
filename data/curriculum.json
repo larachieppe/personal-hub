@@ -179,23 +179,6 @@
       "description": "Practical computer science for building and running real systems: code, cloud, networking, and security.",
       "topics": [
         {
-          "id": "software-engineering",
-          "title": "Software Engineering Practices",
-          "notes": "freeCodeCamp's certification pages aren't individually linkable, so these are single articles covering the same JS fundamentals, one topic each.",
-          "resources": [
-            { "title": "JavaScript Basics", "url": "https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/JavaScript_basics", "type": "article" },
-            { "title": "ES6 In Depth: An Introduction", "url": "https://hacks.mozilla.org/2015/04/es6-in-depth-an-introduction/", "type": "article" },
-            { "title": "Regular Expressions", "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_expressions", "type": "article" },
-            { "title": "What Went Wrong? Troubleshooting JavaScript", "url": "https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Scripting/What_went_wrong", "type": "article" },
-            { "title": "Indexed Collections", "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Indexed_collections", "type": "article" },
-            { "title": "Introduction to Algorithms Handbook — with JavaScript Examples", "url": "https://www.freecodecamp.org/news/introduction-to-algorithms-with-javascript-examples/", "type": "article" },
-            { "title": "Object-Oriented Programming", "url": "https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Advanced_JavaScript_objects/Object-oriented_programming", "type": "article" },
-            { "title": "What Is Functional Programming? A Beginner's JavaScript Guide", "url": "https://www.freecodecamp.org/news/functional-programming-in-javascript/", "type": "article" },
-            { "title": "Top 10 JavaScript Algorithms for Coding Challenges", "url": "https://www.freecodecamp.org/news/top-10-javascript-algorithms-for-coding-challenges/", "type": "article" },
-            { "title": "The Standard of Code Review", "url": "https://google.github.io/eng-practices/review/reviewer/standard.html", "type": "article" }
-          ]
-        },
-        {
           "id": "cloud-infrastructure",
           "title": "Cloud & Infrastructure",
           "notes": "AWS Skill Builder's course modules aren't individually linkable, so these are single AWS docs/explainer pages, one topic each.",

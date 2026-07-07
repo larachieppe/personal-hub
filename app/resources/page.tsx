@@ -1,4 +1,4 @@
-import { getDomains, getAllResources } from "@/lib/curriculum";
+import { getDomains } from "@/lib/curriculum";
 import ResourceLibrary from "@/components/ResourceLibrary";
 import Ornament from "@/components/Ornament";
 
@@ -8,7 +8,6 @@ export const metadata = {
 
 export default function ResourcesPage() {
   const domains = getDomains();
-  const resources = getAllResources(domains);
 
   return (
     <div className="flex flex-col gap-6">
@@ -21,19 +20,11 @@ export default function ResourcesPage() {
         </h1>
         <p className="mt-2 text-sm text-muted">
           Every book, course, video, and article attached to a curriculum topic. Add
-          more by editing the{" "}
-          <code className="border border-border bg-surface px-1 py-0.5 text-foreground">
-            resources
-          </code>{" "}
-          array for any topic in{" "}
-          <code className="border border-border bg-surface px-1 py-0.5 text-foreground">
-            data/curriculum.json
-          </code>
-          .
+          your own from any domain&apos;s page — no file editing required.
         </p>
       </div>
       <Ornament />
-      <ResourceLibrary resources={resources} />
+      <ResourceLibrary domains={domains} />
     </div>
   );
 }

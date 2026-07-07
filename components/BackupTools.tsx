@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import type { CustomResourceMap } from "@/lib/curriculum";
+import { exportCustomResources, replaceCustomResources } from "@/lib/custom-resources-store";
 import { exportDiscardedResources, replaceDiscardedResources } from "@/lib/discard-store";
 import { exportHabitLog, replaceHabitLog } from "@/lib/habit-store";
 import type { MealOverride } from "@/lib/meal-store";
@@ -33,6 +35,7 @@ interface BackupFile {
   discardedResources: string[];
   planAssignments: PlanAssignments;
   weeklyTodos: TodosByDate;
+  customResources: CustomResourceMap;
 }
 
 export default function BackupTools() {
@@ -53,6 +56,7 @@ export default function BackupTools() {
       discardedResources: exportDiscardedResources(),
       planAssignments: exportPlanAssignments(),
       weeklyTodos: exportTodos(),
+      customResources: exportCustomResources(),
     };
     const blob = new Blob([JSON.stringify(payload, null, 2)], {
       type: "application/json",
@@ -80,6 +84,7 @@ export default function BackupTools() {
         replaceDiscardedResources(parsed.discardedResources ?? []);
         replacePlanAssignments(parsed.planAssignments ?? {});
         replaceTodos(parsed.weeklyTodos ?? {});
+        replaceCustomResources(parsed.customResources ?? {});
         setMessage("Backup restored. Reload any open pages to see the change everywhere.");
       } catch {
         setMessage("That file couldn't be read as a valid backup.");

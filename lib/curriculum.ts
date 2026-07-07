@@ -8,6 +8,7 @@ export interface Resource {
   title: string;
   url: string;
   type: ResourceType;
+  custom?: boolean;
 }
 
 export interface Topic {
@@ -146,6 +147,34 @@ export function computeOverallProgress(
     checkedResources,
     percent,
   };
+}
+
+export type CustomResourceMap = Record<string, Record<string, Resource[]>>;
+
+/**
+ * Merges user-added resources (from lib/custom-resources-store.ts) into the
+ * domains loaded from curriculum.json. Custom resources are appended to the
+ * end of their topic's list — after the curriculum's own resources — and
+ * tagged `custom: true` so the UI can offer a permanent "Remove" alongside
+ * the usual Discard.
+ */
+export function mergeCustomResources(domains: Domain[], custom: CustomResourceMap): Domain[] {
+  if (Object.keys(custom).length === 0) return domains;
+  return domains.map((domain) => {
+    const domainCustom = custom[domain.id];
+    if (!domainCustom) return domain;
+    return {
+      ...domain,
+      topics: domain.topics.map((topic) => {
+        const extra = domainCustom[topic.id];
+        if (!extra || extra.length === 0) return topic;
+        return {
+          ...topic,
+          resources: [...topic.resources, ...extra.map((r) => ({ ...r, custom: true }))],
+        };
+      }),
+    };
+  });
 }
 
 export function filterOutDiscarded(

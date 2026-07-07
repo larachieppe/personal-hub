@@ -2,9 +2,10 @@
 
 import Link from "next/link";
 import type { Domain } from "@/lib/curriculum";
-import { computeDomainProgress, filterOutDiscarded } from "@/lib/curriculum";
+import { computeDomainProgress, filterOutDiscarded, mergeCustomResources } from "@/lib/curriculum";
 import { useCompletedResources } from "@/lib/progress-store";
 import { useDiscardedResources } from "@/lib/discard-store";
+import { useCustomResources } from "@/lib/custom-resources-store";
 import ProgressBar from "@/components/ProgressBar";
 import StatusBadge from "@/components/StatusBadge";
 import DomainIcon from "@/components/DomainIcon";
@@ -12,7 +13,8 @@ import DomainIcon from "@/components/DomainIcon";
 export default function CurriculumList({ domains }: { domains: Domain[] }) {
   const completed = useCompletedResources();
   const discarded = useDiscardedResources();
-  const visibleDomains = filterOutDiscarded(domains, discarded);
+  const custom = useCustomResources();
+  const visibleDomains = filterOutDiscarded(mergeCustomResources(domains, custom), discarded);
 
   return (
     <div className="flex flex-col divide-y divide-border">

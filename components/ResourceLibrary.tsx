@@ -1,18 +1,24 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { resourceKey } from "@/lib/curriculum";
-import type { ResourceWithContext } from "@/lib/curriculum";
+import { getAllResources, mergeCustomResources, resourceKey } from "@/lib/curriculum";
+import type { Domain } from "@/lib/curriculum";
 import { toggleResourceCompleted, useCompletedResources } from "@/lib/progress-store";
 import { discardResource, restoreResource, useDiscardedResources } from "@/lib/discard-store";
+import { removeCustomResource, useCustomResources } from "@/lib/custom-resources-store";
 
 export default function ResourceLibrary({
-  resources,
+  domains: allDomains,
 }: {
-  resources: ResourceWithContext[];
+  domains: Domain[];
 }) {
   const completed = useCompletedResources();
   const discarded = useDiscardedResources();
+  const custom = useCustomResources();
+  const resources = useMemo(
+    () => getAllResources(mergeCustomResources(allDomains, custom)),
+    [allDomains, custom]
+  );
   const [query, setQuery] = useState("");
   const [domainFilter, setDomainFilter] = useState("all");
   const [typeFilter, setTypeFilter] = useState("all");
@@ -149,6 +155,16 @@ export default function ResourceLibrary({
                 >
                   Discard
                 </button>
+                {resource.custom && (
+                  <button
+                    type="button"
+                    onClick={() => removeCustomResource(resource.domainId, resource.topicId, resource.title)}
+                    className="mt-1 shrink-0 text-xs uppercase tracking-wide text-muted transition-colors hover:text-wine"
+                    aria-label={`Remove "${resource.title}"`}
+                  >
+                    Remove
+                  </button>
+                )}
               </li>
             );
           })}

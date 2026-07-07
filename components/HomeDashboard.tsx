@@ -2,9 +2,15 @@
 
 import Link from "next/link";
 import type { Domain } from "@/lib/curriculum";
-import { computeDomainProgress, computeOverallProgress, filterOutDiscarded } from "@/lib/curriculum";
+import {
+  computeDomainProgress,
+  computeOverallProgress,
+  filterOutDiscarded,
+  mergeCustomResources,
+} from "@/lib/curriculum";
 import { useCompletedResources } from "@/lib/progress-store";
 import { useDiscardedResources } from "@/lib/discard-store";
+import { useCustomResources } from "@/lib/custom-resources-store";
 import ProgressBar from "@/components/ProgressBar";
 import StatusBadge from "@/components/StatusBadge";
 import DomainIcon from "@/components/DomainIcon";
@@ -22,7 +28,8 @@ function overallMilestoneMessage(percent: number): string | null {
 export default function HomeDashboard({ domains }: { domains: Domain[] }) {
   const completed = useCompletedResources();
   const discarded = useDiscardedResources();
-  const visibleDomains = filterOutDiscarded(domains, discarded);
+  const custom = useCustomResources();
+  const visibleDomains = filterOutDiscarded(mergeCustomResources(domains, custom), discarded);
   const overall = computeOverallProgress(visibleDomains, completed);
   const milestone = overallMilestoneMessage(overall.percent);
 

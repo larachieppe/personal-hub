@@ -6,10 +6,12 @@ import {
   filterOutDiscarded,
   getAllResources,
   getNextResources,
+  mergeCustomResources,
   resourceKey,
 } from "@/lib/curriculum";
 import { toggleResourceCompleted, useCompletedResources } from "@/lib/progress-store";
 import { discardResource, useDiscardedResources } from "@/lib/discard-store";
+import { useCustomResources } from "@/lib/custom-resources-store";
 import { ensureAssignments, replaceAssignment, usePlanAssignments } from "@/lib/plan-store";
 import { addTodo, deleteTodo, toggleTodo, useTodos } from "@/lib/todo-store";
 import { addDays, getWeekStart, parseDateString, toDateString, useTodayString } from "@/lib/date-utils";
@@ -27,6 +29,7 @@ const DAY_NAMES = [
 export default function WeeklyPlan({ domains }: { domains: Domain[] }) {
   const completed = useCompletedResources();
   const discarded = useDiscardedResources();
+  const custom = useCustomResources();
   const assignments = usePlanAssignments();
   const todosByDate = useTodos();
   const todayStr = useTodayString();
@@ -37,16 +40,16 @@ export default function WeeklyPlan({ domains }: { domains: Domain[] }) {
   const weekDateStrs = Array.from({ length: 7 }, (_, i) => toDateString(addDays(weekStart, i)));
 
   useEffect(() => {
-    const visibleDomains = filterOutDiscarded(domains, discarded);
+    const visibleDomains = filterOutDiscarded(mergeCustomResources(domains, custom), discarded);
     const pool = getNextResources(visibleDomains, completed).map((r) => ({
       key: resourceKey(r.domainId, r.topicId, r),
     }));
     const wStart = getWeekStart(parseDateString(todayStr));
     const dates = Array.from({ length: 7 }, (_, i) => toDateString(addDays(wStart, i)));
     ensureAssignments(dates, pool, completed, discarded);
-  }, [domains, discarded, completed, todayStr]);
+  }, [domains, custom, discarded, completed, todayStr]);
 
-  const visibleDomains = filterOutDiscarded(domains, discarded);
+  const visibleDomains = filterOutDiscarded(mergeCustomResources(domains, custom), discarded);
   const resourceByKey = new Map(
     getAllResources(visibleDomains).map((r) => [resourceKey(r.domainId, r.topicId, r), r])
   );

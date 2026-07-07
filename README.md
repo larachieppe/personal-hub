@@ -59,6 +59,16 @@ topic's progress, and won't be picked by What's Next or the Weekly Plan). It's n
 `curriculum.json` — the Athenaeum has a **Show discarded** toggle where you can **Restore** anything
 you change your mind about.
 
+Every topic also has a **+ Add a resource** link at the bottom of its checklist (on the domain page).
+Click it to open a small form — title, an optional URL, and a type — and it's added to that exact
+topic immediately, no file editing or redeploy required. Resources added this way behave exactly
+like ones from `curriculum.json`: they get their own checkbox, count toward that topic's progress,
+show up in the Athenaeum and What's Next, and can be picked up by the Weekly Plan once every
+curriculum resource ahead of them in the topic is checked off. They also get a **Remove** button
+(next to Discard) since — unlike curriculum content — they can be deleted outright, not just hidden.
+
+
+
 ## Nothing is ever deleted on a schedule
 
 Habit check-ins, resource-completion timestamps, and meal logs are never pruned or rotated out —
@@ -111,10 +121,20 @@ filtered out of the curriculum before anything else runs — progress bars, topi
 and the Weekly Plan all operate on that filtered view, so a discarded resource behaves as if it
 doesn't exist until you restore it.
 
+Resources you add yourself (`localStorage`, per-browser) work the same way, in reverse: they're a
+map of domain → topic → resource list (`polymath-hub:custom-resources`, via
+`lib/custom-resources-store.ts`) that gets *merged into* the curriculum before anything else runs —
+`mergeCustomResources()` in `lib/curriculum.ts` appends them to the right topic's resources array,
+tagged `custom: true`, right alongside what's in `curriculum.json`. Every page that reads the
+curriculum (Dashboard, Curriculum, a domain page, the Athenaeum, What's Next, the Weekly Plan,
+Review) does this merge itself, so a resource you add shows up everywhere immediately, with no
+distinction from JSON-defined ones except the extra **Remove** button.
+
 Because everything lives in `localStorage` and nowhere else, use the **Backup** page periodically
 (or before switching browsers/devices) to export a JSON snapshot of your curriculum progress, habit
 log, meal log, meal plan edits, calorie goal, pantry list, discarded resources, Weekly Plan
-assignment history, and to-do lists — and import it back in on the other side.
+assignment history, to-do lists, and your own added resources — and import it back in on the other
+side.
 
 ### How the Weekly Plan actually works
 
@@ -159,7 +179,8 @@ Content lives in plain data files — no database, no login, just edit and commi
     it's derived from the checklist).
   - Add a resource to a topic's `resources` array: `{ "title": "...", "url": "...", "type": "article" }`
     (`type` is one of `book`, `course`, `video`, `article`, `paper`, `other`; `url` can be `""` if
-    you don't have a link yet).
+    you don't have a link yet). For one-off additions you don't need to touch this file at all —
+    use the **+ Add a resource** link on the topic itself (see above).
 - [`data/motivation.json`](data/motivation.json) — your mission statement and the pool of quotes
   shown on the dashboard (one is picked per day).
 
