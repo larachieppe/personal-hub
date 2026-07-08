@@ -20,6 +20,7 @@ import {
   removeCustomResource,
   useCustomResources,
 } from "@/lib/custom-resources-store";
+import { resolveResourceMeta } from "@/lib/resource-meta";
 import ProgressBar from "@/components/ProgressBar";
 import StatusBadge from "@/components/StatusBadge";
 import DomainIcon from "@/components/DomainIcon";
@@ -264,21 +265,53 @@ function CourseGroup({
 const RESOURCE_TYPES: ResourceType[] = ["article", "video", "book", "paper", "other"];
 
 function AddResourceForm({ domainId, topicId }: { domainId: string; topicId: string }) {
-  const [title, setTitle] = useState("");
   const [url, setUrl] = useState("");
+  const [title, setTitle] = useState("");
   const [type, setType] = useState<ResourceType>("article");
+  const [titleTouched, setTitleTouched] = useState(false);
+  const [typeTouched, setTypeTouched] = useState(false);
+  const [isResolving, setIsResolving] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
 
-  function handleSubmit(e: React.FormEvent) {
-    e.preventDefault();
-    const trimmedTitle = title.trim();
-    if (!trimmedTitle) return;
-    const resource: Resource = { title: trimmedTitle, url: url.trim(), type };
-    addCustomResource(domainId, topicId, resource);
-    setTitle("");
+  function resetForm() {
     setUrl("");
+    setTitle("");
     setType("article");
+    setTitleTouched(false);
+    setTypeTouched(false);
+    setIsResolving(false);
     setIsOpen(false);
+  }
+
+  async function autofillFromUrl(value: string) {
+    const trimmed = value.trim();
+    if (!trimmed) return;
+    setIsResolving(true);
+    const meta = await resolveResourceMeta(trimmed);
+    setIsResolving(false);
+    if (!titleTouched) setTitle(meta.title);
+    if (!typeTouched) setType(meta.type);
+  }
+
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    const trimmedUrl = url.trim();
+    let finalTitle = title.trim();
+    let finalType = type;
+
+    if (trimmedUrl && !finalTitle) {
+      setIsResolving(true);
+      const meta = await resolveResourceMeta(trimmedUrl);
+      setIsResolving(false);
+      finalTitle = meta.title;
+      if (!typeTouched) finalType = meta.type;
+    }
+
+    if (!finalTitle) finalTitle = trimmedUrl;
+    if (!finalTitle) return;
+
+    addCustomResource(domainId, topicId, { title: finalTitle, url: trimmedUrl, type: finalType });
+    resetForm();
   }
 
   if (!isOpen) {
@@ -296,24 +329,31 @@ function AddResourceForm({ domainId, topicId }: { domainId: string; topicId: str
   return (
     <form onSubmit={handleSubmit} className="mt-1 flex flex-col gap-2 border border-border bg-surface p-3">
       <input
-        type="text"
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-        placeholder="Title"
+        type="url"
+        value={url}
+        onChange={(e) => setUrl(e.target.value)}
+        onBlur={(e) => autofillFromUrl(e.target.value)}
+        placeholder="Paste a link — title and type are filled in for you"
         autoFocus
         className="border border-border bg-transparent px-2 py-1 text-sm text-foreground placeholder:text-muted focus:border-gold focus:outline-none"
       />
       <input
         type="text"
-        value={url}
-        onChange={(e) => setUrl(e.target.value)}
-        placeholder="URL (optional)"
+        value={title}
+        onChange={(e) => {
+          setTitle(e.target.value);
+          setTitleTouched(true);
+        }}
+        placeholder={isResolving ? "Fetching title…" : "Title (auto-filled — edit if you like)"}
         className="border border-border bg-transparent px-2 py-1 text-sm text-foreground placeholder:text-muted focus:border-gold focus:outline-none"
       />
       <div className="flex flex-wrap items-center gap-2">
         <select
           value={type}
-          onChange={(e) => setType(e.target.value as ResourceType)}
+          onChange={(e) => {
+            setType(e.target.value as ResourceType);
+            setTypeTouched(true);
+          }}
           className="border border-border bg-background px-2 py-1 text-sm text-foreground focus:border-gold focus:outline-none"
         >
           {RESOURCE_TYPES.map((t) => (
@@ -324,13 +364,14 @@ function AddResourceForm({ domainId, topicId }: { domainId: string; topicId: str
         </select>
         <button
           type="submit"
-          className="border border-gold bg-gold px-3 py-1 text-xs uppercase tracking-wide text-background transition-colors hover:border-gold-dim hover:bg-gold-dim"
+          disabled={isResolving}
+          className="border border-gold bg-gold px-3 py-1 text-xs uppercase tracking-wide text-background transition-colors hover:border-gold-dim hover:bg-gold-dim disabled:cursor-wait disabled:opacity-60"
         >
           Add
         </button>
         <button
           type="button"
-          onClick={() => setIsOpen(false)}
+          onClick={resetForm}
           className="text-xs uppercase tracking-wide text-muted transition-colors hover:text-foreground"
         >
           Cancel

@@ -61,12 +61,19 @@ topic's progress, and won't be picked by What's Next or the Weekly Plan). It's n
 you change your mind about.
 
 Every topic also has a **+ Add a resource** link at the bottom of its checklist (on the domain page).
-Click it to open a small form — title, an optional URL, and a type — and it's added to that exact
-topic immediately, no file editing or redeploy required. Resources added this way behave exactly
-like ones from `curriculum.json`: they get their own checkbox, count toward that topic's progress,
-show up in the Athenaeum and What's Next, and can be picked up by the Weekly Plan once every
-curriculum resource ahead of them in the topic is checked off. They also get a **Remove** button
-(next to Discard) since — unlike curriculum content — they can be deleted outright, not just hidden.
+Paste a link and that's genuinely all you need to do — the title and type are filled in for you
+(see `lib/resource-meta.ts`): pasting a YouTube URL fetches its real title from YouTube's own oEmbed
+API and sets the type to Video; anything else gets a readable title guessed from the URL's own path
+(e.g. `.../rice-simple-prioritization-for-product-managers/` becomes "Rice Simple Prioritization For
+Product Managers") with the type guessed from the domain (arXiv/DOI/PubMed → Paper, Amazon/Goodreads
+→ Book, otherwise Article). Both fields stay fully editable — type over the guessed title or change
+the type dropdown before hitting Add if it didn't guess right — and clicking Add before the guess has
+finished resolving just waits for it rather than losing your link. It's added to that exact topic
+immediately, no file editing or redeploy required. Resources added this way behave exactly like ones
+from `curriculum.json`: they get their own checkbox, count toward that topic's progress, show up in
+the Athenaeum and What's Next, and can be picked up by the Weekly Plan once every curriculum resource
+ahead of them in the topic is checked off. They also get a **Remove** button (next to Discard) since
+— unlike curriculum content — they can be deleted outright, not just hidden.
 
 
 
