@@ -41,9 +41,10 @@ export default function WeeklyPlan({ domains }: { domains: Domain[] }) {
   useEffect(() => {
     const visibleDomains = filterOutDiscarded(mergeCustomResources(domains, custom), discarded);
     const pool = getNextResources(visibleDomains, completed).map((r) => ({ key: r.key }));
+    const validKeys = new Set(getAllResources(visibleDomains).map((r) => r.key));
     const wStart = getWeekStart(parseDateString(todayStr));
     const dates = Array.from({ length: 7 }, (_, i) => toDateString(addDays(wStart, i)));
-    ensureAssignments(dates, pool, completed, discarded);
+    ensureAssignments(dates, pool, completed, discarded, validKeys);
   }, [domains, custom, discarded, completed, todayStr]);
 
   const visibleDomains = filterOutDiscarded(mergeCustomResources(domains, custom), discarded);

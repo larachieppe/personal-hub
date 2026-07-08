@@ -62,16 +62,33 @@ export function replacePlanAssignments(next: PlanAssignments) {
  * sequence order — see getNextResources). A resource already pending on
  * another date this week is skipped so it isn't suggested twice at once.
  * Completed/discarded history is left in place; this only ever appends.
+ *
+ * Assigned keys that no longer resolve to a real resource (e.g. a domain or
+ * course was removed from curriculum.json after the assignment was made) are
+ * dropped from the list first — otherwise a day can end up permanently empty,
+ * since a dangling key is neither completed nor discarded so it never looked
+ * like it needed replacing.
  */
 export function ensureAssignments(
   dateStrs: string[],
   eligiblePool: { key: string }[],
   completed: ReadonlySet<string>,
-  discarded: ReadonlySet<string>
+  discarded: ReadonlySet<string>,
+  validKeys: ReadonlySet<string>
 ) {
   const current = getSnapshot();
   const next: PlanAssignments = { ...current };
   let changed = false;
+
+  for (const dateStr of dateStrs) {
+    const list = next[dateStr];
+    if (!list) continue;
+    const cleaned = list.filter((key) => validKeys.has(key));
+    if (cleaned.length !== list.length) {
+      next[dateStr] = cleaned;
+      changed = true;
+    }
+  }
 
   const pendingElsewhere = new Set<string>();
   for (const dateStr of dateStrs) {
