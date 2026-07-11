@@ -14,16 +14,17 @@ Live site (once Pages is enabled): `https://<your-username>.github.io/personal-h
   resources.
 - **Resources** (`/resources`) — every resource across the whole curriculum, searchable and
   filterable by domain/type, with the same checkboxes as the domain pages.
-- **Habits** (`/habits`) — daily check-off for a fixed set of habits (weight lifting, cardio,
-  studying 8+ hours, reading before sleep), each with a streak counter, a milestone label
-  (Week/Month/Century/Year Streak), a full-year heatmap, and an all-time total.
 - **Plan** (`/plan`) — a day-by-day plan for every day of the week, including weekends. Each day gets
   a resource assigned in sequence (never a later lesson before an earlier one in the same topic);
   checking one off keeps it marked on that day and appends a new suggestion below it. Don't want the
   one it picked? Click **Change** to swap in a different eligible resource from the same pool.
-  Every day also has its own free-form **To-Do** list — type anything into the box and hit Add, check
-  items off, or remove them — so the Plan page doubles as a plain weekly to-do list alongside the
-  curriculum assignments.
+  Every day also has a **Tasks** section: pick from the tasks you've created on the To-Do page and
+  assign as many as you like to that day, check them off or remove them from the day (removing
+  doesn't delete the task, just unschedules it).
+- **To-Do** (`/todos`) — a master list of tasks, separate from the curriculum: type something and hit
+  Add. Each task is a single entity — check it done, delete it, or (from the Plan page) assign it to
+  one or more days of the week; a "This week: Mon, Wed" label shows where it's currently scheduled.
+  Deleting a task also removes it from every day it was assigned to.
 - **Kitchen** (`/kitchen`) — meal plan and pantry together on one page behind a tab switcher.
   - **Meal Plan** tab: your weekly menu (breakfast/lunch/snack/dinner for each day), with a
     checkbox and a calorie count per meal. Each day shows calories eaten so far against your daily
@@ -35,11 +36,15 @@ Live site (once Pages is enabled): `https://<your-username>.github.io/personal-h
     Proteins, Produce, etc). Check an item off once you have it; unchecked items are what's missing.
     Click **Edit pantry** to rename items/categories or add and remove them — this list is fully
     yours to shape, unlike the fixed weekly structure of Habits/Meals.
-- **Review** (`/review`) — a retrospective with a **Week / Month / Year** toggle: habit consistency,
-  meal plan adherence, and resources completed, all computed against however much of that period has
-  elapsed so far (e.g. 6/6 days if you're on day 6 of the month, not 6/31).
-- **Backup** (`/backup`) — export all progress (curriculum + habits + meals + pantry) to a JSON
-  file, or import one to restore it. Linked from the footer on every page.
+- **Progress** (`/progress`) — Habits and Review together on one page behind a tab switcher.
+  - **Habits** tab: daily check-off for a fixed set of habits (weight lifting, cardio, studying
+    8+ hours, reading before sleep), each with a streak counter, a milestone label
+    (Week/Month/Century/Year Streak), a full-year heatmap, and an all-time total.
+  - **Review** tab: a retrospective with a **Week / Month / Year** toggle: habit consistency,
+    meal plan adherence, and resources completed, all computed against however much of that
+    period has elapsed so far (e.g. 6/6 days if you're on day 6 of the month, not 6/31).
+- **Backup** (`/backup`) — export all progress (curriculum + habits + meals + pantry + to-dos) to a
+  JSON file, or import one to restore it. Linked from the footer on every page.
 
 Every resource in `curriculum.json` is a single, specific article, video, or lecture/reading page —
 never a bare YouTube channel, playlist, or a "hub" page that lists many pieces of content under one
@@ -100,10 +105,10 @@ Every resource in a topic is a checkbox. Check one off and:
 - Renaming a resource's `title` in `curriculum.json` changes its identity, so a previously
   checked item under the old title will show as unchecked again.
 
-The Habits page works the same way (`localStorage`, per-browser): each habit can be marked done
-once per calendar day. A streak stays alive if you've checked in today or yesterday, and breaks
-if you miss a full day; the all-time total never resets. To add, remove, or rename habits, edit
-[`data/habits.json`](data/habits.json).
+The Habits tab (under Progress) works the same way (`localStorage`, per-browser): each habit can be
+marked done once per calendar day. A streak stays alive if you've checked in today or yesterday, and
+breaks if you miss a full day; the all-time total never resets. To add, remove, or rename habits,
+edit [`data/habits.json`](data/habits.json).
 
 The Meal Plan tab (under Kitchen) is a weekly menu template that repeats every week. [`data/meals.json`](data/meals.json)
 defines the default plan (what a fresh browser sees) — each meal has a `calories` value, and there's
@@ -141,8 +146,8 @@ distinction from JSON-defined ones except the extra **Remove** button.
 Because everything lives in `localStorage` and nowhere else, use the **Backup** page periodically
 (or before switching browsers/devices) to export a JSON snapshot of your curriculum progress, habit
 log, meal log, meal plan edits, calorie goal, pantry list, discarded resources, Weekly Plan
-assignment history, to-do lists, and your own added resources — and import it back in on the other
-side.
+assignment history, to-do list and its day assignments, and your own added resources — and import it
+back in on the other side.
 
 ### How the Weekly Plan actually works
 
@@ -167,15 +172,27 @@ appended or removed, and the swap is just as persistent as the original assignme
 A new calendar week means new (empty) date keys, so Monday of a new week always starts fresh —
 there's nothing to reset by hand.
 
-### The to-do list on the Plan page
+### To-Do tasks and day assignment
 
-Independent of curriculum resources, every day on `/plan` has its own free-form list backed by
-`lib/todo-store.ts` (`localStorage` key `polymath-hub:weekly-todos`, keyed by calendar date the same
-way plan assignments are). Type into the box under a day and hit Add (or press Enter) to add an
-item; check it off or remove it with the buttons next to it. Nothing here is generated or suggested
-— it's just yours, for whatever a normal to-do list is for (errands, one-off tasks, reminders) — and
-since it's keyed by the actual date, a new calendar week starts with empty lists just like the
-curriculum assignments do.
+To-dos are deliberately split into two independent pieces of state in `lib/todo-store.ts`, both
+`localStorage`-backed and per-browser:
+
+- **The task pool** (`polymath-hub:todos`) — every task you've ever created on `/todos`, each with
+  just a `text` and a `done` flag. A task is one entity: marking it done or deleting it is global,
+  not per-day. This is what the To-Do page manages: type into the box and hit Add (or press Enter),
+  check tasks off, or delete them.
+- **Day assignments** (`polymath-hub:todo-assignments`) — a map of calendar date → list of task ids
+  scheduled on that date. This is what the Plan page manages: each day has a **Tasks** section
+  listing whichever pool tasks are currently assigned to it (with the same checkbox, plus a
+  **Remove** button that unschedules the task from that day without deleting it), and a
+  "+ Add a task to this day" control that opens a dropdown of not-yet-assigned tasks to schedule.
+  A task can be assigned to as many days as you like at once.
+
+Deleting a task from the To-Do page also purges it from every day's assignment list, so you never
+end up with a scheduled id that no longer resolves to anything. Since assignments are keyed by the
+actual date, a new calendar week starts with nothing assigned, the same as plan assignments — but
+the task pool itself persists across weeks, so a recurring task just needs re-assigning, not
+re-creating.
 
 ## Editing your curriculum
 

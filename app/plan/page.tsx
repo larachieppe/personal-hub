@@ -23,8 +23,9 @@ export default function PlanPage() {
           order — a later lesson is never suggested ahead of an earlier one in the
           same topic. Check something off and it stays marked right there, with the
           next one appearing below it, or click <strong>Change</strong> to swap in a
-          different one. Each day also has its own free-form to-do list, and a new
-          week starts fresh.
+          different one. Each day also has a Tasks section — pick from the tasks
+          you&rsquo;ve created on the <strong>To-Do</strong> page and assign them to
+          whichever days you like, and a new week starts fresh.
         </p>
       </div>
       <Ornament />

@@ -12,7 +12,13 @@ import { toggleResourceCompleted, useCompletedResources } from "@/lib/progress-s
 import { discardResource, useDiscardedResources } from "@/lib/discard-store";
 import { useCustomResources } from "@/lib/custom-resources-store";
 import { ensureAssignments, replaceAssignment, usePlanAssignments } from "@/lib/plan-store";
-import { addTodo, deleteTodo, toggleTodo, useTodos } from "@/lib/todo-store";
+import {
+  assignTodoToDate,
+  toggleTodo,
+  unassignTodoFromDate,
+  useTodoAssignments,
+  useTodos,
+} from "@/lib/todo-store";
 import { addDays, getWeekStart, parseDateString, toDateString, useTodayString } from "@/lib/date-utils";
 
 const DAY_NAMES = [
@@ -30,9 +36,11 @@ export default function WeeklyPlan({ domains }: { domains: Domain[] }) {
   const discarded = useDiscardedResources();
   const custom = useCustomResources();
   const assignments = usePlanAssignments();
-  const todosByDate = useTodos();
+  const allTodos = useTodos();
+  const todoAssignments = useTodoAssignments();
   const todayStr = useTodayString();
   const [openSwapId, setOpenSwapId] = useState<string | null>(null);
+  const [openAssignDate, setOpenAssignDate] = useState<string | null>(null);
 
   const today = parseDateString(todayStr);
   const weekStart = getWeekStart(today);
@@ -67,7 +75,11 @@ export default function WeeklyPlan({ domains }: { domains: Domain[] }) {
         const dateStr = weekDateStrs[index];
         const isToday = dateStr === todayStr;
         const assignedKeys = assignments[dateStr] ?? [];
-        const todos = todosByDate[dateStr] ?? [];
+        const assignedTodoIds = todoAssignments[dateStr] ?? [];
+        const assignedTodos = assignedTodoIds
+          .map((id) => allTodos.find((t) => t.id === id))
+          .filter((t): t is NonNullable<typeof t> => Boolean(t));
+        const availableTodos = allTodos.filter((t) => !assignedTodoIds.includes(t.id));
 
         return (
           <div
@@ -181,16 +193,16 @@ export default function WeeklyPlan({ domains }: { domains: Domain[] }) {
 
             <div className="flex flex-col gap-2 border-t border-border/60 pt-3">
               <h3 className="text-xs font-semibold uppercase tracking-wide text-muted">
-                To-Do
+                Tasks
               </h3>
-              {todos.length > 0 && (
+              {assignedTodos.length > 0 && (
                 <ul className="flex flex-col gap-1.5">
-                  {todos.map((todo) => (
+                  {assignedTodos.map((todo) => (
                     <li key={todo.id} className="flex items-center gap-2.5">
                       <input
                         type="checkbox"
                         checked={todo.done}
-                        onChange={() => toggleTodo(dateStr, todo.id)}
+                        onChange={() => toggleTodo(todo.id)}
                         className="h-4 w-4 shrink-0 cursor-pointer accent-gold"
                         aria-label={`Mark "${todo.text}" as done`}
                       />
@@ -205,9 +217,9 @@ export default function WeeklyPlan({ domains }: { domains: Domain[] }) {
                       </span>
                       <button
                         type="button"
-                        onClick={() => deleteTodo(dateStr, todo.id)}
+                        onClick={() => unassignTodoFromDate(dateStr, todo.id)}
                         className="shrink-0 text-xs uppercase tracking-wide text-muted transition-colors hover:text-wine"
-                        aria-label={`Remove "${todo.text}"`}
+                        aria-label={`Remove "${todo.text}" from this day`}
                       >
                         Remove
                       </button>
@@ -215,41 +227,47 @@ export default function WeeklyPlan({ domains }: { domains: Domain[] }) {
                   ))}
                 </ul>
               )}
-              <TodoAddForm dateStr={dateStr} />
+              {allTodos.length === 0 ? (
+                <p className="text-xs italic text-muted">
+                  No tasks yet — add some on the To-Do page.
+                </p>
+              ) : openAssignDate === dateStr ? (
+                <select
+                  defaultValue=""
+                  onChange={(e) => {
+                    const id = e.target.value;
+                    if (id) assignTodoToDate(dateStr, id);
+                    setOpenAssignDate(null);
+                  }}
+                  className="border border-border bg-background px-2 py-1 text-sm text-foreground focus:border-gold focus:outline-none"
+                  aria-label="Choose a task to add to this day"
+                >
+                  <option value="" disabled>
+                    Choose a task…
+                  </option>
+                  {availableTodos.map((todo) => (
+                    <option key={todo.id} value={todo.id}>
+                      {todo.text}
+                    </option>
+                  ))}
+                </select>
+              ) : availableTodos.length === 0 ? (
+                <p className="text-xs italic text-muted">
+                  All your tasks are already on this day.
+                </p>
+              ) : (
+                <button
+                  type="button"
+                  onClick={() => setOpenAssignDate(dateStr)}
+                  className="w-fit text-xs uppercase tracking-wide text-gold transition-colors hover:text-foreground"
+                >
+                  + Add a task to this day
+                </button>
+              )}
             </div>
           </div>
         );
       })}
     </div>
-  );
-}
-
-function TodoAddForm({ dateStr }: { dateStr: string }) {
-  const [text, setText] = useState("");
-
-  function handleSubmit(e: React.FormEvent) {
-    e.preventDefault();
-    const trimmed = text.trim();
-    if (!trimmed) return;
-    addTodo(dateStr, trimmed);
-    setText("");
-  }
-
-  return (
-    <form onSubmit={handleSubmit} className="flex gap-2">
-      <input
-        type="text"
-        value={text}
-        onChange={(e) => setText(e.target.value)}
-        placeholder="Add a to-do…"
-        className="flex-1 border border-border bg-transparent px-2 py-1 text-sm text-foreground placeholder:text-muted focus:border-gold focus:outline-none"
-      />
-      <button
-        type="submit"
-        className="shrink-0 border border-border px-3 py-1 text-xs uppercase tracking-wide text-muted transition-colors hover:border-gold-dim hover:text-foreground"
-      >
-        Add
-      </button>
-    </form>
   );
 }

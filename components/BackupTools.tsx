@@ -19,8 +19,13 @@ import { exportPantry, replacePantry } from "@/lib/pantry-store";
 import type { PlanAssignments } from "@/lib/plan-store";
 import { exportPlanAssignments, replacePlanAssignments } from "@/lib/plan-store";
 import { exportProgressData, replaceProgressData } from "@/lib/progress-store";
-import type { TodosByDate } from "@/lib/todo-store";
-import { exportTodos, replaceTodos } from "@/lib/todo-store";
+import type { Todo, TodoAssignments } from "@/lib/todo-store";
+import {
+  exportTodoAssignments,
+  exportTodos,
+  replaceTodoAssignments,
+  replaceTodos,
+} from "@/lib/todo-store";
 
 interface BackupFile {
   version: 1;
@@ -34,7 +39,8 @@ interface BackupFile {
   pantry: PantryCategoryState[];
   discardedResources: string[];
   planAssignments: PlanAssignments;
-  weeklyTodos: TodosByDate;
+  todos: Todo[];
+  todoAssignments: TodoAssignments;
   customResources: CustomResourceMap;
 }
 
@@ -55,7 +61,8 @@ export default function BackupTools() {
       pantry: exportPantry(),
       discardedResources: exportDiscardedResources(),
       planAssignments: exportPlanAssignments(),
-      weeklyTodos: exportTodos(),
+      todos: exportTodos(),
+      todoAssignments: exportTodoAssignments(),
       customResources: exportCustomResources(),
     };
     const blob = new Blob([JSON.stringify(payload, null, 2)], {
@@ -83,7 +90,8 @@ export default function BackupTools() {
         replacePantry(parsed.pantry ?? []);
         replaceDiscardedResources(parsed.discardedResources ?? []);
         replacePlanAssignments(parsed.planAssignments ?? {});
-        replaceTodos(parsed.weeklyTodos ?? {});
+        replaceTodos(parsed.todos ?? []);
+        replaceTodoAssignments(parsed.todoAssignments ?? {});
         replaceCustomResources(parsed.customResources ?? {});
         setMessage("Backup restored. Reload any open pages to see the change everywhere.");
       } catch {
