@@ -76,7 +76,7 @@ export default function MealPlan({
               type="number"
               defaultValue={goal}
               onBlur={(e) => setDailyGoalOverride(Number(e.target.value))}
-              className="w-20 border border-border bg-surface px-2 py-1 text-sm text-foreground outline-none focus:border-gold"
+              className="field w-20"
               aria-label="Daily calorie goal"
             />
             cal
@@ -101,8 +101,8 @@ export default function MealPlan({
             onClick={() => setIsEditing((e) => !e)}
             className={
               isEditing
-                ? "whitespace-nowrap border border-green px-4 py-2 text-xs uppercase tracking-wide text-green transition-colors"
-                : "whitespace-nowrap border border-gold bg-gold px-4 py-2 text-xs uppercase tracking-wide text-background transition-colors hover:border-gold-dim hover:bg-gold-dim"
+                ? "whitespace-nowrap rounded-lg border border-green px-4 py-2 text-xs font-semibold uppercase tracking-wide text-green transition-colors"
+                : "btn-gold whitespace-nowrap"
             }
           >
             {isEditing ? "Done editing" : "Edit plan"}
@@ -110,7 +110,7 @@ export default function MealPlan({
         </div>
       </div>
 
-      <div className="flex flex-col divide-y divide-border">
+      <div className="flex flex-col gap-5">
         {WEEKDAY_ORDER.map((dayKey, index) => {
           const menu = byDay.get(dayKey);
           if (!menu) return null;
@@ -127,7 +127,11 @@ export default function MealPlan({
           return (
             <div
               key={dayKey}
-              className={`flex flex-col gap-3 py-5 ${isToday ? "-mx-6 bg-surface px-6" : ""}`}
+              className={
+                isToday
+                  ? "panel flex flex-col gap-3 border-gold-dim/70 bg-surface-hover"
+                  : "panel flex flex-col gap-3"
+              }
             >
               <div className="flex items-baseline justify-between">
                 <h2 className="font-display text-lg text-foreground">
@@ -175,7 +179,7 @@ export default function MealPlan({
                             onBlur={(e) =>
                               setMealOverride(dayKey, meal.id, { name: e.target.value })
                             }
-                            className="flex-1 border border-border bg-surface px-2 py-1 text-sm text-foreground outline-none focus:border-gold"
+                            className="field flex-1"
                             aria-label={`Edit ${DAY_LABELS[dayKey]} ${meal.label}`}
                           />
                           <input
@@ -184,7 +188,7 @@ export default function MealPlan({
                             onBlur={(e) =>
                               setMealOverride(dayKey, meal.id, { calories: Number(e.target.value) })
                             }
-                            className="w-20 border border-border bg-surface px-2 py-1 text-sm text-foreground outline-none focus:border-gold"
+                            className="field w-20"
                             aria-label={`Edit ${DAY_LABELS[dayKey]} ${meal.label} calories`}
                           />
                         </div>

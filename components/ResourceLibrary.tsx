@@ -60,12 +60,12 @@ export default function ResourceLibrary({
           placeholder="Search the catalog..."
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          className="flex-1 border border-border bg-surface px-3 py-2 text-sm text-foreground outline-none placeholder:text-muted focus:border-gold"
+          className="field flex-1"
         />
         <select
           value={domainFilter}
           onChange={(e) => setDomainFilter(e.target.value)}
-          className="border border-border bg-surface px-3 py-2 text-sm text-foreground outline-none focus:border-gold"
+          className="field"
         >
           <option value="all">All domains</option>
           {domains.map((domain) => (
@@ -77,7 +77,7 @@ export default function ResourceLibrary({
         <select
           value={typeFilter}
           onChange={(e) => setTypeFilter(e.target.value)}
-          className="border border-border bg-surface px-3 py-2 text-sm text-foreground outline-none focus:border-gold"
+          className="field"
         >
           <option value="all">All types</option>
           {types.map((type) => (
@@ -93,7 +93,7 @@ export default function ResourceLibrary({
           No resources match your filters yet.
         </p>
       ) : (
-        <ul className="flex flex-col divide-y divide-border">
+        <ul className="panel flex flex-col divide-y divide-border/70">
           {filtered.map((resource, i) => {
             const key = resource.key;
             const isChecked = completed.has(key);
@@ -178,7 +178,7 @@ export default function ResourceLibrary({
             {showDiscarded ? "Hide" : "Show"} discarded ({discardedResources.length})
           </button>
           {showDiscarded && (
-            <ul className="flex flex-col divide-y divide-border">
+            <ul className="panel flex flex-col divide-y divide-border/70">
               {discardedResources.map((resource, i) => {
                 const key = resource.key;
                 return (

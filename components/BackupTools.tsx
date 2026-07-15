@@ -102,16 +102,12 @@ export default function BackupTools() {
   }
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className="panel flex flex-col gap-4">
       <div className="flex flex-col gap-3 sm:flex-row">
-        <button
-          type="button"
-          onClick={handleExport}
-          className="border border-gold bg-gold px-4 py-2 text-xs uppercase tracking-wide text-background transition-colors hover:border-gold-dim hover:bg-gold-dim"
-        >
+        <button type="button" onClick={handleExport} className="btn-gold">
           Export backup
         </button>
-        <label className="cursor-pointer border border-border px-4 py-2 text-center text-xs uppercase tracking-wide text-gold transition-colors hover:border-gold">
+        <label className="btn-outline cursor-pointer">
           Import backup
           <input
             type="file"

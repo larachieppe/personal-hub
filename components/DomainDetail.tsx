@@ -46,10 +46,10 @@ export default function DomainDetail({ domain: rawDomain }: { domain: Domain }) 
           &larr; All domains
         </Link>
         <div className="mt-3 flex items-center gap-3">
-          <div className="flex h-12 w-12 shrink-0 items-center justify-center border border-gold-dim bg-surface">
+          <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-gold-dim bg-surface">
             <DomainIcon domainId={domain.id} className="h-6 w-6 text-gold" />
           </div>
-          <h1 className="font-display text-3xl italic text-foreground">
+          <h1 className="font-display text-4xl italic tracking-tight text-foreground">
             {domain.name}
           </h1>
           {progress.percent === 100 && <StatusBadge status="done" />}
@@ -66,11 +66,11 @@ export default function DomainDetail({ domain: rawDomain }: { domain: Domain }) 
 
       <Ornament />
 
-      <div className="flex flex-col divide-y divide-border">
+      <div className="flex flex-col gap-4">
         {domain.topics.map((topic) => {
           const topicProgress = computeTopicProgress(domain.id, topic, completed);
           return (
-            <div key={topic.id} className="flex flex-col gap-2 py-5">
+            <div key={topic.id} className="panel flex flex-col gap-2">
               <div className="flex items-center justify-between gap-4">
                 <h2 className="font-display text-lg text-foreground">{topic.title}</h2>
                 <StatusBadge status={topicProgress.status} />
@@ -195,7 +195,7 @@ function CourseGroup({
   const progress = computeCourseProgress(domainId, topicId, course, completed);
 
   return (
-    <li className="flex flex-col gap-2 border border-border bg-surface p-3">
+    <li className="flex flex-col gap-2 rounded-lg border border-border bg-background/40 p-3">
       <button
         type="button"
         onClick={() => setExpanded((e) => !e)}
@@ -327,7 +327,7 @@ function AddResourceForm({ domainId, topicId }: { domainId: string; topicId: str
   }
 
   return (
-    <form onSubmit={handleSubmit} className="mt-1 flex flex-col gap-2 border border-border bg-surface p-3">
+    <form onSubmit={handleSubmit} className="mt-1 flex flex-col gap-2 rounded-lg border border-border bg-background/40 p-3">
       <input
         type="url"
         value={url}
@@ -335,7 +335,7 @@ function AddResourceForm({ domainId, topicId }: { domainId: string; topicId: str
         onBlur={(e) => autofillFromUrl(e.target.value)}
         placeholder="Paste a link — title and type are filled in for you"
         autoFocus
-        className="border border-border bg-transparent px-2 py-1 text-sm text-foreground placeholder:text-muted focus:border-gold focus:outline-none"
+        className="field"
       />
       <input
         type="text"
@@ -345,7 +345,7 @@ function AddResourceForm({ domainId, topicId }: { domainId: string; topicId: str
           setTitleTouched(true);
         }}
         placeholder={isResolving ? "Fetching title…" : "Title (auto-filled — edit if you like)"}
-        className="border border-border bg-transparent px-2 py-1 text-sm text-foreground placeholder:text-muted focus:border-gold focus:outline-none"
+        className="field"
       />
       <div className="flex flex-wrap items-center gap-2">
         <select
@@ -354,7 +354,7 @@ function AddResourceForm({ domainId, topicId }: { domainId: string; topicId: str
             setType(e.target.value as ResourceType);
             setTypeTouched(true);
           }}
-          className="border border-border bg-background px-2 py-1 text-sm text-foreground focus:border-gold focus:outline-none"
+          className="field"
         >
           {RESOURCE_TYPES.map((t) => (
             <option key={t} value={t}>
@@ -362,11 +362,7 @@ function AddResourceForm({ domainId, topicId }: { domainId: string; topicId: str
             </option>
           ))}
         </select>
-        <button
-          type="submit"
-          disabled={isResolving}
-          className="border border-gold bg-gold px-3 py-1 text-xs uppercase tracking-wide text-background transition-colors hover:border-gold-dim hover:bg-gold-dim disabled:cursor-wait disabled:opacity-60"
-        >
+        <button type="submit" disabled={isResolving} className="btn-gold disabled:cursor-wait disabled:opacity-60">
           Add
         </button>
         <button

@@ -39,7 +39,7 @@ export default function MobileNav({ links }: { links: NavLink[] }) {
         />
       </button>
       {open && (
-        <div className="absolute inset-x-0 top-full border-b border-border bg-background px-6 py-4">
+        <div className="absolute inset-x-0 top-full border-b border-border bg-background px-6 py-5 shadow-[0_24px_48px_-24px_rgba(0,0,0,0.9)]">
           <div className="flex flex-col gap-4 text-xs font-medium uppercase tracking-[0.15em] text-muted">
             {links.map((link) => (
               <Link

@@ -34,7 +34,7 @@ export default function TodoList() {
           No tasks yet — add one above, then assign it to a day on the Plan page.
         </p>
       ) : (
-        <ul className="flex flex-col divide-y divide-border">
+        <ul className="panel flex flex-col divide-y divide-border/70">
           {todos.map((todo) => {
             const assignedDays = daysAssignedThisWeek(todo.id);
             return (
@@ -91,12 +91,9 @@ function AddTaskForm() {
         value={text}
         onChange={(e) => setText(e.target.value)}
         placeholder="Add a task…"
-        className="flex-1 border border-border bg-surface px-3 py-2 text-sm text-foreground placeholder:text-muted focus:border-gold focus:outline-none"
+        className="field flex-1"
       />
-      <button
-        type="submit"
-        className="shrink-0 border border-gold bg-gold px-4 py-2 text-xs uppercase tracking-wide text-background transition-colors hover:border-gold-dim hover:bg-gold-dim"
-      >
+      <button type="submit" className="btn-gold shrink-0">
         Add
       </button>
     </form>

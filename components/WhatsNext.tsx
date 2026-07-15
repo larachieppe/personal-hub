@@ -23,13 +23,13 @@ export default function WhatsNext({ domains }: { domains: Domain[] }) {
 
   if (unchecked.length === 0) {
     return (
-      <section className="flex flex-col gap-2 border border-border bg-surface p-6 shadow-[inset_0_1px_0_rgba(255,255,255,0.04),0_16px_32px_-20px_rgba(0,0,0,0.85)]">
+      <section className="panel flex flex-col gap-2">
         <h2 className="font-display text-sm uppercase tracking-[0.2em] text-muted">
           What&apos;s Next
         </h2>
         <p className="text-sm italic text-muted">
           Every resource in the curriculum is checked off. Add more in{" "}
-          <code className="border border-border bg-background px-1 py-0.5 text-foreground">
+          <code className="rounded-md border border-border bg-background px-1.5 py-0.5 text-foreground">
             data/curriculum.json
           </code>
           , or go add a domain.
@@ -42,7 +42,7 @@ export default function WhatsNext({ domains }: { domains: Domain[] }) {
   const key = pick.key;
 
   return (
-    <section className="flex flex-col gap-3 border border-border bg-surface p-6 shadow-[inset_0_1px_0_rgba(255,255,255,0.04),0_16px_32px_-20px_rgba(0,0,0,0.85)]">
+    <section className="panel flex flex-col gap-3">
       <div className="flex items-baseline justify-between">
         <h2 className="font-display text-sm uppercase tracking-[0.2em] text-muted">
           What&apos;s Next

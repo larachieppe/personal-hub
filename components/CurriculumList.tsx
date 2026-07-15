@@ -17,16 +17,16 @@ export default function CurriculumList({ domains }: { domains: Domain[] }) {
   const visibleDomains = filterOutDiscarded(mergeCustomResources(domains, custom), discarded);
 
   return (
-    <div className="flex flex-col divide-y divide-border">
+    <div className="flex flex-col gap-4">
       {visibleDomains.map((domain) => {
         const progress = computeDomainProgress(domain, completed);
         return (
           <Link
             key={domain.id}
             href={`/curriculum/${domain.id}`}
-            className="group flex gap-4 py-6 transition-colors"
+            className="group panel panel-interactive flex gap-4"
           >
-            <div className="mt-0.5 flex h-10 w-10 shrink-0 items-center justify-center border border-border bg-surface transition-colors group-hover:border-gold-dim">
+            <div className="mt-0.5 flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-border bg-background/60 transition-colors group-hover:border-gold-dim">
               <DomainIcon
                 domainId={domain.id}
                 className="h-5 w-5 text-gold-dim transition-colors group-hover:text-gold"

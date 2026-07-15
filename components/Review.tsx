@@ -73,11 +73,7 @@ export default function Review({
             key={p}
             type="button"
             onClick={() => setPeriod(p)}
-            className={
-              period === p
-                ? "border border-gold bg-gold px-4 py-2 text-xs uppercase tracking-wide text-background transition-colors"
-                : "border border-border px-4 py-2 text-xs uppercase tracking-wide text-muted transition-colors hover:border-gold-dim hover:text-foreground"
-            }
+            className={period === p ? "pill-active" : "pill"}
           >
             {PERIOD_LABELS[p]}
           </button>
@@ -86,11 +82,11 @@ export default function Review({
 
       <p className="text-xs uppercase tracking-wide text-muted">{rangeLabel}</p>
 
-      <section className="flex flex-col gap-4">
+      <section className="panel flex flex-col gap-4">
         <h2 className="font-display text-sm uppercase tracking-[0.2em] text-muted">
           Habit Consistency
         </h2>
-        <div className="flex flex-col divide-y divide-border">
+        <div className="flex flex-col divide-y divide-border/70">
           {habits.map((habit) => {
             const count = countHabitDaysInRange(habitLog[habit.id] ?? [], start, today);
             const percent = elapsed === 0 ? 0 : Math.round((count / elapsed) * 100);
@@ -111,7 +107,7 @@ export default function Review({
         </div>
       </section>
 
-      <section className="flex flex-col gap-3">
+      <section className="panel flex flex-col gap-3">
         <h2 className="font-display text-sm uppercase tracking-[0.2em] text-muted">
           Meal Plan Adherence
         </h2>
@@ -128,7 +124,7 @@ export default function Review({
         </div>
       </section>
 
-      <section className="flex flex-col gap-4">
+      <section className="panel flex flex-col gap-4">
         <div className="flex items-baseline justify-between">
           <h2 className="font-display text-sm uppercase tracking-[0.2em] text-muted">
             Resources Completed
@@ -140,7 +136,7 @@ export default function Review({
             Nothing checked off yet — the Athenaeum is waiting.
           </p>
         ) : (
-          <ul className="flex max-h-96 flex-col divide-y divide-border overflow-y-auto">
+          <ul className="flex max-h-96 flex-col divide-y divide-border/70 overflow-y-auto">
             {resourcesInPeriod.map((resource) => (
               <li
                 key={`${resource.topicId}-${resource.title}`}

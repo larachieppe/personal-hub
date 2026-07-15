@@ -13,7 +13,7 @@ export default function HabitTracker({ habits }: { habits: Habit[] }) {
   const log = useHabitLog();
 
   return (
-    <div className="flex flex-col divide-y divide-border">
+    <div className="flex flex-col gap-5">
       {habits.map((habit) => {
         const dates = log[habit.id] ?? [];
         const stats = computeHabitStats(dates);
@@ -21,7 +21,7 @@ export default function HabitTracker({ habits }: { habits: Habit[] }) {
         const milestone = getStreakMilestone(stats.streak);
 
         return (
-          <div key={habit.id} className="flex flex-col gap-4 py-6">
+          <div key={habit.id} className="panel flex flex-col gap-4">
             <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
               <div className="flex flex-col gap-1">
                 <h2 className="font-display text-lg text-foreground">{habit.name}</h2>
@@ -49,8 +49,8 @@ export default function HabitTracker({ habits }: { habits: Habit[] }) {
                   onClick={() => toggleHabitToday(habit.id)}
                   className={
                     stats.isDoneToday
-                      ? "whitespace-nowrap border border-green px-4 py-2 text-xs uppercase tracking-wide text-green transition-colors"
-                      : "whitespace-nowrap border border-gold bg-gold px-4 py-2 text-xs uppercase tracking-wide text-background transition-colors hover:border-gold-dim hover:bg-gold-dim"
+                      ? "whitespace-nowrap rounded-lg border border-green px-4 py-2 text-xs font-semibold uppercase tracking-wide text-green transition-colors"
+                      : "btn-gold whitespace-nowrap"
                   }
                 >
                   {stats.isDoneToday ? "Done today" : "Mark done"}

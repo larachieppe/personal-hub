@@ -33,12 +33,9 @@ function AddItemForm({ categoryId }: { categoryId: string }) {
         value={name}
         onChange={(e) => setName(e.target.value)}
         placeholder="Add item..."
-        className="flex-1 border border-border bg-surface px-2 py-1 text-sm text-foreground outline-none placeholder:text-muted focus:border-gold"
+        className="field flex-1"
       />
-      <button
-        type="submit"
-        className="border border-gold px-3 py-1 text-xs uppercase tracking-wide text-gold transition-colors hover:border-gold-dim hover:text-foreground"
-      >
+      <button type="submit" className="btn-outline">
         Add
       </button>
     </form>
@@ -87,8 +84,8 @@ export default function Pantry() {
             onClick={() => setIsEditing((e) => !e)}
             className={
               isEditing
-                ? "whitespace-nowrap border border-green px-4 py-2 text-xs uppercase tracking-wide text-green transition-colors"
-                : "whitespace-nowrap border border-gold bg-gold px-4 py-2 text-xs uppercase tracking-wide text-background transition-colors hover:border-gold-dim hover:bg-gold-dim"
+                ? "whitespace-nowrap rounded-lg border border-green px-4 py-2 text-xs font-semibold uppercase tracking-wide text-green transition-colors"
+                : "btn-gold whitespace-nowrap"
             }
           >
             {isEditing ? "Done editing" : "Edit pantry"}
@@ -96,16 +93,16 @@ export default function Pantry() {
         </div>
       </div>
 
-      <div className="flex flex-col divide-y divide-border">
+      <div className="flex flex-col gap-4">
         {categories.map((category) => (
-          <div key={category.id} className="flex flex-col gap-3 py-5">
+          <div key={category.id} className="panel flex flex-col gap-3">
             <div className="flex items-center gap-3">
               {isEditing ? (
                 <input
                   type="text"
                   defaultValue={category.name}
                   onBlur={(e) => renameCategory(category.id, e.target.value)}
-                  className="font-display flex-1 border border-border bg-surface px-2 py-1 text-lg text-foreground outline-none focus:border-gold"
+                  className="field font-display flex-1 text-lg"
                   aria-label={`Rename category ${category.name}`}
                 />
               ) : (
@@ -146,7 +143,7 @@ export default function Pantry() {
                         type="text"
                         defaultValue={item.name}
                         onBlur={(e) => renameItem(category.id, item.id, e.target.value)}
-                        className="flex-1 border border-border bg-surface px-2 py-1 text-sm text-foreground outline-none focus:border-gold"
+                        className="field flex-1"
                         aria-label={`Edit ${item.name}`}
                       />
                       <button
@@ -190,12 +187,9 @@ export default function Pantry() {
             value={newCategoryName}
             onChange={(e) => setNewCategoryName(e.target.value)}
             placeholder="New category name..."
-            className="flex-1 border border-border bg-surface px-3 py-2 text-sm text-foreground outline-none placeholder:text-muted focus:border-gold"
+            className="field flex-1"
           />
-          <button
-            type="submit"
-            className="border border-gold bg-gold px-4 py-2 text-xs uppercase tracking-wide text-background transition-colors hover:border-gold-dim hover:bg-gold-dim"
-          >
+          <button type="submit" className="btn-gold">
             Add category
           </button>
         </form>

@@ -33,11 +33,7 @@ export default function Progress({
             key={t}
             type="button"
             onClick={() => setTab(t)}
-            className={
-              tab === t
-                ? "border border-gold bg-gold px-4 py-2 text-xs uppercase tracking-wide text-background transition-colors"
-                : "border border-border px-4 py-2 text-xs uppercase tracking-wide text-muted transition-colors hover:border-gold-dim hover:text-foreground"
-            }
+            className={tab === t ? "pill-active" : "pill"}
           >
             {TAB_LABELS[t]}
           </button>

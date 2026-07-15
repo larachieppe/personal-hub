@@ -70,7 +70,7 @@ export default function WeeklyPlan({ domains }: { domains: Domain[] }) {
   }
 
   return (
-    <div className="flex flex-col divide-y divide-border">
+    <div className="flex flex-col gap-5">
       {DAY_NAMES.map((dayName, index) => {
         const dateStr = weekDateStrs[index];
         const isToday = dateStr === todayStr;
@@ -84,7 +84,11 @@ export default function WeeklyPlan({ domains }: { domains: Domain[] }) {
         return (
           <div
             key={dateStr}
-            className={`flex flex-col gap-3 py-5 ${isToday ? "-mx-6 bg-surface px-6" : ""}`}
+            className={
+              isToday
+                ? "panel flex flex-col gap-3 border-gold-dim/70 bg-surface-hover"
+                : "panel flex flex-col gap-3"
+            }
           >
             <div className="flex items-baseline justify-between">
               <h2 className="font-display text-lg text-foreground">
@@ -171,7 +175,7 @@ export default function WeeklyPlan({ domains }: { domains: Domain[] }) {
                             if (newKey) replaceAssignment(dateStr, key, newKey);
                             setOpenSwapId(null);
                           }}
-                          className="ml-6 border border-border bg-background px-2 py-1 text-sm text-foreground focus:border-gold focus:outline-none"
+                          className="field ml-6"
                           aria-label={`Choose a replacement for "${resource.title}"`}
                         >
                           <option value="" disabled>
@@ -239,7 +243,7 @@ export default function WeeklyPlan({ domains }: { domains: Domain[] }) {
                     if (id) assignTodoToDate(dateStr, id);
                     setOpenAssignDate(null);
                   }}
-                  className="border border-border bg-background px-2 py-1 text-sm text-foreground focus:border-gold focus:outline-none"
+                  className="field"
                   aria-label="Choose a task to add to this day"
                 >
                   <option value="" disabled>

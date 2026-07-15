@@ -37,7 +37,7 @@ export default function HomeDashboard({ domains }: { domains: Domain[] }) {
     <>
       <Ornament />
 
-      <section className="flex flex-col gap-4 border border-border bg-surface p-6 shadow-[inset_0_1px_0_rgba(255,255,255,0.04),0_16px_32px_-20px_rgba(0,0,0,0.85)]">
+      <section className="panel flex flex-col gap-4">
         <div className="flex items-baseline justify-between">
           <h2 className="font-display text-sm uppercase tracking-[0.2em] text-muted">
             The Ledger
@@ -73,22 +73,24 @@ export default function HomeDashboard({ domains }: { domains: Domain[] }) {
             View full curriculum &rarr;
           </Link>
         </div>
-        <div className="grid gap-4 sm:grid-cols-2">
+        <div className="grid gap-5 sm:grid-cols-2">
           {visibleDomains.map((domain) => {
             const progress = computeDomainProgress(domain, completed);
             return (
               <Link
                 key={domain.id}
                 href={`/curriculum/${domain.id}`}
-                className="group flex flex-col gap-3 border border-border border-t-2 border-t-gold-dim bg-surface p-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.03),0_10px_24px_-16px_rgba(0,0,0,0.8)] transition-all duration-200 hover:-translate-y-0.5 hover:border-t-gold hover:bg-surface-hover hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.05),0_18px_32px_-16px_rgba(0,0,0,0.9)]"
+                className="group panel panel-interactive flex flex-col gap-3"
               >
                 <div className="flex items-center justify-between gap-2">
-                  <div className="flex items-center gap-2.5">
-                    <DomainIcon
-                      domainId={domain.id}
-                      className="h-5 w-5 shrink-0 text-gold-dim transition-colors group-hover:text-gold"
-                    />
-                    <span className="font-display text-base text-foreground">
+                  <div className="flex items-center gap-3">
+                    <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-border bg-background/60 transition-colors group-hover:border-gold-dim">
+                      <DomainIcon
+                        domainId={domain.id}
+                        className="h-4 w-4 shrink-0 text-gold-dim transition-colors group-hover:text-gold"
+                      />
+                    </span>
+                    <span className="font-display text-lg text-foreground">
                       {domain.name}
                     </span>
                   </div>
