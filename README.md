@@ -41,9 +41,11 @@ Live site (once Pages is enabled): `https://<your-username>.github.io/personal-h
     8+ hours, reading before sleep), each with a streak counter, a milestone label
     (Week/Month/Century/Year Streak), a full-year heatmap, and an all-time total.
   - **Lifts** tab: log gym sets — exercise, weight, reps, and date — free-form (type any exercise
-    name; previous ones autocomplete). Each exercise you've logged gets its own card showing a
-    personal-best badge, a sparkline of weight over time, and the full history of sets, newest
-    first, each removable.
+    name; previous ones autocomplete). A row of pill buttons, one per exercise you've logged, lets
+    you switch between them one at a time so progression never gets mixed together — each shows a
+    personal-best badge, a progression chart, and the full history of sets, newest first, each
+    removable. Typing the same exercise with different casing or spacing (`Bench Press` vs
+    `bench press`) still groups into the same one.
   - **Review** tab: a retrospective with a **Week / Month / Year** toggle: habit consistency,
     meal plan adherence, and resources completed, all computed against however much of that
     period has elapsed so far (e.g. 6/6 days if you're on day 6 of the month, not 6/31).
