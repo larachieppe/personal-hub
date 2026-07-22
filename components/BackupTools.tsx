@@ -19,6 +19,8 @@ import { exportPantry, replacePantry } from "@/lib/pantry-store";
 import type { PlanAssignments } from "@/lib/plan-store";
 import { exportPlanAssignments, replacePlanAssignments } from "@/lib/plan-store";
 import { exportProgressData, replaceProgressData } from "@/lib/progress-store";
+import type { LiftEntry } from "@/lib/lifts-store";
+import { exportLifts, replaceLifts } from "@/lib/lifts-store";
 import type { Todo, TodoAssignments } from "@/lib/todo-store";
 import {
   exportTodoAssignments,
@@ -41,6 +43,7 @@ interface BackupFile {
   planAssignments: PlanAssignments;
   todos: Todo[];
   todoAssignments: TodoAssignments;
+  lifts: LiftEntry[];
   customResources: CustomResourceMap;
 }
 
@@ -63,6 +66,7 @@ export default function BackupTools() {
       planAssignments: exportPlanAssignments(),
       todos: exportTodos(),
       todoAssignments: exportTodoAssignments(),
+      lifts: exportLifts(),
       customResources: exportCustomResources(),
     };
     const blob = new Blob([JSON.stringify(payload, null, 2)], {
@@ -92,6 +96,7 @@ export default function BackupTools() {
         replacePlanAssignments(parsed.planAssignments ?? {});
         replaceTodos(parsed.todos ?? []);
         replaceTodoAssignments(parsed.todoAssignments ?? {});
+        replaceLifts(parsed.lifts ?? []);
         replaceCustomResources(parsed.customResources ?? {});
         setMessage("Backup restored. Reload any open pages to see the change everywhere.");
       } catch {

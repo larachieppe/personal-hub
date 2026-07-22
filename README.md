@@ -36,15 +36,19 @@ Live site (once Pages is enabled): `https://<your-username>.github.io/personal-h
     Proteins, Produce, etc). Check an item off once you have it; unchecked items are what's missing.
     Click **Edit pantry** to rename items/categories or add and remove them — this list is fully
     yours to shape, unlike the fixed weekly structure of Habits/Meals.
-- **Progress** (`/progress`) — Habits and Review together on one page behind a tab switcher.
+- **Progress** (`/progress`) — Habits, Lifts, and Review together on one page behind a tab switcher.
   - **Habits** tab: daily check-off for a fixed set of habits (weight lifting, cardio, studying
     8+ hours, reading before sleep), each with a streak counter, a milestone label
     (Week/Month/Century/Year Streak), a full-year heatmap, and an all-time total.
+  - **Lifts** tab: log gym sets — exercise, weight, reps, and date — free-form (type any exercise
+    name; previous ones autocomplete). Each exercise you've logged gets its own card showing a
+    personal-best badge, a sparkline of weight over time, and the full history of sets, newest
+    first, each removable.
   - **Review** tab: a retrospective with a **Week / Month / Year** toggle: habit consistency,
     meal plan adherence, and resources completed, all computed against however much of that
     period has elapsed so far (e.g. 6/6 days if you're on day 6 of the month, not 6/31).
-- **Backup** (`/backup`) — export all progress (curriculum + habits + meals + pantry + to-dos) to a
-  JSON file, or import one to restore it. Linked from the footer on every page.
+- **Backup** (`/backup`) — export all progress (curriculum + habits + lifts + meals + pantry +
+  to-dos) to a JSON file, or import one to restore it. Linked from the footer on every page.
 
 Every resource in `curriculum.json` is a single, specific article, video, or lecture/reading page —
 never a bare YouTube channel, playlist, or a "hub" page that lists many pieces of content under one
@@ -109,6 +113,12 @@ The Habits tab (under Progress) works the same way (`localStorage`, per-browser)
 marked done once per calendar day. A streak stays alive if you've checked in today or yesterday, and
 breaks if you miss a full day; the all-time total never resets. To add, remove, or rename habits,
 edit [`data/habits.json`](data/habits.json).
+
+The Lifts tab (under Progress) is unlike Habits in that there's no fixed list to edit — every
+exercise is whatever you type into the log form (`lib/lifts-store.ts`, `localStorage` key
+`polymath-hub:lifts`), grouped by exact name match. Each logged set is `{ exercise, weight, reps,
+date }`; the exercise cards, personal-best badge, and sparkline are all derived from that flat log,
+not from a separate exercise list — so a new exercise just appears the first time you log it.
 
 The Meal Plan tab (under Kitchen) is a weekly menu template that repeats every week. [`data/meals.json`](data/meals.json)
 defines the default plan (what a fresh browser sees) — each meal has a `calories` value, and there's

@@ -5,12 +5,14 @@ import type { Domain } from "@/lib/curriculum";
 import type { Habit } from "@/lib/habits";
 import type { DayMenu } from "@/lib/meals";
 import HabitTracker from "@/components/HabitTracker";
+import LiftLog from "@/components/LiftLog";
 import Review from "@/components/Review";
 
-type Tab = "habits" | "review";
+type Tab = "habits" | "lifts" | "review";
 
 const TAB_LABELS: Record<Tab, string> = {
   habits: "Habits",
+  lifts: "Lifts",
   review: "Review",
 };
 
@@ -42,6 +44,8 @@ export default function Progress({
 
       {tab === "habits" ? (
         <HabitTracker habits={habits} />
+      ) : tab === "lifts" ? (
+        <LiftLog />
       ) : (
         <Review domains={domains} habits={habits} mealDays={mealDays} />
       )}

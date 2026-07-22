@@ -20,10 +20,11 @@ export default function ProgressPage() {
         title="Progress"
         description={
           <>
-            Mark a habit done once per day under the <strong>Habits</strong> tab, or switch to{" "}
-            <strong>Review</strong> for a Week/Month/Year retrospective on habits, meals, and
-            curriculum resources completed. Nothing here is ever deleted — missing a day resets a
-            streak, but the all-time totals and history keep counting.
+            Mark a habit done once per day under the <strong>Habits</strong> tab, log sets and
+            weight under <strong>Lifts</strong>, or switch to <strong>Review</strong> for a
+            Week/Month/Year retrospective on habits, meals, and curriculum resources completed.
+            Nothing here is ever deleted — missing a day resets a streak, but the all-time totals
+            and history keep counting.
           </>
         }
       />
